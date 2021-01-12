@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "nodemon ./bin/www",
     "debug": "nodemon  --inspect ./bin/www",
+    "start": "node server/app.js",
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --exit --timeout 30000"
   },
   "dependencies": {
