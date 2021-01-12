@@ -1,5 +1,4 @@
 const express = require("express");
-const { getMaxListeners } = require("../app");
 const router = express.Router();
 const { User } = require("../models/user.models");
 router.get("/welcome", function (req, res, next) {
