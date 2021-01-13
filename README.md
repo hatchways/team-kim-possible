@@ -21,3 +21,4 @@ This starter repo will be used for building applications using React, Material-U
 - nodemon
 - validator
 - bcrypt
+- jwt

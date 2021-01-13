@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const userSchema = mongoose.Schema({
   name: {
@@ -26,6 +27,11 @@ const userSchema = mongoose.Schema({
     minlength: [6, "Password must be at least 6 characters in length"],
   },
 });
+
+userSchema.methods.generateAuthenticationToken = async (user) => {
+  const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY);
+  return token;
+};
 
 //Password hashing before save
 userSchema.pre("save", async function () {
