@@ -12,6 +12,7 @@ function SignUp() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [passwordMatchError, setPasswordMatchError] = useState(false);
+	const [passwordLengthError, setPasswordLengthError] = useState(false);
 
 	const container = {
 		backgroundColor: "#333",
@@ -35,50 +36,23 @@ function SignUp() {
 	};
 
 	const handlePasswordChange = (e) => {
+		setPasswordLengthError(false);
 		setPassword(e.target.value);
 	};
 
 	const handleConfirmPasswordChange = (e) => {
+		setPasswordMatchError(false);
 		setConfirmPassword(e.target.value);
 	};
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
+		if (password.length <= 6) {
+			setPasswordLengthError(true);
+			return;
+		}
 		if (password !== confirmPassword) {
 			setPasswordMatchError(true);
-		}
-
-		if (name === "") {
-			return console.log("empty name");
-		}
-	};
-
-	const checkPasswordMatchError = () => {
-		if (passwordMatchError) {
-			return (
-				<TextField
-					error
-					id="filled-error-helper-text"
-					label="Confirm Password"
-					fullWidth={true}
-					helperText="Passwords do not match."
-					variant="outlined"
-					type="password"
-					onChange={(e) => handleConfirmPasswordChange(e)}
-				/>
-			);
-		} else {
-			return (
-				<TextField
-					id="Confirm-Password"
-					label="Confirm Password"
-					variant="outlined"
-					fullWidth={true}
-					color="secondary"
-					type="password"
-					onChange={(e) => handleConfirmPasswordChange(e)}
-				/>
-			);
 		}
 	};
 
@@ -102,7 +76,7 @@ function SignUp() {
 							height: "20px",
 							width: "2px",
 							marginLeft: "12px",
-							backgroundColor: "#8C8F91",
+							backgroundColor: `${theme.palette.primary.light}`,
 							transform: " rotate(45deg)",
 							zIndex: "1",
 						}}
@@ -111,7 +85,7 @@ function SignUp() {
 							style={{
 								height: "20px",
 								width: "2px",
-								backgroundColor: "#8C8F91",
+								backgroundColor: `${theme.palette.primary.light}`,
 								transform: " rotate(90deg)",
 								zIndex: "2",
 							}}
@@ -140,7 +114,12 @@ function SignUp() {
 						>
 							<h1>Sign Up</h1>
 
-							<p style={{ color: "#8C8F91", fontSize: "13px" }}>
+							<p
+								style={{
+									color: `${theme.palette.primary.light}`,
+									fontSize: "13px",
+								}}
+							>
 								Track Prices, organize travel plans and access
 								member-only deals
 							</p>
@@ -150,6 +129,8 @@ function SignUp() {
 							onSubmit={handleFormSubmit}
 						>
 							<FormControl style={{ width: "100%" }}>
+								{/* Name */}
+
 								<Box mt={4.5}>
 									<TextField
 										id="Name"
@@ -160,6 +141,8 @@ function SignUp() {
 										onChange={(e) => handleNameChange(e)}
 									/>
 								</Box>
+
+								{/* Email */}
 								<Box mt={2}>
 									<TextField
 										id="Email"
@@ -170,8 +153,23 @@ function SignUp() {
 										onChange={(e) => handleEmailChange(e)}
 									/>
 								</Box>
+
+								{/* PASSWORD */}
 								<Box mt={2}>
-									{
+									{passwordLengthError ? (
+										<TextField
+											error
+											id="filled-error-helper-text"
+											label="Password"
+											fullWidth={true}
+											helperText="Passwords must be greater than 6 characters."
+											variant="outlined"
+											type="password"
+											onChange={(e) =>
+												handlePasswordChange(e)
+											}
+										/>
+									) : (
 										<TextField
 											id="Password"
 											label="Password"
@@ -183,9 +181,41 @@ function SignUp() {
 												handlePasswordChange(e)
 											}
 										/>
-									}
+									)}
 								</Box>
-								<Box mt={2}>{checkPasswordMatchError()}</Box>
+
+								{/* CONFIRM PASSWORD */}
+
+								<Box mt={2}>
+									{passwordMatchError ? (
+										<TextField
+											error
+											id="filled-error-helper-text"
+											label="Confirm Password"
+											fullWidth={true}
+											helperText="Passwords must match."
+											variant="outlined"
+											type="password"
+											onChange={(e) =>
+												handleConfirmPasswordChange(e)
+											}
+										/>
+									) : (
+										<TextField
+											id="Confirm-Password"
+											label="Confirm Password"
+											variant="outlined"
+											fullWidth={true}
+											color="secondary"
+											type="password"
+											onChange={(e) =>
+												handleConfirmPasswordChange(e)
+											}
+										/>
+									)}
+								</Box>
+
+								{/* SUBMIT BUTTON */}
 
 								<Box
 									mt={6}
@@ -205,7 +235,7 @@ function SignUp() {
 											disableRipple={true}
 											style={{
 												color: "white",
-												fontSize: "14px",
+												fontSize: "15px",
 												borderRadius: "6px",
 											}}
 											type="submit"
@@ -224,6 +254,9 @@ function SignUp() {
 						</form>
 					</div>
 				</Box>
+
+				{/* FOOTER */}
+
 				<div
 					style={{
 						width: "100%",
@@ -232,7 +265,7 @@ function SignUp() {
 						alignItems: "center",
 						borderTop: "1px solid #e2e2ea",
 						fontSize: "15px",
-						color: "#8C8F91",
+						color: `${theme.palette.primary.light}`,
 					}}
 				>
 					<p style={{ margin: "36px" }}>

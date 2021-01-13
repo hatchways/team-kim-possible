@@ -58,7 +58,7 @@ function SignIn() {
 							height: "20px",
 							width: "2px",
 							marginLeft: "12px",
-							backgroundColor: "#8C8F91",
+							backgroundColor: `${theme.palette.primary.light}`,
 							transform: " rotate(45deg)",
 							zIndex: "1",
 						}}
@@ -67,7 +67,7 @@ function SignIn() {
 							style={{
 								height: "20px",
 								width: "2px",
-								backgroundColor: "#8C8F91",
+								backgroundColor: `${theme.palette.primary.light}`,
 								transform: " rotate(90deg)",
 								zIndex: "2",
 							}}
@@ -96,7 +96,12 @@ function SignIn() {
 						>
 							<h1>Sign In</h1>
 
-							<p style={{ color: "#8C8F91", fontSize: "13px" }}>
+							<p
+								style={{
+									color: `${theme.palette.primary.light}`,
+									fontSize: "13px",
+								}}
+							>
 								Track Prices, organize travel plans and access
 								member-only deals
 							</p>
@@ -152,6 +157,7 @@ function SignIn() {
 												color: "white",
 												fontSize: "16px",
 												borderRadius: "6px",
+												marginBottom: "24px",
 											}}
 											type="submit"
 										>
@@ -177,7 +183,7 @@ function SignIn() {
 						alignItems: "center",
 						borderTop: "1px solid #e2e2ea",
 						fontSize: "15px",
-						color: "#8C8F91",
+						color: `${theme.palette.primary.light}`,
 					}}
 				>
 					<p style={{ margin: "36px" }}>
