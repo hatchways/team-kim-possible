@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { FormControl, Paper, TextField } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
+import { useTheme } from "@material-ui/core/styles";
 
 function SignUp() {
-	const [name, setame] = useState(null);
-	const [email, setEmail] = useState(null);
-	const [password, setPassword] = useState(null);
+	const theme = useTheme();
+
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
+	const [passwordMatchError, setPasswordMatchError] = useState(false);
 
 	const container = {
 		backgroundColor: "#333",
@@ -21,7 +26,61 @@ function SignUp() {
 		console.log("exit");
 	};
 
-	const handleFormSubmit = (e) => {};
+	const handleNameChange = (e) => {
+		setName(e.target.value);
+	};
+
+	const handleEmailChange = (e) => {
+		setEmail(e.target.value);
+	};
+
+	const handlePasswordChange = (e) => {
+		setPassword(e.target.value);
+	};
+
+	const handleConfirmPasswordChange = (e) => {
+		setConfirmPassword(e.target.value);
+	};
+
+	const handleFormSubmit = (e) => {
+		e.preventDefault();
+		if (password !== confirmPassword) {
+			setPasswordMatchError(true);
+		}
+
+		if (name === "") {
+			return console.log("empty name");
+		}
+	};
+
+	const checkPasswordMatchError = () => {
+		if (passwordMatchError) {
+			return (
+				<TextField
+					error
+					id="filled-error-helper-text"
+					label="Confirm Password"
+					fullWidth={true}
+					helperText="Passwords do not match."
+					variant="outlined"
+					type="password"
+					onChange={(e) => handleConfirmPasswordChange(e)}
+				/>
+			);
+		} else {
+			return (
+				<TextField
+					id="Confirm-Password"
+					label="Confirm Password"
+					variant="outlined"
+					fullWidth={true}
+					color="secondary"
+					type="password"
+					onChange={(e) => handleConfirmPasswordChange(e)}
+				/>
+			);
+		}
+	};
 
 	return (
 		<div style={container}>
@@ -86,7 +145,10 @@ function SignUp() {
 								member-only deals
 							</p>
 						</Box>
-						<form style={{ width: "100%" }}>
+						<form
+							style={{ width: "100%" }}
+							onSubmit={handleFormSubmit}
+						>
 							<FormControl style={{ width: "100%" }}>
 								<Box mt={4.5}>
 									<TextField
@@ -95,6 +157,7 @@ function SignUp() {
 										variant="outlined"
 										fullWidth={true}
 										color="secondary"
+										onChange={(e) => handleNameChange(e)}
 									/>
 								</Box>
 								<Box mt={2}>
@@ -104,38 +167,26 @@ function SignUp() {
 										variant="outlined"
 										fullWidth={true}
 										color="secondary"
+										onChange={(e) => handleEmailChange(e)}
 									/>
 								</Box>
 								<Box mt={2}>
-									<TextField
-										id="Password"
-										label="Password"
-										variant="outlined"
-										fullWidth={true}
-										color="secondary"
-										type="password"
-									/>
+									{
+										<TextField
+											id="Password"
+											label="Password"
+											variant="outlined"
+											fullWidth={true}
+											color="secondary"
+											type="password"
+											onChange={(e) =>
+												handlePasswordChange(e)
+											}
+										/>
+									}
 								</Box>
-								<Box mt={2}>
-									<TextField
-										id="Confirm-Password"
-										label="Confirm Password"
-										variant="outlined"
-										fullWidth={true}
-										color="secondary"
-										type="password"
-									/>
-								</Box>
-								{/* <Box mt={2}>
-									<TextField
-										error
-										id="filled-error-helper-text"
-										label="Confirm Password"
-										fullWidth={true}
-										helperText="Passwords do not match."
-										variant="outlined"
-									/>
-								</Box> */}
+								<Box mt={2}>{checkPasswordMatchError()}</Box>
+
 								<Box
 									mt={6}
 									style={{
@@ -157,6 +208,7 @@ function SignUp() {
 												fontSize: "14px",
 												borderRadius: "6px",
 											}}
+											type="submit"
 										>
 											<div
 												style={{
@@ -185,7 +237,9 @@ function SignUp() {
 				>
 					<p style={{ margin: "36px" }}>
 						Already have an account?{" "}
-						<span style={{ color: "#9a9aff" }}>Sign In</span>
+						<span style={{ color: theme.palette.secondary.main }}>
+							Sign In
+						</span>
 					</p>
 				</div>
 			</Paper>
