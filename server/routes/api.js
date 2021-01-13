@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
+require("dotenv").config();
 
 router.get("/", function (req, res, next) {
   const apiParams = {
@@ -14,7 +15,7 @@ router.get("/", function (req, res, next) {
     url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/CA/CAD/en-US/${apiParams.originPlace}/${apiParams.destinationPlace}/${apiParams.departureDate}`,
     params: { inboundpartialdate: apiParams.returnDate },
     headers: {
-      "x-rapidapi-key": "12ace0bfd9msh34dee4306bb93d3p1da922jsn4c10b1bd8ee4",
+      "x-rapidapi-key": process.env.rapidapi,
       "x-rapidapi-host":
         "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
     },
@@ -38,7 +39,7 @@ router.get("/places", function (req, res, next) {
       "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-USD/",
     params: { query: "Canada" },
     headers: {
-      "x-rapidapi-key": "12ace0bfd9msh34dee4306bb93d3p1da922jsn4c10b1bd8ee4",
+      "x-rapidapi-key": process.env.rapidapi,
       "x-rapidapi-host":
         "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
     },
