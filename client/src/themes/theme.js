@@ -2,13 +2,13 @@ import { createMuiTheme } from "@material-ui/core";
 
 export const theme = createMuiTheme({
 	overrides: {
-		MuiFilledInput: {
-			text: {
-				color: "red",
+		MuiInputLabel: {
+			root: {
+				fontWeight: "bolder",
+				color: "black",
 			},
 		},
 	},
-
 	typography: {
 		button: {
 			textTransform: "none",
@@ -21,6 +21,6 @@ export const theme = createMuiTheme({
 	},
 	palette: {
 		primary: { main: "#ffa000" },
-		secondary: { main: "#9a9aff", dark: "#333" },
+		secondary: { main: "#9a9aff" },
 	},
 });

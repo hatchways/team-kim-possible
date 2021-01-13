@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormControl, Paper, TextField } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import { useTheme } from "@material-ui/core/styles";
-import palette from "@material-ui/system/palette";
 
 function SignUp() {
-	const theme = useTheme();
-	//console.log(theme.MuiFilledInput.text);
+	const [name, setame] = useState(null);
+	const [email, setEmail] = useState(null);
+	const [password, setPassword] = useState(null);
 
 	const container = {
 		backgroundColor: "#333",
@@ -21,6 +20,8 @@ function SignUp() {
 	const handleExit = () => {
 		console.log("exit");
 	};
+
+	const handleFormSubmit = (e) => {};
 
 	return (
 		<div style={container}>
@@ -94,7 +95,6 @@ function SignUp() {
 										variant="outlined"
 										fullWidth={true}
 										color="secondary"
-										InputLabelProps={{ fontWeight: "bold" }}
 									/>
 								</Box>
 								<Box mt={2}>
