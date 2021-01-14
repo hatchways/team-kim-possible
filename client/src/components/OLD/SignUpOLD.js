@@ -1,73 +1,11 @@
 import React, { useState } from "react";
-import { Paper, TextField, Grid } from "@material-ui/core";
+import { FormControl, Paper, TextField } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import { useTheme, makeStyles } from "@material-ui/core/styles";
-
-const signUpStyles = makeStyles((theme) => ({
-	// X BUTTON IN THE CORNER
-
-	closeXContainer: {
-		position: "absolute",
-		left: "94%",
-		top: "2%",
-		height: "20px",
-		width: "20px",
-		textAlign: "center",
-	},
-	closeX1: {
-		height: "20px",
-		width: "2px",
-		marginLeft: "12px",
-		backgroundColor: `${theme.palette.primary.light}`,
-		transform: " rotate(45deg)",
-		zIndex: "1",
-	},
-	closeX2: {
-		height: "20px",
-		width: "2px",
-		backgroundColor: `${theme.palette.primary.light}`,
-		transform: " rotate(90deg)",
-		zIndex: "2",
-	},
-
-	//PAPER
-
-	paper: {
-		position: "relative",
-		overflow: "hidden",
-		maxWidth: "500px",
-	},
-	title: { paddingTop: "1rem" },
-	subTitle: {
-		color: `${theme.palette.primary.light}`,
-		fontSize: "13px",
-		width: "65%",
-		textAlign: "center",
-	},
-	continueButton: {
-		color: "white",
-		fontSize: "16px",
-		borderRadius: "6px",
-		marginTop: "3rem",
-		padding: ".75rem 5rem .75rem 5rem",
-	},
-	footer: {
-		border: "1px solid #e2e2ea",
-		marginTop: "2rem",
-		padding: "2rem 3rem 2rem 3rem",
-	},
-	footerText: {
-		color: `${theme.palette.primary.light}`,
-	},
-	secondary: {
-		color: `${theme.palette.secondary.main}`,
-	},
-}));
+import { useTheme } from "@material-ui/core/styles";
 
 function SignUp() {
 	const theme = useTheme();
-	const classes = signUpStyles(theme);
 
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -120,55 +58,78 @@ function SignUp() {
 
 	return (
 		<div style={container}>
-			{/* TOP TEXT - HEADER */}
-
-			<Paper elevation={3} className={classes.paper}>
-				<Box
-					className={classes.closeXContainer}
+			<Paper elevation={3} style={{ position: "relative" }}>
+				<div
+					style={{
+						position: "absolute",
+						left: "91%",
+						top: "2%",
+						height: "20px",
+						width: "20px",
+						textAlign: "center",
+					}}
 					onClick={() => handleExit()}
 				>
-					<div className={classes.closeX1}>
-						<div className={classes.closeX2}></div>
-					</div>
-				</Box>
-				<Grid
-					container
-					direction="column"
-					justify="center"
-					alignItems="center"
-				>
-					<Grid
-						container
-						item
-						xs={12}
-						justify="center"
-						alignItems="center"
-						direction="column"
+					<div
+						style={{
+							height: "20px",
+							width: "2px",
+							marginLeft: "12px",
+							backgroundColor: `${theme.palette.primary.light}`,
+							transform: " rotate(45deg)",
+							zIndex: "1",
+						}}
 					>
-						<Grid item>
-							<h1 className={classes.title}>Sign Up</h1>
-						</Grid>
+						<div
+							style={{
+								height: "20px",
+								width: "2px",
+								backgroundColor: `${theme.palette.primary.light}`,
+								transform: " rotate(90deg)",
+								zIndex: "2",
+							}}
+						></div>
+					</div>
+				</div>
 
-						<Grid item xs={4} className={classes.subTitle}>
-							<p>
+				<Box px={8} py={4}>
+					<div
+						style={{
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+							flexDirection: "column",
+						}}
+					>
+						<Box
+							width="75%"
+							style={{
+								display: "flex",
+								justifyContent: "center",
+								alignItems: "center",
+								flexDirection: "column",
+								textAlign: "center",
+							}}
+						>
+							<h1>Sign Up</h1>
+
+							<p
+								style={{
+									color: `${theme.palette.primary.light}`,
+									fontSize: "13px",
+								}}
+							>
 								Track Prices, organize travel plans and access
 								member-only deals
 							</p>
-						</Grid>
-					</Grid>
-
-					{/* FORM SECTION */}
-
-					<form onSubmit={handleFormSubmit}>
-						<Grid
-							container
-							item
-							xs={12}
-							justify="center"
-							alignItems="center"
-							className={classes.internalGrids}
+						</Box>
+						<form
+							style={{ width: "100%" }}
+							onSubmit={handleFormSubmit}
 						>
-							<Grid item xs={8}>
+							<FormControl style={{ width: "100%" }}>
+								{/* Name */}
+
 								<Box mt={4.5}>
 									<TextField
 										id="Name"
@@ -179,9 +140,8 @@ function SignUp() {
 										onChange={(e) => handleNameChange(e)}
 									/>
 								</Box>
-							</Grid>
 
-							<Grid item xs={8}>
+								{/* Email */}
 								<Box mt={2}>
 									<TextField
 										id="Email"
@@ -192,9 +152,8 @@ function SignUp() {
 										onChange={(e) => handleEmailChange(e)}
 									/>
 								</Box>
-							</Grid>
 
-							<Grid item xs={8}>
+								{/* PASSWORD */}
 								<Box mt={2}>
 									{passwordLengthError ? (
 										<TextField
@@ -223,9 +182,9 @@ function SignUp() {
 										/>
 									)}
 								</Box>
-							</Grid>
 
-							<Grid item xs={8}>
+								{/* CONFIRM PASSWORD */}
+
 								<Box mt={2}>
 									{passwordMatchError ? (
 										<TextField
@@ -254,51 +213,67 @@ function SignUp() {
 										/>
 									)}
 								</Box>
-							</Grid>
-						</Grid>
 
-						{/* BUTTON */}
+								{/* SUBMIT BUTTON */}
 
-						<Grid
-							container
-							justify="center"
-							alignItems="center"
-							item
-						>
-							<Grid item xs={4}>
-								<Button
-									color={"primary"}
-									variant="contained"
-									fullWidth={true}
-									size="large"
-									disableRipple={true}
-									type="submit"
-									className={classes.continueButton}
+								<Box
+									mt={6}
+									style={{
+										width: "100%",
+										display: "flex",
+										justifyContent: "center",
+										alignItems: "center",
+									}}
 								>
-									Continue
-								</Button>
-							</Grid>
-						</Grid>
-					</form>
+									<Box style={{ width: "45%" }}>
+										<Button
+											color={"primary"}
+											variant="contained"
+											fullWidth={true}
+											size="large"
+											disableRipple={true}
+											style={{
+												color: "white",
+												fontSize: "15px",
+												borderRadius: "6px",
+											}}
+											type="submit"
+										>
+											<div
+												style={{
+													margin: "3px 6px 3px 6px",
+												}}
+											>
+												Continue
+											</div>
+										</Button>
+									</Box>
+								</Box>
+							</FormControl>
+						</form>
+					</div>
+				</Box>
 
-					{/* FOOTER */}
+				{/* FOOTER */}
 
-					<Grid
-						container
-						item
-						xs={12}
-						className={classes.footer}
-						justify="center"
-						alignItems="center"
-					>
-						<Grid item>
-							<span className={classes.footerText}>
-								Already Have An Account?{" "}
-							</span>
-							<span className={classes.secondary}>Sign In</span>
-						</Grid>
-					</Grid>
-				</Grid>
+				<div
+					style={{
+						width: "100%",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						borderTop: "1px solid #e2e2ea",
+						fontSize: "15px",
+						color: `${theme.palette.primary.light}`,
+					}}
+				>
+					<p style={{ margin: "36px" }}>
+						Already have an account?{" "}
+						<span style={{ color: theme.palette.secondary.main }}>
+							Sign In
+						</span>
+					</p>
+				</div>
 			</Paper>
 		</div>
 	);
