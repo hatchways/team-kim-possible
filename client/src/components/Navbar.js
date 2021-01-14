@@ -16,6 +16,12 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: "#6495ED",
+  },
+  navbar: {
+    backgroundColor: "#fff",
+    color: "black",
+    boxShadow: "0 4px 4px rgba(0, 0, 0, 0.1)",
   },
 }));
 
@@ -24,26 +30,23 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar
-        position="static"
-        style={{
-          backgroundColor: "#fff",
-          color: "black",
-          boxShadow: "0 4px 4px rgba(0, 0, 0, 0.1)",
-        }}
-      >
+      <AppBar position="static" className={classes.navbar}>
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography variant="h6" className={classes.title}>
-            News
+            Travel Booking
           </Typography>
+          <Button color="inherit">Explore</Button>
+          <Button color="inherit">Flights</Button>
+          <Button color="inherit">Hotels</Button>
+          <Button color="inherit">Cars</Button>
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
