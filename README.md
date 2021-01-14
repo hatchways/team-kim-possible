@@ -19,3 +19,6 @@ This starter repo will be used for building applications using React, Material-U
 - mongoose
 - morgan
 - nodemon
+- validator
+- bcrypt
+- jwt
