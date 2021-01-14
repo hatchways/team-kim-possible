@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Paper, TextField, Grid } from "@material-ui/core";
+import React from "react";
+import { Paper, Grid } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
+import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 
-const signInStyles = makeStyles((theme) => ({
+const signUp2Styles = makeStyles((theme) => ({
 	// X BUTTON IN THE CORNER
-
 	closeXContainer: {
 		position: "absolute",
 		left: "90%",
@@ -31,12 +31,14 @@ const signInStyles = makeStyles((theme) => ({
 		zIndex: "2",
 	},
 
+	sidePadding: {
+		padding: "0rem 1rem 0rem 1rem",
+	},
 	//PAPER
-
 	paper: {
 		position: "relative",
 		overflow: "hidden",
-		maxWidth: "500px",
+		width: "500px",
 	},
 	title: {
 		padding: "1rem 1rem 0rem 1rem",
@@ -46,19 +48,35 @@ const signInStyles = makeStyles((theme) => ({
 	subTitle: {
 		color: `${theme.palette.primary.light}`,
 		fontSize: "13px",
-		width: "40%",
+
 		textAlign: "center",
+		marginBottom: "1rem",
+	},
+	locationPaper: {
+		margin: "1rem 0 0.5rem 0",
+	},
+	locationText: {
+		marginLeft: "1.25rem",
+		fontWeight: "bold",
+	},
+
+	locationIcon: {
+		paddingLeft: "0.75rem",
+		color: `${theme.palette.secondary.main}`,
+	},
+	spacingRight: {
+		paddingRight: "1rem",
 	},
 	signUpButton: {
 		color: "white",
 		fontSize: "16px",
 		borderRadius: "6px",
-		marginTop: "3rem",
-		padding: ".5rem, 1rem, .5rem, 1rem",
+		marginTop: "2.5rem",
+		padding: "0.5rem, 1rem, 0.5rem, 1rem",
 	},
 	footer: {
-		border: "1px solid #e2e2ea",
-		marginTop: "3rem",
+		borderTop: "1px solid #e2e2ea",
+		marginTop: "4rem",
 		padding: "2rem 3rem 2rem 3rem",
 	},
 	footerText: {
@@ -69,9 +87,9 @@ const signInStyles = makeStyles((theme) => ({
 	},
 }));
 
-function SignIn() {
+function SignUpPage2() {
 	const theme = useTheme();
-	const classes = signInStyles(theme);
+	const classes = signUp2Styles(theme);
 
 	const container = {
 		backgroundColor: "#333",
@@ -84,10 +102,6 @@ function SignIn() {
 
 	const handleExit = () => {
 		console.log("exit");
-	};
-
-	const handleFormSubmit = (e) => {
-		e.preventDefault();
 	};
 
 	return (
@@ -128,66 +142,111 @@ function SignIn() {
 						</Grid>
 					</Grid>
 
-					{/* FORM SECTION */}
+					{/* LOCATION SECTION */}
 
-					<form onSubmit={handleFormSubmit}>
-						<Grid
-							container
-							item
-							xs={12}
-							justify="center"
-							alignItems="center"
-							className={classes.internalGrids}
-						>
-							<Grid item xs={8}>
-								<Box mt={4.5}>
-									<TextField
-										id="Email"
-										label="Email Address"
-										variant="outlined"
-										fullWidth={true}
-										color="secondary"
-									/>
-								</Box>
-							</Grid>
-
-							<Grid item xs={8}>
-								<Box mt={2}>
-									<TextField
-										id="Password"
-										label="Password"
-										variant="outlined"
-										fullWidth={true}
-										color="secondary"
-										type="password"
-									/>
-								</Box>
-							</Grid>
-						</Grid>
-
-						{/* BUTTON */}
-
-						<Grid
-							container
-							justify="center"
-							alignItems="center"
-							item
-						>
-							<Grid item xs={5}>
-								<Button
-									color={"primary"}
-									variant="contained"
-									fullWidth={true}
-									size="large"
-									disableRipple={true}
-									type="submit"
-									className={classes.signInButton}
+					<Grid
+						container
+						item
+						xs={12}
+						justify="center"
+						alignItems="center"
+					>
+						<Grid item xs={9}>
+							<Paper
+								variant="outlined"
+								elevation={0}
+								className={classes.locationPaper}
+							>
+								<Grid
+									container
+									alignItems="center"
+									justify="flex-start"
 								>
-									Sign In
-								</Button>
-							</Grid>
+									<Grid item xs={1}>
+										<RoomOutlinedIcon
+											className={classes.locationIcon}
+										></RoomOutlinedIcon>
+									</Grid>
+									<Grid item xs={3}>
+										<p className={classes.locationText}>
+											Paris
+										</p>
+									</Grid>
+									<Grid
+										container
+										justify="flex-end"
+										item
+										xs={8}
+										className={classes.spacingRight}
+									>
+										<div className={classes.closeX1}>
+											<div
+												className={classes.closeX2}
+											></div>
+										</div>
+									</Grid>
+								</Grid>
+							</Paper>
 						</Grid>
-					</form>
+						<Grid item xs={9}>
+							<Paper
+								variant="outlined"
+								elevation={0}
+								className={classes.locationPaper}
+							>
+								<Grid
+									container
+									alignItems="center"
+									justify="flex-start"
+								>
+									<Grid item xs={1}>
+										<RoomOutlinedIcon
+											className={classes.locationIcon}
+										></RoomOutlinedIcon>
+									</Grid>
+									<Grid item xs={3}>
+										<p className={classes.locationText}>
+											Bali
+										</p>
+									</Grid>
+									<Grid
+										container
+										justify="flex-end"
+										item
+										xs={8}
+										className={classes.spacingRight}
+									>
+										<div className={classes.closeX1}>
+											<div
+												className={classes.closeX2}
+											></div>
+										</div>
+									</Grid>
+								</Grid>
+							</Paper>
+						</Grid>
+						<Grid container item xs={4} justify="center">
+							<p className={classes.secondary}>Add More</p>
+						</Grid>
+					</Grid>
+
+					{/* BUTTON */}
+
+					<Grid container justify="center" alignItems="center" item>
+						<Grid item xs={5}>
+							<Button
+								color={"primary"}
+								variant="contained"
+								fullWidth={true}
+								size="large"
+								disableRipple={true}
+								type="submit"
+								className={classes.signUpButton}
+							>
+								Sign Up
+							</Button>
+						</Grid>
+					</Grid>
 
 					{/* FOOTER */}
 
@@ -212,4 +271,4 @@ function SignIn() {
 	);
 }
 
-export default SignIn;
+export default SignUpPage2;

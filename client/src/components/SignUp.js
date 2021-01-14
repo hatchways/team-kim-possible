@@ -6,7 +6,6 @@ import { useTheme, makeStyles } from "@material-ui/core/styles";
 
 const signUpStyles = makeStyles((theme) => ({
 	// X BUTTON IN THE CORNER
-
 	closeXContainer: {
 		position: "absolute",
 		left: "94%",
@@ -30,19 +29,18 @@ const signUpStyles = makeStyles((theme) => ({
 		transform: " rotate(90deg)",
 		zIndex: "2",
 	},
-
 	//PAPER
-
 	paper: {
 		position: "relative",
 		overflow: "hidden",
 		maxWidth: "500px",
 	},
-	title: { paddingTop: "1rem" },
+	title: {
+		paddingTop: "1rem",
+	},
 	subTitle: {
 		color: `${theme.palette.primary.light}`,
 		fontSize: "13px",
-		width: "65%",
 		textAlign: "center",
 	},
 	continueButton: {
@@ -50,7 +48,7 @@ const signUpStyles = makeStyles((theme) => ({
 		fontSize: "16px",
 		borderRadius: "6px",
 		marginTop: "3rem",
-		padding: ".75rem 5rem .75rem 5rem",
+		padding: "0.75rem 5rem 0.75rem 5rem",
 	},
 	footer: {
 		border: "1px solid #e2e2ea",
@@ -75,6 +73,7 @@ function SignUp() {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [passwordMatchError, setPasswordMatchError] = useState(false);
 	const [passwordLengthError, setPasswordLengthError] = useState(false);
+	const [emailValidationError, setEmailValidationError] = useState(false);
 
 	const container = {
 		backgroundColor: "#333",
@@ -93,7 +92,14 @@ function SignUp() {
 		setName(e.target.value);
 	};
 
+	const validateEmail = (email) => {
+		const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+		return re.test(email.toLowerCase());
+	};
+
 	const handleEmailChange = (e) => {
+		setEmailValidationError(false);
 		setEmail(e.target.value);
 	};
 
@@ -109,6 +115,9 @@ function SignUp() {
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
+		if (!validateEmail(email)) {
+			setEmailValidationError(true);
+		}
 		if (password.length <= 6) {
 			setPasswordLengthError(true);
 			return;
@@ -149,7 +158,7 @@ function SignUp() {
 							<h1 className={classes.title}>Sign Up</h1>
 						</Grid>
 
-						<Grid item xs={4} className={classes.subTitle}>
+						<Grid item xs={6} className={classes.subTitle}>
 							<p>
 								Track Prices, organize travel plans and access
 								member-only deals
@@ -166,7 +175,6 @@ function SignUp() {
 							xs={12}
 							justify="center"
 							alignItems="center"
-							className={classes.internalGrids}
 						>
 							<Grid item xs={8}>
 								<Box mt={4.5}>
@@ -183,14 +191,30 @@ function SignUp() {
 
 							<Grid item xs={8}>
 								<Box mt={2}>
-									<TextField
-										id="Email"
-										label="Email Address"
-										variant="outlined"
-										fullWidth={true}
-										color="secondary"
-										onChange={(e) => handleEmailChange(e)}
-									/>
+									{emailValidationError ? (
+										<TextField
+											error
+											id="filled-error-helper-text"
+											label="Email Address"
+											fullWidth={true}
+											helperText="Must be a valid email."
+											variant="outlined"
+											onChange={(e) =>
+												handleEmailChange(e)
+											}
+										/>
+									) : (
+										<TextField
+											id="Email"
+											label="Email Address"
+											variant="outlined"
+											fullWidth={true}
+											color="secondary"
+											onChange={(e) =>
+												handleEmailChange(e)
+											}
+										/>
+									)}
 								</Box>
 							</Grid>
 

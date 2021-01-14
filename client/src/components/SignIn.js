@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormControl, Paper, TextField, Grid } from "@material-ui/core";
+import { Paper, TextField, Grid } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
@@ -9,7 +9,7 @@ const signInStyles = makeStyles((theme) => ({
 
 	closeXContainer: {
 		position: "absolute",
-		left: "90%",
+		left: "93%",
 		top: "2%",
 		height: "20px",
 		width: "20px",
@@ -36,7 +36,7 @@ const signInStyles = makeStyles((theme) => ({
 	paper: {
 		position: "relative",
 		overflow: "hidden",
-		maxWidth: "500px",
+		width: "500px",
 	},
 	title: {
 		padding: "1rem 1rem 0rem 1rem",
@@ -46,7 +46,6 @@ const signInStyles = makeStyles((theme) => ({
 	subTitle: {
 		color: `${theme.palette.primary.light}`,
 		fontSize: "13px",
-		width: "65%",
 		textAlign: "center",
 	},
 	signInButton: {
@@ -141,14 +140,13 @@ function SignIn() {
 
 					{/* FORM SECTION */}
 
-					<form onSubmit={handleFormSubmit}>
+					<form onSubmit={handleFormSubmit} style={{ width: "100%" }}>
 						<Grid
 							container
 							item
 							xs={12}
 							justify="center"
 							alignItems="center"
-							className={classes.internalGrids}
 						>
 							<Grid item xs={8}>
 								<Box mt={4.5}>
