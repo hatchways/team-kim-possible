@@ -37,7 +37,7 @@ router.get("/places", function (req, res, next) {
     method: "GET",
     url:
       "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-USD/",
-    params: { query: "Canada" },
+    params: { query: "Vancouver" },
     headers: {
       "x-rapidapi-key": process.env.rapidapi,
       "x-rapidapi-host":
