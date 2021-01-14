@@ -4,7 +4,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 import { theme } from "./themes/theme";
 import LandingPage from "./pages/Landing";
-
+import Navbar from "./components/Navbar";
 import "./App.css";
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
     <MuiThemeProvider theme={theme}>
       <BrowserRouter>
         <Route path="/" component={LandingPage} />
+        <Route path="/" component={Navbar} />
       </BrowserRouter>
     </MuiThemeProvider>
   );
