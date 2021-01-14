@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { User } = require("../models/user.models");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 router.post("/", async function (req, res, next) {
   const user = await User.findOne({
@@ -19,7 +18,6 @@ router.post("/", async function (req, res, next) {
 
   if (passwordMatch) {
     const token = await user.generateAuthenticationToken(user);
-    console.log(token);
     //authenticationToken is session cookie and will be removed once browser is closed
     return res
       .cookie("authenticationToken", token, { httpOnly: true, expires: 0 })

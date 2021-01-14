@@ -10,7 +10,11 @@ router.post("/", async function (req, res, next) {
       password: req.body.password,
     });
     await user.save();
-    res.status(201).send({ responseMessage: "Signup success!" });
+    const token = await user.generateAuthenticationToken(user);
+    res
+      .cookie("authenticationToken", token, { httpOnly: true, expires: 0 })
+      .status(201)
+      .send({ responseMessage: "Signup success!" });
   } catch (e) {
     res.status(404).send({ responseMesage: e });
   }
