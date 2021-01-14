@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Avatar from "./Avatar";
+import "./navbar.css";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
   links: {
     color: "black",
-    "&:hover": {
+    ":hover": {
       color: "#white",
     },
   },
@@ -49,12 +51,10 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             Travel Booking
           </Typography>
-          <Button color="inherit" className={classes.links}>
-            Explore
-          </Button>
-          <Button color="inherit">Flights</Button>
-          <Button color="inherit">Hotels</Button>
-          <Button color="inherit">Cars</Button>
+          <Button id="links">Explore</Button>
+          <Button id="links">Flights</Button>
+          <Button id="links">Hotels</Button>
+          <Button id="links">Cars</Button>
           <Avatar />
         </Toolbar>
       </AppBar>
