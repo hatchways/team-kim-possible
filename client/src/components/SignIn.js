@@ -6,7 +6,6 @@ import { useTheme, makeStyles } from "@material-ui/core/styles";
 
 const signInStyles = makeStyles((theme) => ({
 	// X BUTTON IN THE CORNER
-
 	closeXContainer: {
 		position: "absolute",
 		left: "93%",
@@ -30,9 +29,7 @@ const signInStyles = makeStyles((theme) => ({
 		transform: " rotate(90deg)",
 		zIndex: "2",
 	},
-
 	//PAPER
-
 	paper: {
 		position: "relative",
 		overflow: "hidden",

@@ -125,6 +125,11 @@ function SignUp() {
 		if (password !== confirmPassword) {
 			setPasswordMatchError(true);
 		}
+		const userData = {
+			name: name,
+			email: email,
+			password: password,
+		};
 	};
 
 	return (
