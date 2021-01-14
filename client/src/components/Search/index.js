@@ -1,73 +1,121 @@
 import React, {useState} from 'react'
 import 'date-fns';
-import { Grid, Divider, Button} from '@material-ui/core';
+import { Grid, Divider, Button, FormControl, InputLabel, MenuItem, Select} from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
-import {Wrapper} from './styled'
+import {Wrapper} from './styled';
+import {useStyles} from './styled';
 
+const cities=['Paris', 'London', 'Seatle'];
 const Search = () => {
 
-    const [arrivalDate,setArrivalDate]=useState(new Date());
-    const handleDateChange=()=>{};
+    const classes=useStyles();
+    const [state,setState]=useState({
+        departureCity: '',
+        arrivalCity: '',
+        departureDate: new Date(),
+        arrivalDate: new Date(),
+        numOfTravellers: 1
+    });
 
+    const handleChange=(e)=>{
+        setState({...state,[e.target.name]:e.target.value})
+    }
+    const handleSubmit=()=>{
+        console.log(state)
+    }
 
     return (
-        <Wrapper>
+        <div className={classes.root}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid container>
-                    <Grid item xs={12} sm={2}>    
-                        <Grid className='title'>From</Grid>
-                        <Grid className='data'>Torono</Grid>
+                <Grid container >
+                    <Grid item xs={12} sm={2} className={classes.item}>    
+                        <FormControl className={classes.formControl}>
+                            <InputLabel shrink>From</InputLabel>
+                            <Select
+                                className={classes.input}
+                                name='departureCity'
+                                value={state.departureCity}
+                                onChange={handleChange}
+                                displayEmpty
+                            >
+                            <MenuItem disabled value=""><em>City</em></MenuItem>
+                            {cities.map(city=>(<MenuItem value={city}>{city}</MenuItem>))}
+                            </Select>
+                        </FormControl>
+                        <Divider orientation="vertical" flexItem />
                     </Grid>
-                    <Divider orientation="vertical" flexItem />
-                    <Grid item xs={12} sm={2}>
-                        <Grid className='title'>Where to go</Grid>
-                        <Grid className='data'>Bali</Grid>
+                    
+                    <Grid item xs={12} sm={2} className={classes.item}>
+                        <FormControl className={classes.formControl}>
+                            <InputLabel shrink>Where to go</InputLabel>
+                            <Select
+                                className={classes.input}
+                                name='arrivalCity'
+                                value={state.arrivalCity}
+                                onChange={handleChange}
+                                displayEmpty
+                            >
+                            <MenuItem disabled value=""><em>City</em></MenuItem>
+                            {cities.map(city=>(<MenuItem value={city}>{city}</MenuItem>))}
+                            </Select>
+                        </FormControl>
+                        <Divider orientation="vertical" flexItem />
                     </Grid>
-                    <Divider orientation="vertical" flexItem />
-                    <Grid item xs={12} sm={2}>
+                    
+                    <Grid item xs={12} sm={2} className={classes.item}>
                         <KeyboardDatePicker
                             disableToolbar
                             variant="inline"
                             format="MM/dd/yyyy"
                             margin="normal"
-                            id="date-picker-inline"
+                            className={classes.input}
                             label="Arrival"
-                            value={arrivalDate}
-                            onChange={handleDateChange}
-                            KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
+                            value={state.arrivalDate}
+                            minDate={new Date()}
+                            onChange={e=>setState({...state,arrivalDate:e})}
                         />
+                        <Divider orientation="vertical" flexItem />
                     </Grid>
-                    <Divider orientation="vertical" flexItem />
-                    <Grid item xs={12} sm={2}>
+                    
+                    <Grid item xs={12} sm={2} className={classes.item}>
                     <KeyboardDatePicker
                             disableToolbar
                             variant="inline"
                             format="MM/dd/yyyy"
                             margin="normal"
-                            id="date-picker-inline"
+                            className={classes.input}
                             label="Departure"
-                            value={arrivalDate}
-                            onChange={handleDateChange}
-                            KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                        }}
+                            value={state.departureDate}
+                            minDate={new Date()}
+                            onChange={e=>setState({...state,departureDate:e})}
                         />
+                        <Divider orientation="vertical" flexItem/>
+                    </Grid>        
+                    <Grid item xs={12} sm={2} className={classes.item}>
+                        <FormControl className={classes.formControl}>
+                            <InputLabel shrink>Travellers</InputLabel>
+                            <Select
+                                className={classes.input}
+                                name='numOfTravellers'
+                                value={state.numOfTravellers}
+                                onChange={handleChange}
+                            >
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                                </Select>
+                        </FormControl>
+                        <Divider orientation="vertical" flexItem />
                     </Grid>
-                    <Divider orientation="vertical" flexItem />
-                    <Grid item xs={12} sm={2}>
-                        <Grid className='title'>Travellers</Grid>
-                        <Grid className='data'>2 travellers</Grid>
+                    <Grid item xs={12} sm={2} className={classes.item}>
+                         <FormControl className={classes.formControl}>
+                            <Button class={classes.btn} variant='contained' type='submit' onClick={handleSubmit}> Search</Button>
+                        </FormControl>
                     </Grid>
-                    <Divider orientation="vertical" flexItem />
-                    <Grid item xs={12} sm={2}>
-                        <Button variant='contained'> Search</Button>
-                    </Grid>   
                 </Grid>
             </MuiPickersUtilsProvider>
-        </Wrapper>
+        </div>
     )
 }
 
