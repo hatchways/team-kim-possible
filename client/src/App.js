@@ -11,8 +11,8 @@ function App() {
   return (
     <MuiThemeProvider theme={theme}>
       <BrowserRouter>
-        <Route path="/" component={LandingPage} />
         <Route path="/" component={Navbar} />
+        <Route path="/" component={LandingPage} />
       </BrowserRouter>
     </MuiThemeProvider>
   );
