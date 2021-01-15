@@ -26,6 +26,10 @@ const userSchema = mongoose.Schema({
     required: true,
     minlength: [6, "Password must be at least 6 characters in length"],
   },
+  profilePictureUrl: {
+    type: String,
+    unique: true,
+  },
 });
 
 userSchema.methods.generateAuthenticationToken = async (user) => {

@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 
 import { theme } from "./themes/theme";
 import LandingPage from "./pages/Landing";
+import DropBox from "./components/dropbox.component";
 
 import "./App.css";
 
@@ -11,6 +12,8 @@ function App() {
   return (
     <MuiThemeProvider theme={theme}>
       <BrowserRouter>
+        <Route path="/DropBox" component={DropBox} />
+
         <Route path="/" component={LandingPage} />
       </BrowserRouter>
     </MuiThemeProvider>

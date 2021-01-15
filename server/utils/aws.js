@@ -19,6 +19,7 @@ const upload = multer({
     metadata: function (req, file, cb) {
       cb(null, { fieldName: file.fieldname });
     },
+    //Key is name of file. Change to be dynamic in future.
     key: function (req, file, cb) {
       cb(null, Date.now().toString());
     },
