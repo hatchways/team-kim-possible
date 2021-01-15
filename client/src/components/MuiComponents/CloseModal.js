@@ -37,7 +37,7 @@ function CloseModal(props) {
 			{props.modalContainer ? (
 				<Box
 					className={classes.closeXContainer}
-					onClick={() => props.cbExit()}
+					onClick={() => props.cb()}
 				>
 					<div className={classes.closeX1}>
 						<div className={classes.closeX2}></div>

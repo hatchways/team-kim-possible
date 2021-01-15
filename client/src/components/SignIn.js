@@ -55,10 +55,7 @@ function SignIn() {
 	return (
 		<div style={container}>
 			<Paper elevation={3} className={classes.paper}>
-				<CloseModal
-					cbExit={handleExit}
-					modalContainer={true}
-				></CloseModal>
+				<CloseModal cb={handleExit} modalContainer={true}></CloseModal>
 				<Grid
 					container
 					direction="column"

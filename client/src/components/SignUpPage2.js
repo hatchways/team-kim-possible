@@ -65,10 +65,7 @@ function SignUpPage2() {
 	return (
 		<div style={container}>
 			<Paper elevation={3} className={classes.paper}>
-				<CloseModal
-					cbExit={handleExit}
-					modalContainer={true}
-				></CloseModal>
+				<CloseModal cb={handleExit} modalContainer={true}></CloseModal>
 				<Grid
 					container
 					direction="column"
@@ -120,7 +117,7 @@ function SignUpPage2() {
 										className={classes.pr1}
 									>
 										<CloseModal
-											cbExit={null}
+											cb={null}
 											modalContainer={false}
 										></CloseModal>
 									</Grid>
@@ -156,7 +153,7 @@ function SignUpPage2() {
 										className={classes.pr1}
 									>
 										<CloseModal
-											cbExit={handleExit}
+											cb={handleExit}
 											modalContainer={false}
 										></CloseModal>
 									</Grid>
