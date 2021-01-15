@@ -13,7 +13,7 @@ const exploreStyles = makeStyles((theme) => ({
 	},
 
 	title: {
-		fontSize: "3rem",
+		fontSize: "2.5rem",
 	},
 	subTitle: {
 		color: `${theme.palette.primary.light}`,
@@ -21,11 +21,15 @@ const exploreStyles = makeStyles((theme) => ({
 		fontSize: "19px",
 	},
 	cardContainer: {
-		padding: "3rem 9rem 0rem 9rem",
+		paddingTop: "3rem",
+		paddingLeft: "10%",
+		paddingRight: "10%",
 	},
 }));
 
 function Explore() {
+	//To get image for exploreCard, make sure the image is saved in public with the name of the place. ex: "public/images/cancun.png"
+	//THIS: props.location.toLowerCase() === saved image name
 	const theme = useTheme();
 	const classes = exploreStyles(theme);
 
@@ -45,7 +49,13 @@ function Explore() {
 				alignItems="center"
 				className={classes.pt4}
 			>
-				<Grid item>
+				<Grid
+					item
+					xs={12}
+					container
+					justify="center"
+					alignItems="center"
+				>
 					<h1 className={classes.title}>Explore destinations</h1>
 				</Grid>
 			</Grid>
@@ -59,41 +69,64 @@ function Explore() {
 				item
 				justify="center"
 				alignItems="center"
-				spacing={6}
+				spacing={5}
 				className={classes.cardContainer}
 			>
-				<Grid item xs={6} md={3}>
+				<Grid item xs={12} lg={3}>
 					<ExploreCard
 						location="Cancun"
 						country="Mexico"
+						imgName="cancun.png"
 					></ExploreCard>
 				</Grid>
-				<Grid item xs={6} md={3}>
+				<Grid item xs={12} lg={3}>
 					<ExploreCard
 						location="London"
-						country="United Kingdom"
+						country="UK"
+						imgName="london.png"
 					></ExploreCard>
 				</Grid>
-				<Grid item xs={6} md={3}>
+				<Grid item xs={12} lg={3}>
 					<ExploreCard
 						location="Bali"
 						country="Indonesia"
+						imgName="bali.png"
 					></ExploreCard>
 				</Grid>
-				<Grid item xs={6} md={3}>
-					<ExploreCard location="Oslo" country="Norway"></ExploreCard>
+				<Grid item xs={12} lg={3}>
+					<ExploreCard
+						location="Oslo"
+						country="Norway"
+						imgName="oslo.png"
+					></ExploreCard>
 				</Grid>
-				<Grid item xs={6} md={3}>
-					<ExploreCard location="Oslo" country="Norway"></ExploreCard>
+				<Grid item xs={12} lg={3}>
+					<ExploreCard
+						location="Paris"
+						country="France"
+						imgName="paris.png"
+					></ExploreCard>
 				</Grid>
-				<Grid item xs={6} md={3}>
-					<ExploreCard location="Oslo" country="Norway"></ExploreCard>
+				<Grid item xs={12} lg={3}>
+					<ExploreCard
+						location="New York"
+						country="USA"
+						imgName="newyork.png"
+					></ExploreCard>
 				</Grid>
-				<Grid item xs={6} md={3}>
-					<ExploreCard location="Oslo" country="Norway"></ExploreCard>
+				<Grid item xs={12} lg={3}>
+					<ExploreCard
+						location="Miami"
+						country="USA"
+						imgName="miami.png"
+					></ExploreCard>
 				</Grid>
-				<Grid item xs={6} md={3}>
-					<ExploreCard location="Oslo" country="Norway"></ExploreCard>
+				<Grid item xs={12} lg={3}>
+					<ExploreCard
+						location="Rome"
+						country="Italy"
+						imgName="rome.png"
+					></ExploreCard>
 				</Grid>
 			</Grid>
 		</Grid>

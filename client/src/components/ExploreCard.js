@@ -1,23 +1,18 @@
 import React, { useState } from "react";
 import { Paper, Grid } from "@material-ui/core";
-import { useTheme, makeStyles } from "@material-ui/core/styles";
-import cancun from "../images/cancun.png";
-import oslo from "../images/oslo.png";
+import { makeStyles } from "@material-ui/core/styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 const exploreCardStyles = makeStyles((theme, props) => ({
-	mainPaper: {
-		background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 90%, rgba(0, 0, 0, 0.65) 100%), url(/images/oslo.png)`,
+	mainPaper: (props) => ({
+		background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 90%, rgba(0, 0, 0, 0.65) 100%), url(/images/${props.imgName})`,
 		backgroundRepeat: "no-repeat",
 		backgroundPosition: "center center",
 		backgroundSize: "cover",
 		borderRadius: "18px",
-		maxWidth: "368px",
-		maxHeight: "468px",
-	},
+	}),
 	emptyTopSpace: {
-		paddingTop: "22rem",
+		paddingTop: "23rem",
 	},
 	cardDataContainer: {
 		borderTop: `1px solid ${theme.palette.primary.light}`,
@@ -49,9 +44,7 @@ const exploreCardStyles = makeStyles((theme, props) => ({
 }));
 
 function ExploreCard(props) {
-	const theme = useTheme();
-	console.log(props.location.toLowerCase());
-	const classes = exploreCardStyles(theme, "oslo");
+	const classes = exploreCardStyles(props);
 
 	const [liked, setLike] = useState(false);
 
