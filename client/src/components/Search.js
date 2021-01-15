@@ -3,12 +3,41 @@ import 'date-fns';
 import { Grid, Divider, Button, FormControl, InputLabel, MenuItem, Select} from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
-import {Wrapper} from './styled';
-import {useStyles} from './styled';
+import { makeStyles } from '@material-ui/core/styles'
 
 const cities=['Paris', 'London', 'Seatle'];
+const useStyles=makeStyles({
+    root:{
+        height:'90px',
+        width:'80%',
+        background:'white',
+        margin:'0 auto',
+        borderRadius: '20px',
+        boxShadow: '0 0 5px 5px rgba(221, 221, 240, 0.7)',
+        display:'flex',
+        alignItems:'center'
+    },
+    item:{
+        padding: '0 20px',
+    },
+    btn: {
+        backgroundColor:'#FAAC2F',
+        color: 'white',
+        padding:  '10px 20px',
+        border: 'none',
+        marginTop:'3px',
+        borderRadius: '5px'
+        
+    },
+    formControl:{
+        width:'100%',
+        marginTop:'16px',
+    },
+    input: {
+        fontSize:'0.8rem',
+    }
+})
 const Search = () => {
-
     const classes=useStyles();
     const [state,setState]=useState({
         departureCity: '',
