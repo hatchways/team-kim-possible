@@ -70,14 +70,14 @@ function Explore() {
 				</Grid>
 				<Grid item xs={6} md={3}>
 					<ExploreCard
-						location="Cancun"
-						country="Mexico"
+						location="London"
+						country="United Kingdom"
 					></ExploreCard>
 				</Grid>
 				<Grid item xs={6} md={3}>
 					<ExploreCard
-						location="Cancun"
-						country="Mexico"
+						location="Bali"
+						country="Indonesia"
 					></ExploreCard>
 				</Grid>
 				<Grid item xs={6} md={3}>

@@ -3,45 +3,15 @@ import { Paper, TextField, Grid } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
+import SignInModalFooter from "./MuiComponents/SignInModalFooter";
+import SignInModalHeader from "./MuiComponents/SignInModalHeader";
+import CloseModal from "./MuiComponents/CloseModal";
 
 const signUpStyles = makeStyles((theme) => ({
-	// X BUTTON IN THE CORNER
-	closeXContainer: {
-		position: "absolute",
-		left: "94%",
-		top: "2%",
-		height: "20px",
-		width: "20px",
-		textAlign: "center",
-	},
-	closeX1: {
-		height: "20px",
-		width: "2px",
-		marginLeft: "12px",
-		backgroundColor: `${theme.palette.primary.light}`,
-		transform: " rotate(45deg)",
-		zIndex: "1",
-	},
-	closeX2: {
-		height: "20px",
-		width: "2px",
-		backgroundColor: `${theme.palette.primary.light}`,
-		transform: " rotate(90deg)",
-		zIndex: "2",
-	},
-	//PAPER
 	paper: {
 		position: "relative",
 		overflow: "hidden",
 		maxWidth: "500px",
-	},
-	title: {
-		paddingTop: "1rem",
-	},
-	subTitle: {
-		color: `${theme.palette.primary.light}`,
-		fontSize: "13px",
-		textAlign: "center",
 	},
 	continueButton: {
 		color: "white",
@@ -49,17 +19,6 @@ const signUpStyles = makeStyles((theme) => ({
 		borderRadius: "6px",
 		marginTop: "3rem",
 		padding: "0.75rem 5rem 0.75rem 5rem",
-	},
-	footer: {
-		border: "1px solid #e2e2ea",
-		marginTop: "2rem",
-		padding: "2rem 3rem 2rem 3rem",
-	},
-	footerText: {
-		color: `${theme.palette.primary.light}`,
-	},
-	secondary: {
-		color: `${theme.palette.secondary.main}`,
 	},
 }));
 
@@ -84,9 +43,7 @@ function SignUp() {
 		alignItems: "center",
 	};
 
-	const handleExit = () => {
-		console.log("exit");
-	};
+	const handleExit = () => {};
 
 	const handleNameChange = (e) => {
 		setName(e.target.value);
@@ -134,42 +91,23 @@ function SignUp() {
 
 	return (
 		<div style={container}>
-			{/* TOP TEXT - HEADER */}
-
 			<Paper elevation={3} className={classes.paper}>
-				<Box
-					className={classes.closeXContainer}
-					onClick={() => handleExit()}
-				>
-					<div className={classes.closeX1}>
-						<div className={classes.closeX2}></div>
-					</div>
-				</Box>
+				<CloseModal
+					cbExit={handleExit}
+					modalContainer={true}
+				></CloseModal>
 				<Grid
 					container
 					direction="column"
 					justify="center"
 					alignItems="center"
 				>
-					<Grid
-						container
-						item
-						xs={12}
-						justify="center"
-						alignItems="center"
-						direction="column"
-					>
-						<Grid item>
-							<h1 className={classes.title}>Sign Up</h1>
-						</Grid>
+					{/* TOP TEXT - HEADER */}
 
-						<Grid item xs={6} className={classes.subTitle}>
-							<p>
-								Track Prices, organize travel plans and access
-								member-only deals
-							</p>
-						</Grid>
-					</Grid>
+					<SignInModalHeader
+						title="Sign Up"
+						subTitle="Track Prices, organize travel plans and access member-only deals"
+					></SignInModalHeader>
 
 					{/* FORM SECTION */}
 
@@ -312,21 +250,10 @@ function SignUp() {
 
 					{/* FOOTER */}
 
-					<Grid
-						container
-						item
-						xs={12}
-						className={classes.footer}
-						justify="center"
-						alignItems="center"
-					>
-						<Grid item>
-							<span className={classes.footerText}>
-								Already Have An Account?{" "}
-							</span>
-							<span className={classes.secondary}>Sign In</span>
-						</Grid>
-					</Grid>
+					<SignInModalFooter
+						primaryText={"Already have an account?"}
+						secondaryText={"Sign In"}
+					/>
 				</Grid>
 			</Paper>
 		</div>
