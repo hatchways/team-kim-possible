@@ -10,7 +10,7 @@ const useStyles = makeStyles({
     padding: "10px",
     margin: "20px",
     textAlign: "center",
-    border: "1px dotted",
+    border: "2px dotted",
   },
 });
 
