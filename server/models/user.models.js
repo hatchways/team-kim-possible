@@ -28,7 +28,6 @@ const userSchema = mongoose.Schema({
   },
   profilePictureUrl: {
     type: String,
-    unique: true,
   },
 });
 
