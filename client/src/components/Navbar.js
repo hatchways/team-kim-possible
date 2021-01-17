@@ -16,12 +16,13 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    color: "#6565ff",
+    color: "#6464FF",
   },
   navbar: {
     backgroundColor: "#fff",
     color: "black",
     boxShadow: "0 4px 4px rgba(0, 0, 0, 0.1)",
+    position: "relative",
   },
   links: {
     color: "black",
@@ -36,7 +37,7 @@ export default function ButtonAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes.navbar}>
+      <AppBar position="static" className={classes.navbar} elevation={5}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             Travel Booking

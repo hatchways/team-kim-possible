@@ -5,6 +5,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { theme } from "./themes/theme";
 import LandingPage from "./pages/Landing";
 import Navbar from "./components/Navbar";
+import ExploreCard from "./components/ExploreCard";
+import Userpage from "./components/Userpage";
 import "./App.css";
 
 function App() {
@@ -12,7 +14,7 @@ function App() {
     <MuiThemeProvider theme={theme}>
       <BrowserRouter>
         <Route path="/" component={Navbar} />
-        <p> A lot of cool stuff</p>
+        <Userpage />
       </BrowserRouter>
     </MuiThemeProvider>
   );

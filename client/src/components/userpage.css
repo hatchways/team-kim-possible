@@ -1,0 +1,15 @@
+.selector::first-letter {
+  color: #f09600;
+}
+
+.selector {
+  text-align: center;
+  align-content: center;
+  margin: auto;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
