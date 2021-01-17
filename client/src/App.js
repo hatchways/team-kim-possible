@@ -1,22 +1,17 @@
 import React from "react";
-import { MuiThemeProvider } from "@material-ui/core";
 import { BrowserRouter, Route } from "react-router-dom";
-
-import { theme } from "./themes/theme";
 import LandingPage from "./pages/Landing";
-import DropBox from "./components/dropbox.component";
+
+import SearchPage from "./pages/SearchPage";
 
 import "./App.css";
 
 function App() {
   return (
-    <MuiThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Route path="/DropBox" component={DropBox} />
-
-        <Route path="/" component={LandingPage} />
-      </BrowserRouter>
-    </MuiThemeProvider>
+    <BrowserRouter>
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/search" component={SearchPage} />
+    </BrowserRouter>
   );
 }
 
