@@ -1,16 +1,16 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import LandingPage from "./pages/Landing";
-import SearchPage from "./pages/SearchPage"
+import SearchPage from "./pages/SearchPage";
 
 import "./App.css";
 
 function App() {
   return (
-      <BrowserRouter>
-        <Route exact path="/" component={LandingPage} />
-        <Route path='/search' component={SearchPage}/>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/search" component={SearchPage} />
+    </BrowserRouter>
   );
 }
 

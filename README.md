@@ -22,3 +22,8 @@ This starter repo will be used for building applications using React, Material-U
 - validator
 - bcrypt
 - jwt
+- aws-sdk
+- multer
+- multer-s3
+- react-dropzone
+- date-fns
