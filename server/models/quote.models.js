@@ -12,14 +12,14 @@ const quoteSchema = mongoose.Schema({
     },
     outboundLeg:{
         // carrierIds: [],
-        originId: {type:mongoose.Schema.Types.ObjectId,required:true,ref:'Places'},
-        destinationId:{type:mongoose.Schema.Types.ObjectId,required:true,ref:'Places'},
+        originId: {type:mongoose.Schema.Types.ObjectId,required:true,ref:'Place'},
+        destinationId:{type:mongoose.Schema.Types.ObjectId,required:true,ref:'Place'},
         departureDate:{type:String,required:true}
     },
     inboundLeg:{
         // carrierIds: [],
-        originId: {type:mongoose.Schema.Types.ObjectId,required:true,ref:'Places'},
-        destinationId:{type:mongoose.Schema.Types.ObjectId,required:true,ref:'Places'},
+        originId: {type:mongoose.Schema.Types.ObjectId,required:true,ref:'Place'},
+        destinationId:{type:mongoose.Schema.Types.ObjectId,required:true,ref:'Place'},
         departureDate:{type:String,required:true}
     },  
     quoteDateTime:{type:String,required:true}
