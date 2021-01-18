@@ -6,14 +6,27 @@ import { useTheme, makeStyles } from "@material-ui/core/styles";
 import SignInModalFooter from "./MuiComponents/SignInModalFooter";
 import SignInModalHeader from "./MuiComponents/SignInModalHeader";
 import CloseModal from "./MuiComponents/CloseModal";
+import axios from "axios";
 
 const signInStyles = makeStyles((theme) => ({
+	container: {
+		position: "fixed",
+		width: "100%",
+		height: "100%",
+		top: "0",
+		right: "0",
+		bottom: "0",
+		margin: "auto",
+		backgroundColor: "rgba(0,0,0, 0.5)",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+	},
 	paper: {
 		position: "relative",
 		overflow: "hidden",
 		width: "500px",
 	},
-
 	signInButton: {
 		color: "white",
 		fontSize: "16px",
@@ -29,15 +42,6 @@ function SignIn() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	const container = {
-		backgroundColor: "#333",
-		height: "100vh",
-		width: "100vw",
-		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-	};
-
 	const handleExit = () => {};
 
 	const handleEmailChange = (e) => {
@@ -48,12 +52,18 @@ function SignIn() {
 		setPassword(e.target.value);
 	};
 
+	const userData = {
+		email: email,
+		password: password,
+	};
+
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
+		axios.post("/login", userData);
 	};
 
 	return (
-		<div style={container}>
+		<div className={classes.container}>
 			<Paper elevation={3} className={classes.paper}>
 				<CloseModal cb={handleExit} modalContainer={true}></CloseModal>
 				<Grid

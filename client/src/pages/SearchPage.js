@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 		fontSize: "2rem",
 	},
 	item7: {
-		backgroundImage: 'url("/images/nature.jpg")',
+		backgroundImage: 'url("/images/searchHero.png")',
 	},
 	container: {
 		position: "absolute",
