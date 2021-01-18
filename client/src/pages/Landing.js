@@ -5,7 +5,7 @@ import SignIn from "../components/SignIn";
 import Explore from "../components/Explore";
 
 const Landing = () => {
-	return <Explore></Explore>;
+	return <SignIn></SignIn>;
 };
 
 export default Landing;
