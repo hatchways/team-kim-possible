@@ -16,7 +16,10 @@ import {
 } from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
 
-const cities = ["Paris", "London", "Seatle"];
+import SearchResults from "../components/search-results.component";
+import { cityId, outgoingRoutes } from "../utils/skyscanner";
+
+const cities = ["Paris", "London", "Seattle"];
 const useStyles = makeStyles({
   root: {
     height: "90px",
@@ -60,8 +63,16 @@ const Search = () => {
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
-  const handleSubmit = () => {
-    console.log(state);
+  const handleSubmit = async () => {
+    const departureCityId = await cityId(state.departureCity);
+    const arrivalCityId = await cityId(state.arrivalCity);
+    const outgoingFlights = await outgoingRoutes(
+      departureCityId,
+      arrivalCityId,
+      state.departureDate.toISOString().slice(0, 10),
+      state.arrivalDate.toISOString().slice(0, 10)
+    );
+    console.log(outgoingFlights);
   };
 
   return (
@@ -170,6 +181,7 @@ const Search = () => {
           </Grid>
         </Grid>
       </MuiPickersUtilsProvider>
+      <SearchResults />
     </div>
   );
 };
