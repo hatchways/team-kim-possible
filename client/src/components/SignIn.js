@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Paper, TextField, Grid } from "@material-ui/core";
+import { Paper, TextField, Grid, FormHelperText } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
@@ -34,15 +34,18 @@ const signInStyles = makeStyles((theme) => ({
 		marginTop: "3rem",
 		padding: ".5rem, 1rem, .5rem, 1rem",
 	},
+	signInErrText: {
+		marginTop: "2rem",
+		fontSize: "1rem",
+	},
 }));
 
-function SignIn() {
+function SignIn(props) {
 	const theme = useTheme();
 	const classes = signInStyles(theme);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-
-	const handleExit = () => {};
+	const [signInErr, setSignInErr] = useState(false);
 
 	const handleEmailChange = (e) => {
 		setEmail(e.target.value);
@@ -59,13 +62,22 @@ function SignIn() {
 
 	const handleFormSubmit = (e) => {
 		e.preventDefault();
-		axios.post("/login", userData);
+
+		const sendSignInRequest = async () => {
+			try {
+				const resp = await axios.post("/login", userData);
+				props.exit();
+			} catch (err) {
+				setSignInErr(true);
+			}
+		};
+		sendSignInRequest();
 	};
 
 	return (
 		<div className={classes.container}>
 			<Paper elevation={3} className={classes.paper}>
-				<CloseModal cb={handleExit} modalContainer={true}></CloseModal>
+				<CloseModal cb={props.exit} modalContainer={true}></CloseModal>
 				<Grid
 					container
 					direction="column"
@@ -118,7 +130,20 @@ function SignIn() {
 								</Box>
 							</Grid>
 						</Grid>
-
+						{signInErr ? (
+							<Grid
+								item
+								container
+								justify="center"
+								alignItems="center"
+							>
+								<FormHelperText
+									error
+									children="Could not sign user in"
+									className={classes.signInErrText}
+								></FormHelperText>
+							</Grid>
+						) : null}
 						{/* BUTTON */}
 
 						<Grid
