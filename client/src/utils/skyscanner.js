@@ -15,20 +15,21 @@ const cityId = async (city) => {
       useQueryString: true,
     },
   });
-  return response.data.Places[0].CityId;
+  //Places[0] is the city. Places[1] is the first, usually major airport
+  return response.data.Places[1].PlaceId;
 };
 
 const outgoingRoutes = async (
-  originCity,
-  destinationCity,
+  originLocation,
+  destinationLocation,
   departureDate,
   arrivalDate
 ) => {
   const response = await axios({
     method: "get",
-    url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${originCity}/${destinationCity}/${departureDate}`,
+    url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${originLocation}/${destinationLocation}/${arrivalDate}`,
     params: {
-      inboundpartialdate: arrivalDate,
+      inboundpartialdate: departureDate,
     },
     headers: {
       "x-rapidapi-key": "12ace0bfd9msh34dee4306bb93d3p1da922jsn4c10b1bd8ee4",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "date-fns";
 import {
   Grid,
@@ -16,7 +16,6 @@ import {
 } from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
 
-import SearchResults from "../components/search-results.component";
 import { cityId, outgoingRoutes } from "../utils/skyscanner";
 
 const cities = ["Paris", "London", "Seattle"];
@@ -50,29 +49,24 @@ const useStyles = makeStyles({
     fontSize: "0.8rem",
   },
 });
-const Search = () => {
+const Search = (props) => {
   const classes = useStyles();
-  const [state, setState] = useState({
-    departureCity: "",
-    arrivalCity: "",
-    departureDate: new Date(),
-    arrivalDate: new Date(),
-    numOfTravellers: 1,
-  });
+  const { state, setState } = props;
 
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
   const handleSubmit = async () => {
-    const departureCityId = await cityId(state.departureCity);
-    const arrivalCityId = await cityId(state.arrivalCity);
+    const departureLocationId = await cityId(state.departureCity);
+    const arrivalLocationId = await cityId(state.arrivalCity);
     const outgoingFlights = await outgoingRoutes(
-      departureCityId,
-      arrivalCityId,
+      departureLocationId,
+      arrivalLocationId,
       state.departureDate.toISOString().slice(0, 10),
       state.arrivalDate.toISOString().slice(0, 10)
     );
     console.log(outgoingFlights);
+    setState({ ...state, routeData: outgoingFlights.data });
   };
 
   return (
@@ -181,7 +175,6 @@ const Search = () => {
           </Grid>
         </Grid>
       </MuiPickersUtilsProvider>
-      <SearchResults />
     </div>
   );
 };
