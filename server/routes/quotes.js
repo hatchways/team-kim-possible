@@ -25,15 +25,13 @@ router.get(
           params: req.query,
         }
       );
-      if (response.quotes.length !== 0) {
-        console.log("data");
-        res.json(data);
+      if (response.data.length !== 0) {
+        res.json(response.data);
       } else {
         res.status(404);
         throw new Error("Flights not found");
       }
     } catch (error) {
-      console.log("errr");
       res.send(error);
     }
   }

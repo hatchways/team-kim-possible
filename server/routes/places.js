@@ -18,8 +18,8 @@ router.get("/", async function (req, res, next) {
         params: req.query,
       }
     );
-    if (response.length !== 0) {
-      res.json(data);
+    if (response.data.length !== 0) {
+      res.json(response.data);
     } else {
       res.status(404);
       throw new Error("Cities not found");

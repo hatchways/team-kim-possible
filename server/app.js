@@ -22,13 +22,10 @@ const indexRouter = require("./routes/index");
 const pingRouter = require("./routes/ping");
 const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
-<<<<<<< HEAD
 const placesRouter = require("./routes/places");
 const quotesRouter = require("./routes/quotes");
 const favoritesRouter = require("./routes/favorites");
-=======
 const profileRouter = require("./routes/profile");
->>>>>>> origin
 const auth = require("./middleware/auth");
 
 const { json, urlencoded } = express;
@@ -46,13 +43,10 @@ app.use("/", indexRouter);
 app.use("/ping", pingRouter);
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
-<<<<<<< HEAD
 app.use("/search-places", placesRouter);
 app.use("/quotes", quotesRouter);
 app.use("/favorites", auth, favoritesRouter);
-=======
 app.use("/profile", auth, profileRouter);
->>>>>>> origin
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

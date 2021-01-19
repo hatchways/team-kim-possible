@@ -26,13 +26,9 @@ const userSchema = mongoose.Schema({
     required: true,
     minlength: [6, "Password must be at least 6 characters in length"],
   },
-<<<<<<< HEAD
-  favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Place',}]
-=======
   profilePictureUrl: {
     type: String,
   },
->>>>>>> origin
 });
 
 userSchema.methods.generateAuthenticationToken = async (user) => {
