@@ -24,7 +24,6 @@ router.get("/", function (req, res, next) {
   axios
     .request(options)
     .then(function (response) {
-      console.log(response.data);
       res.send(response.data);
     })
     .catch(function (error) {
@@ -48,7 +47,6 @@ router.get("/places", function (req, res, next) {
   axios
     .request(options)
     .then(function (response) {
-      console.log(response.data);
       res.send(response.data);
     })
     .catch(function (error) {

@@ -20,7 +20,6 @@ mongoose
 
 const indexRouter = require("./routes/index");
 const apiRouter = require("./routes/api");
-const pingRouter = require("./routes/ping");
 const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
 
@@ -35,7 +34,6 @@ app.use(cookieParser());
 app.use(express.static(join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/ping", pingRouter);
 app.use("/api", apiRouter);
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
