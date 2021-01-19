@@ -33,6 +33,17 @@ function Explore() {
 	const theme = useTheme();
 	const classes = exploreStyles(theme);
 
+	const locations = [
+		{ location: "Cancun", country: "Mexico:", imgName: "/cancun.png" },
+		{ location: "London", country: "UK", imgName: "/london.png" },
+		{ location: "Bali", country: "Indonesia", imgName: "bali.png" },
+		{ location: "Oslo", country: "Norway", imgName: "oslo.png" },
+		{ location: "Paris", country: "France", imgName: "paris.png" },
+		{ location: "New York", country: "USA", imgName: "newyork.png" },
+		{ location: "Miami", country: "USA", imgName: "miami.png" },
+		{ location: "Rome", country: "Italy", imgName: "rome.png" },
+	];
+
 	return (
 		<Grid
 			container
@@ -72,62 +83,17 @@ function Explore() {
 				spacing={5}
 				className={classes.cardContainer}
 			>
-				<Grid item xs={12} lg={3}>
-					<ExploreCard
-						location="Cancun"
-						country="Mexico"
-						imgName="cancun.png"
-					></ExploreCard>
-				</Grid>
-				<Grid item xs={12} lg={3}>
-					<ExploreCard
-						location="London"
-						country="UK"
-						imgName="london.png"
-					></ExploreCard>
-				</Grid>
-				<Grid item xs={12} lg={3}>
-					<ExploreCard
-						location="Bali"
-						country="Indonesia"
-						imgName="bali.png"
-					></ExploreCard>
-				</Grid>
-				<Grid item xs={12} lg={3}>
-					<ExploreCard
-						location="Oslo"
-						country="Norway"
-						imgName="oslo.png"
-					></ExploreCard>
-				</Grid>
-				<Grid item xs={12} lg={3}>
-					<ExploreCard
-						location="Paris"
-						country="France"
-						imgName="paris.png"
-					></ExploreCard>
-				</Grid>
-				<Grid item xs={12} lg={3}>
-					<ExploreCard
-						location="New York"
-						country="USA"
-						imgName="newyork.png"
-					></ExploreCard>
-				</Grid>
-				<Grid item xs={12} lg={3}>
-					<ExploreCard
-						location="Miami"
-						country="USA"
-						imgName="miami.png"
-					></ExploreCard>
-				</Grid>
-				<Grid item xs={12} lg={3}>
-					<ExploreCard
-						location="Rome"
-						country="Italy"
-						imgName="rome.png"
-					></ExploreCard>
-				</Grid>
+				{locations.map((loc) => {
+					return (
+						<Grid item xs={12} lg={3}>
+							<ExploreCard
+								location={loc.location}
+								country={loc.country}
+								imgName={loc.imgName}
+							></ExploreCard>
+						</Grid>
+					);
+				})}
 			</Grid>
 		</Grid>
 	);
