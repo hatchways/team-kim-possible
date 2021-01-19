@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const cityId = async (city) => {
+const getCityId = async (city) => {
   const response = await axios({
     method: "get",
     url:
@@ -19,7 +19,7 @@ const cityId = async (city) => {
   return response.data.Places[1].PlaceId;
 };
 
-const outgoingRoutes = async (
+const getRouteData = async (
   originLocation,
   destinationLocation,
   departureDate,
@@ -27,10 +27,8 @@ const outgoingRoutes = async (
 ) => {
   const response = await axios({
     method: "get",
-    url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${originLocation}/${destinationLocation}/${arrivalDate}`,
-    params: {
-      inboundpartialdate: departureDate,
-    },
+    url: `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${originLocation}/${destinationLocation}/${arrivalDate}/${departureDate}`,
+
     headers: {
       "x-rapidapi-key": "12ace0bfd9msh34dee4306bb93d3p1da922jsn4c10b1bd8ee4",
       "x-rapidapi-host":
@@ -41,4 +39,4 @@ const outgoingRoutes = async (
   return response;
 };
 
-export { cityId, outgoingRoutes };
+export { getCityId, getRouteData };

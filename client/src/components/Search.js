@@ -16,7 +16,7 @@ import {
 } from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { cityId, outgoingRoutes } from "../utils/skyscanner";
+import { getCityId, getRouteData } from "../utils/skyscanner";
 
 const cities = ["Paris", "London", "Seattle"];
 const useStyles = makeStyles({
@@ -57,16 +57,16 @@ const Search = (props) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
   const handleSubmit = async () => {
-    const departureLocationId = await cityId(state.departureCity);
-    const arrivalLocationId = await cityId(state.arrivalCity);
-    const outgoingFlights = await outgoingRoutes(
+    const departureLocationId = await getCityId(state.departureCity);
+    const arrivalLocationId = await getCityId(state.arrivalCity);
+    const routeData = await getRouteData(
       departureLocationId,
       arrivalLocationId,
       state.departureDate.toISOString().slice(0, 10),
       state.arrivalDate.toISOString().slice(0, 10)
     );
-    console.log(outgoingFlights);
-    setState({ ...state, routeData: outgoingFlights.data });
+    console.log(routeData);
+    setState({ ...state, routeData: routeData.data });
   };
 
   return (

@@ -8,6 +8,9 @@ function SearchResults(props) {
     Places: places,
     Quotes: quotes,
   } = state.routeData;
+  if (quotes.length < 1) {
+    return <div>Sorry, there are no matching flights!</div>;
+  }
   return (
     <div>
       {quotes.map((quote) => (
