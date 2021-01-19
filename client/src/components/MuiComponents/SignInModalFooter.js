@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 const footerStyles = makeStyles((theme) => ({
 	footer: {
@@ -31,7 +32,9 @@ function SignInModalBottom(props) {
 		>
 			<Grid item>
 				<span className={classes.footerText}>{props.primaryText} </span>
-				<span className={classes.secondary}>{props.secondaryText}</span>
+				<span className={classes.secondary}>
+					<Link to={props.link}>{props.secondaryText}</Link>
+				</span>
 			</Grid>
 		</Grid>
 	);

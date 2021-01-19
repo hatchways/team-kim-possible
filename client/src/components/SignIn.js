@@ -7,6 +7,7 @@ import SignInModalFooter from "./MuiComponents/SignInModalFooter";
 import SignInModalHeader from "./MuiComponents/SignInModalHeader";
 import CloseModal from "./MuiComponents/CloseModal";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const signInStyles = makeStyles((theme) => ({
 	container: {
@@ -47,6 +48,8 @@ function SignIn(props) {
 	const [password, setPassword] = useState("");
 	const [signInErr, setSignInErr] = useState(false);
 
+	const history = useHistory();
+
 	const handleEmailChange = (e) => {
 		setEmail(e.target.value);
 	};
@@ -66,9 +69,12 @@ function SignIn(props) {
 		const sendSignInRequest = async () => {
 			try {
 				const resp = await axios.post("/login", userData);
+				localStorage.setItem("loggedIn", "true");
+				history.push("/");
 				props.exit();
 			} catch (err) {
 				setSignInErr(true);
+				return;
 			}
 		};
 		sendSignInRequest();
@@ -173,6 +179,7 @@ function SignIn(props) {
 					<SignInModalFooter
 						primaryText={"Don't have an account?"}
 						secondaryText={"Sign Up"}
+						link="/signup"
 					/>
 				</Grid>
 			</Paper>

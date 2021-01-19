@@ -6,9 +6,9 @@ import { useTheme, makeStyles } from "@material-ui/core/styles";
 import SignInModalFooter from "./MuiComponents/SignInModalFooter";
 import SignInModalHeader from "./MuiComponents/SignInModalHeader";
 import CloseModal from "./MuiComponents/CloseModal";
-import { useHistory } from "react-router-dom";
 import axios from "axios";
 import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
+import { useHistory } from "react-router-dom";
 
 const signUpStyles = makeStyles((theme) => ({
 	container: {
@@ -76,6 +76,7 @@ const signUpStyles = makeStyles((theme) => ({
 function SignUp(props) {
 	const theme = useTheme();
 	const classes = signUpStyles(theme);
+	const history = useHistory();
 
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -163,7 +164,7 @@ function SignUp(props) {
 								/>
 							) : (
 								<TextField
-									id="Password"
+									id="pass	"
 									label="Password"
 									variant="outlined"
 									fullWidth={true}
@@ -331,7 +332,10 @@ function SignUp(props) {
 							fullWidth={true}
 							size="large"
 							disableRipple={true}
-							onClick={() => props.exit()}
+							onClick={() => {
+								history.push("/");
+								props.exit();
+							}}
 							className={classes.signUpButton}
 						>
 							Sign Up
@@ -398,7 +402,7 @@ function SignUp(props) {
 		const sendSignUpRequest = async () => {
 			try {
 				const resp = await axios.post("/signup", userData);
-
+				localStorage.setItem("loggedIn", "true");
 				setPage2(true);
 			} catch (err) {
 				setSignUpErr(true);
@@ -436,6 +440,7 @@ function SignUp(props) {
 					<SignInModalFooter
 						primaryText={"Already have an account?"}
 						secondaryText={"Sign In"}
+						link={"/signin"}
 					/>
 				</Grid>
 			</Paper>
