@@ -19,7 +19,7 @@ const signUpStyles = makeStyles((theme) => ({
 		right: "0",
 		bottom: "0",
 		margin: "auto",
-		backgroundColor: "rgba(0,0,0, 0.5)",
+		backgroundColor: "inherit",
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",

@@ -13,8 +13,14 @@ const exploreStyles = makeStyles((theme) => ({
 		paddingTop: "3rem",
 	},
 
+	cardContainer: {
+		paddingTop: "2rem",
+		paddingLeft: "10%",
+		paddingRight: "10%",
+	},
+
 	headerSpacing: {
-		margin: "3rem 0 4rem 0",
+		margin: "2rem 0 4rem 0",
 	},
 }));
 

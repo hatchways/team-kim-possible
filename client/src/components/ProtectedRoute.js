@@ -9,7 +9,7 @@ function ProtectedRoute(props) {
 			return <Redirect to={"/"}></Redirect>;
 		}
 	};
-	return <Route to={props.route}>{() => renderComponent()}</Route>;
+	return <Route to={props.to}>{() => renderComponent()}</Route>;
 }
 
 export default ProtectedRoute;

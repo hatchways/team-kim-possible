@@ -30,18 +30,20 @@ function App() {
 	return (
 		<BrowserRouter>
 			<MuiThemeProvider theme={theme}>
-				<Route path="/" component={SearchPage} />
 				<Route path="/">
+					<SearchPage></SearchPage>
 					{loggedIn ? null : <SignIn exit={handleModalExit}></SignIn>}
 				</Route>
-				<Route exact path="/signup">
+
+				<Route path="/signup">
 					{loggedIn ? (
 						<div>already logged in</div>
 					) : (
 						<SignUp exit={handleModalExit}></SignUp>
 					)}
 				</Route>
-				<Route exact path="/signin">
+
+				<Route path="/signin">
 					{loggedIn ? (
 						<div>already logged in</div>
 					) : (
@@ -51,7 +53,7 @@ function App() {
 
 				<ProtectedRoute
 					component={<Explore></Explore>}
-					route="/explore"
+					to="/explore"
 				></ProtectedRoute>
 			</MuiThemeProvider>
 		</BrowserRouter>
