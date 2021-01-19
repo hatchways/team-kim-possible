@@ -1,16 +1,14 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 
 const headerStyles = makeStyles((theme) => ({
-	title: {
-		padding: "1rem 1rem 0rem 1rem",
+	titleSpacing: {
 		marginTop: "2rem",
 		marginBottom: "0.5rem",
 	},
-	subTitle: {
-		color: `${theme.palette.primary.light}`,
-		fontSize: "13px",
+	subTitleSpacing: {
+		marginTop: "1rem",
 		textAlign: "center",
 	},
 }));
@@ -29,11 +27,15 @@ function SignInModalHeader(props) {
 			direction="column"
 		>
 			<Grid item>
-				<h1 className={classes.title}>{props.title}</h1>
+				<Typography variant="h3" className={classes.titleSpacing}>
+					{props.title}
+				</Typography>
 			</Grid>
 
-			<Grid item xs={7} className={classes.subTitle}>
-				<p>{props.subTitle}</p>
+			<Grid item xs={7}>
+				<Typography variant="body2" className={classes.subTitleSpacing}>
+					{props.subTitle}
+				</Typography>
 			</Grid>
 		</Grid>
 	);

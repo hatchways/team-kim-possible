@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const footerStyles = makeStyles((theme) => ({
 		marginTop: "3rem",
 		padding: "2rem 3rem 2rem 3rem",
 	},
-	footerText: {
+	primaryLight: {
 		color: `${theme.palette.primary.light}`,
 	},
 	secondary: {
@@ -31,10 +31,23 @@ function SignInModalBottom(props) {
 			alignItems="center"
 		>
 			<Grid item>
-				<span className={classes.footerText}>{props.primaryText} </span>
-				<span className={classes.secondary}>
-					<Link to={props.link}>{props.secondaryText}</Link>
-				</span>
+				<Typography
+					variant="body1"
+					component="span"
+					className={classes.primaryLight}
+				>
+					{props.primaryText}{" "}
+				</Typography>
+
+				<Link to={props.link}>
+					<Typography
+						variant="body1"
+						color="secondary"
+						component="span"
+					>
+						{props.secondaryText}
+					</Typography>
+				</Link>
 			</Grid>
 		</Grid>
 	);

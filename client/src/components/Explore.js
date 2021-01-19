@@ -2,6 +2,7 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import ExploreCard from "./ExploreCard";
+import { Typography } from "@material-ui/core";
 
 const exploreStyles = makeStyles((theme) => ({
 	pageContainer: {
@@ -12,18 +13,8 @@ const exploreStyles = makeStyles((theme) => ({
 		paddingTop: "3rem",
 	},
 
-	title: {
-		fontSize: "2.5rem",
-	},
-	subTitle: {
-		color: `${theme.palette.primary.light}`,
-		marginTop: "-0.25rem",
-		fontSize: "19px",
-	},
-	cardContainer: {
-		paddingTop: "3rem",
-		paddingLeft: "10%",
-		paddingRight: "10%",
+	headerSpacing: {
+		margin: "3rem 0 4rem 0",
 	},
 }));
 
@@ -67,13 +58,13 @@ function Explore() {
 					justify="center"
 					alignItems="center"
 				>
-					<h1 className={classes.title}>Explore destinations</h1>
+					<Typography variant="h2">Explore Destinations</Typography>
 				</Grid>
 			</Grid>
 			<Grid item>
-				<p className={classes.subTitle}>
+				<Typography variant="h5" className={classes.headerSpacing}>
 					World's Top Destinations to Explore
-				</p>
+				</Typography>
 			</Grid>
 			<Grid
 				container
