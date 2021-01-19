@@ -100,7 +100,6 @@ export default function Userpage2() {
         <br></br>
         <br></br>
         <Grid item xs={12}>
-          {/* <p className={classes.selected}> | </p> */}
           <h5 className={classes.alignment} class="selector">
             | Favourite Destinations
           </h5>
