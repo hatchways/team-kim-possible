@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SearchPage from "./pages/SearchPage";
 import { MuiThemeProvider } from "@material-ui/core";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import { theme } from "./themes/theme";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
@@ -37,7 +37,7 @@ function App() {
 
 				<Route path="/signup">
 					{loggedIn ? (
-						<div>already logged in</div>
+						<Redirect to="/"></Redirect>
 					) : (
 						<SignUp exit={handleModalExit}></SignUp>
 					)}
@@ -45,7 +45,7 @@ function App() {
 
 				<Route path="/signin">
 					{loggedIn ? (
-						<div>already logged in</div>
+						<Redirect to="/"></Redirect>
 					) : (
 						<SignIn exit={handleModalExit}></SignIn>
 					)}
