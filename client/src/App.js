@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import SearchPage from "./pages/SearchPage";
 import { MuiThemeProvider } from "@material-ui/core";
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 import { theme } from "./themes/theme";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Explore from "./components/Explore";
+import Hotels from "./components/Hotels";
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -30,31 +31,35 @@ function App() {
 	return (
 		<BrowserRouter>
 			<MuiThemeProvider theme={theme}>
-				<Route path="/">
-					<SearchPage></SearchPage>
-					{loggedIn ? null : <SignIn exit={handleModalExit}></SignIn>}
-				</Route>
+				<Switch>
+					<Route exact path="/">
+						<SearchPage></SearchPage>
+						{loggedIn ? null : (
+							<SignIn exit={handleModalExit}></SignIn>
+						)}
+					</Route>
+					<Route exact path="/signup">
+						{loggedIn ? (
+							<Redirect to="/"></Redirect>
+						) : (
+							<SignUp exit={handleModalExit}></SignUp>
+						)}
+					</Route>
 
-				<Route path="/signup">
-					{loggedIn ? (
-						<Redirect to="/"></Redirect>
-					) : (
-						<SignUp exit={handleModalExit}></SignUp>
-					)}
-				</Route>
+					<Route exact path="/signin">
+						{loggedIn ? (
+							<Redirect to="/"></Redirect>
+						) : (
+							<SignIn exit={handleModalExit}></SignIn>
+						)}
+					</Route>
 
-				<Route path="/signin">
-					{loggedIn ? (
-						<Redirect to="/"></Redirect>
-					) : (
-						<SignIn exit={handleModalExit}></SignIn>
-					)}
-				</Route>
-
-				<ProtectedRoute
-					component={<Explore></Explore>}
-					to="/explore"
-				></ProtectedRoute>
+					<ProtectedRoute
+						component={Explore}
+						to="/explore"
+						exact
+					></ProtectedRoute>
+				</Switch>
 			</MuiThemeProvider>
 		</BrowserRouter>
 	);

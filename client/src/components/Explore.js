@@ -31,7 +31,7 @@ function Explore() {
 	const classes = exploreStyles(theme);
 
 	const locations = [
-		{ location: "Cancun", country: "Mexico:", imgName: "/cancun.png" },
+		{ location: "Cancun", country: "Mexico", imgName: "/cancun.png" },
 		{ location: "London", country: "UK", imgName: "/london.png" },
 		{ location: "Bali", country: "Indonesia", imgName: "bali.png" },
 		{ location: "Oslo", country: "Norway", imgName: "oslo.png" },
