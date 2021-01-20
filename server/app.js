@@ -19,7 +19,7 @@ mongoose
   .catch((err) => console.error(err));
 
 const indexRouter = require("./routes/index");
-const pingRouter = require("./routes/ping");
+const apiRouter = require("./routes/api");
 const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
 const profileRouter = require("./routes/profile");
@@ -36,7 +36,7 @@ app.use(cookieParser());
 app.use(express.static(join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/ping", pingRouter);
+app.use("/api", apiRouter);
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/profile", auth, profileRouter);

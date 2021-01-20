@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const { User } = require("../models/user.models");
-router.get("/welcome", function (req, res, next) {
-  res.status(200).send({ welcomeMessage: "Step 1 (completed)" });
-});
 
 router.get("/test", async (req, res) => {
   const testData = {
