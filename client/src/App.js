@@ -7,7 +7,6 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Explore from "./components/Explore";
-import Hotels from "./components/Hotels";
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
