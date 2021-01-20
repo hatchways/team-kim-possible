@@ -39,4 +39,37 @@ const getRouteData = async (
   return response;
 };
 
-export { getCityId, getRouteData };
+const getFlightDetails = (places, quoteDetails, carriers, direction) => {
+  //Gets outgoing route details
+  if (direction === "outbound") {
+    const originPlace = places.find(
+      (place) => quoteDetails.OutboundLeg.OriginId === place.PlaceId
+    ).Name;
+    const destinationPlace = places.find(
+      (place) => quoteDetails.OutboundLeg.DestinationId === place.PlaceId
+    ).Name;
+    const carrierId = quoteDetails.OutboundLeg.CarrierIds[0];
+    const carrierName = carriers.find(
+      (carrier) => carrierId === carrier.CarrierId
+    ).Name;
+    const departureDate = quoteDetails.OutboundLeg.DepartureDate;
+    return { originPlace, destinationPlace, carrierName, departureDate };
+  }
+  //Gets inbound route details
+  if (direction === "inbound") {
+    const originPlace = places.find(
+      (place) => quoteDetails.InboundLeg.OriginId === place.PlaceId
+    ).Name;
+    const destinationPlace = places.find(
+      (place) => quoteDetails.InboundLeg.DestinationId === place.PlaceId
+    ).Name;
+    const carrierId = quoteDetails.InboundLeg.CarrierIds[0];
+    const carrierName = carriers.find(
+      (carrier) => carrierId === carrier.CarrierId
+    ).Name;
+    const departureDate = quoteDetails.InboundLeg.DepartureDate;
+    return { originPlace, destinationPlace, carrierName, departureDate };
+  }
+};
+
+export { getCityId, getRouteData, getFlightDetails };
