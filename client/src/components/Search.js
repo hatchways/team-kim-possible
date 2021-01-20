@@ -65,7 +65,6 @@ const Search = (props) => {
       state.departureDate.toISOString().slice(0, 10),
       state.arrivalDate.toISOString().slice(0, 10)
     );
-    console.log(routeData);
     setState({ ...state, routeData: routeData.data });
   };
 

@@ -3,11 +3,13 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import FlightTakeoffIcon from "@material-ui/icons/FlightTakeoff";
 import FlightLandIcon from "@material-ui/icons/FlightLand";
 import CustomTimeline from "../components/custom-timeline.component";
 
 const FlightDetailsByDirection = (props) => {
+  const theme = useTheme();
   const useStyles = makeStyles({
     detail: {
       padding: "15px",
@@ -17,15 +19,10 @@ const FlightDetailsByDirection = (props) => {
       fontSize: "40px",
       paddingRight: "15px",
     },
-    button: {
-      backgroundColor: "#ffa500",
-      "&:hover": {
-        backgroundColor: "#ff8c00",
-      },
-      color: "#ffffff",
-    },
+    button: theme.buttonPrimary,
   });
   const classes = useStyles();
+
   const { details, quoteDetails, extraInfo } = props;
   return (
     <Grid container xs={12}>
