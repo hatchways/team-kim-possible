@@ -60,6 +60,17 @@ const useStyles = makeStyles((themes) => ({
     color: "#F09600",
     marginLeft: "-38%",
   },
+  misc: {
+    marginRight: "20px",
+  },
+  h3: {
+    fontSize: "30px",
+    marginLeft: "20%",
+  },
+  exploreButton: {
+    color: "black",
+    marginTop: "6%",
+  },
 }));
 
 export default function UserPage() {
@@ -110,7 +121,7 @@ export default function UserPage() {
           </h5>
           <br></br>
         </Grid>
-        <Grid item xs={12} style={{ marginRight: "20px" }}>
+        <Grid item xs={12} className={classes.misc}>
           <p
             className={classes.alignment}
             style={{
@@ -126,15 +137,13 @@ export default function UserPage() {
       </Grid>
       <Grid container spacing={4} className={classes.rightQuadrant}>
         <Grid item xs={8}>
-          <h3 style={{ fontSize: "30px", marginLeft: "20%" }}>
-            Favourite Destinations
-          </h3>
+          <h3 className={classes.h3}>Favourite Destinations</h3>
         </Grid>
         <Grid item xs={4}>
           <Button
             variant="outlined"
             size="large"
-            style={{ color: "black", marginTop: "6%" }}
+            className={classes.exploreButton}
           >
             Explore
           </Button>
