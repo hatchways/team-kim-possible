@@ -62,6 +62,10 @@ const useStyles = makeStyles((themes) => ({
   },
   misc: {
     marginRight: "20px",
+    color: "#9A9DBA",
+    position: "fixed",
+    bottom: "10px",
+    left: "13%",
   },
   h3: {
     fontSize: "30px",
@@ -70,6 +74,12 @@ const useStyles = makeStyles((themes) => ({
   exploreButton: {
     color: "black",
     marginTop: "6%",
+  },
+  FavouriteSpace: {
+    marginTop: "10%",
+  },
+  root: {
+    color: "#808080",
   },
 }));
 
@@ -100,39 +110,20 @@ export default function UserPage() {
           Edit
         </Button>
 
-        <Grid item xs={12} />
-        <Grid item xs={12} />
-        <Grid item xs={12} />
-        <Grid item xs={12} />
-        <br></br>
-        <br></br>
-        <Grid item xs={12}>
-          <h5 className={classes.alignment} class="selector">
-            | Favourite Destinations
-          </h5>
+        <Grid item xs={12} className={classes.FavouriteSpace}>
+          <Button fullWidth>Favourite Destinations</Button>
           <br></br>
-          <h5 className={classes.alignment} style={{ color: "#808080" }}>
+          <Button fullWidth className={classes.root}>
             Notifications
-          </h5>
+          </Button>
           <br></br>
-
-          <h5 className={classes.alignment} style={{ color: "#808080" }}>
+          <Button fullWidth className={classes.root}>
             Account Settings
-          </h5>
+          </Button>
           <br></br>
         </Grid>
         <Grid item xs={12} className={classes.misc}>
-          <p
-            className={classes.alignment}
-            style={{
-              color: "#9A9DBA",
-              position: "fixed",
-              bottom: "10px",
-              left: "13%",
-            }}
-          >
-            Logout
-          </p>
+          <Button fullWidth>Logout</Button>
         </Grid>
       </Grid>
       <Grid container spacing={4} className={classes.rightQuadrant}>
