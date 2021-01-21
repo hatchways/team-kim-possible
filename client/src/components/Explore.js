@@ -29,18 +29,45 @@ function Explore() {
   const theme = useTheme();
   const classes = exploreStyles(theme);
   const [exploreCards, setExploreCards] = React.useState([
-    { location: "Oslo", country: "Norway" },
-    { location: "Chichibu", country: "Japan" },
-    { location: "Copenhagen", country: "Denmark" },
-    { location: "Vancouver", country: "Canada" },
-    { location: "Stockholm", country: "Sweden" },
+    {
+      location: "Oslo",
+      country: "Norway",
+      img:
+        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+    },
+    {
+      location: "Chichibu",
+      country: "Japan",
+      img:
+        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+    },
+    {
+      location: "Copenhagen",
+      country: "Denmark",
+      img:
+        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+    },
+    {
+      location: "Vancouver",
+      country: "Canada",
+      img:
+        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+    },
+    {
+      location: "Stockholm",
+      country: "Sweden",
+      img:
+        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+    },
   ]);
+
   const listOfExploreCards = exploreCards.map((exploreCard) => {
     return (
       <Grid item xs={6} md={3}>
         <ExploreCard
           location={exploreCard.location}
           country={exploreCard.country}
+          img={exploreCard.img}
         ></ExploreCard>
       </Grid>
     );
