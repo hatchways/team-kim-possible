@@ -6,9 +6,16 @@ export const theme = createMuiTheme({
     fontSize: 12,
     h1: {
       // could customize the h1 variant as well
-    }
+    },
   },
   palette: {
-    primary: { main: "#DF1B1B" }
-  }
+    primary: { main: "#DF1B1B" },
+  },
+  buttonPrimary: {
+    backgroundColor: "#ff9800",
+    color: "#ffffff",
+    "&:hover": {
+      backgroundColor: "#f57c00",
+    },
+  },
 });
