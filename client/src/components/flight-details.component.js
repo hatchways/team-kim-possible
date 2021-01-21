@@ -16,24 +16,15 @@ function FlightDetails(props) {
   const classes = useStyles();
 
   const { quoteDetails, places, carriers } = props;
-  //THIS DEFINTELY NEEDS A UTIL FUNCTION OF ITS OWN LATER
-  const outgoingDetails = getFlightDetails(
+  const { outboundDetails, inboundDetails } = getFlightDetails(
     places,
     quoteDetails,
-    carriers,
-    "outbound"
+    carriers
   );
-  const inboundDetails = getFlightDetails(
-    places,
-    quoteDetails,
-    carriers,
-    "inbound"
-  );
-
   return (
     <Grid container className={classes.detailsContainer}>
       <FlightDetailsByDirection
-        details={outgoingDetails}
+        details={outboundDetails}
         quoteDetails={quoteDetails}
         extraInfo={true}
       />
