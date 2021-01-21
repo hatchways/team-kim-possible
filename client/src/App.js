@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
-import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { MuiThemeProvider } from "@material-ui/core";
 import { theme } from "./themes/theme";
 import Navbar from "./components/Navbar";
 import SearchPage from "./pages/SearchPage";
-import { MuiThemeProvider } from "@material-ui/core";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
-import { theme } from "./themes/theme";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import ProtectedRoute from "./components/ProtectedRoute";
