@@ -9,7 +9,10 @@ function App() {
   return (
     <BrowserRouter>
       <Route path="/" component={Navbar} />
-      <UserPage />
+      <Route path="/explorepage" component={ExplorePage} />
+      <Route path="/userpage" exact component={UserPage} />
+
+      {/* <UserPage /> */}
     </BrowserRouter>
   );
 }
