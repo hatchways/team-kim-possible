@@ -61,7 +61,7 @@ const useStyles = makeStyles((themes) => ({
   },
 }));
 
-export default function Userpage2() {
+export default function UserPage() {
   const classes = useStyles();
 
   return (
