@@ -9,7 +9,10 @@
     "test": "NODE_ENV=test ./node_modules/.bin/mocha --exit --timeout 30000"
   },
   "dependencies": {
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin
     "axios": "^0.21.1",
     "aws-sdk": "^2.828.0",
     "bcrypt": "^5.0.0",
