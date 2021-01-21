@@ -32,6 +32,7 @@ const useStyles = makeStyles((themes) => ({
   },
   container: {
     display: "grid",
+    marginTop: "9%",
   },
   exploreContainer: {
     marginLeft: "13%",
@@ -67,11 +68,6 @@ export default function UserPage() {
   return (
     <Grid container spacing={0} className={classes.grid}>
       <Grid container spacing={1} className={classes.leftQuadrant}>
-        <Grid item xs={12} />
-        <Grid item xs={12} />
-        <Grid item xs={12} />
-        <Grid item xs={12} />
-        <Grid item xs={12} />
         <Grid item xs={12} className={classes.container}>
           <paper className={classes.alignment}>
             <Avatar />
@@ -114,21 +110,6 @@ export default function UserPage() {
           </h5>
           <br></br>
         </Grid>
-        <Grid item xs={12} />
-        <Grid item xs={12} />
-        <Grid item xs={12} />
-        <Grid item xs={12} />
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
         <Grid item xs={12} style={{ marginRight: "20px" }}>
           <p
             className={classes.alignment}
