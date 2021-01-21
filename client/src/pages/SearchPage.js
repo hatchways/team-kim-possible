@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Grid, Typography } from "@material-ui/core";
 import Search from "../components/Search";
+import SearchResults from "../components/search-results.component";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -14,7 +15,6 @@ const useStyles = makeStyles({
 	footer: {
 		height: "130px",
 		backgroundColor: "#EBF0F7",
-		height: "130px",
 	},
 	item5: {
 		margin: "auto auto",
@@ -26,9 +26,9 @@ const useStyles = makeStyles({
 		fontSize: "2rem",
 	},
 	item7: {
-		backgroundImage: 'url("/images/searchHero.png")',
+		backgroundImage: 'url("/images/nature.jpg")',
 	},
-	container: {
+	searchContainer: {
 		position: "absolute",
 		bottom: "90px",
 		width: "100%",
@@ -37,6 +37,14 @@ const useStyles = makeStyles({
 
 const SearchPage = () => {
 	const classes = useStyles();
+	const [state, setState] = useState({
+		departureCity: "",
+		arrivalCity: "",
+		departureDate: new Date(),
+		arrivalDate: new Date(),
+		numOfTravellers: 1,
+		routeData: null,
+	});
 	return (
 		<div className={classes.root}>
 			<Grid>
@@ -50,9 +58,14 @@ const SearchPage = () => {
 				</Grid>
 				<Grid item xs={12} className={classes.footer}></Grid>
 			</Grid>
-			<Container className={classes.container}>
-				<Search />
+			<Container className={classes.searchContainer}>
+				<Search state={state} setState={setState} />
 			</Container>
+			{state.routeData ? (
+				<Container>
+					<SearchResults state={state} setState={setState} />
+				</Container>
+			) : null}
 		</div>
 	);
 };

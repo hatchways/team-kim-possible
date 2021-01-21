@@ -1,6 +1,13 @@
 import { createMuiTheme } from "@material-ui/core";
 
 export const theme = createMuiTheme({
+	typography: {
+		fontFamily: '"Roboto"',
+		fontSize: 12,
+		h1: {
+			// could customize the h1 variant as well
+		},
+	},
 	overrides: {
 		MuiInputLabel: {
 			root: {
@@ -9,15 +16,15 @@ export const theme = createMuiTheme({
 			},
 		},
 	},
-	typography: {
-		button: {
-			textTransform: "none",
-		},
-		fontFamily: '"Roboto"',
-		fontSize: 12,
-	},
 	palette: {
 		primary: { main: "#ffa000", light: "#8C8F91" },
 		secondary: { main: "#6464ff" },
+	},
+	buttonPrimary: {
+		backgroundColor: "#ff9800",
+		color: "#ffffff",
+		"&:hover": {
+			backgroundColor: "#f57c00",
+		},
 	},
 });

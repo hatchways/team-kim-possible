@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "date-fns";
 import {
 	Grid,
@@ -16,7 +16,9 @@ import {
 } from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
 
-const cities = ["Paris", "London", "Seatle"];
+import { getCityId, getRouteData } from "../utils/skyscanner";
+
+const cities = ["Paris", "London", "Seattle"];
 const useStyles = makeStyles({
 	root: {
 		height: "90px",
@@ -47,22 +49,25 @@ const useStyles = makeStyles({
 		fontSize: "0.8rem",
 	},
 });
-const Search = () => {
+const Search = (props) => {
 	const classes = useStyles();
-	const [state, setState] = useState({
-		departureCity: "",
-		arrivalCity: "",
-		departureDate: new Date(),
-		arrivalDate: new Date(),
-		numOfTravellers: 1,
-	});
+	const { state, setState } = props;
 
 	const handleChange = (e) => {
 		setState({ ...state, [e.target.name]: e.target.value });
 	};
-	const handleSubmit = () => {
-		console.log(state);
+	const handleSubmit = async () => {
+		const departureLocationId = await getCityId(state.departureCity);
+		const arrivalLocationId = await getCityId(state.arrivalCity);
+		const routeData = await getRouteData(
+			departureLocationId,
+			arrivalLocationId,
+			state.departureDate.toISOString().slice(0, 10),
+			state.arrivalDate.toISOString().slice(0, 10)
+		);
+		setState({ ...state, routeData: routeData.data });
 	};
+
 	return (
 		<div className={classes.root}>
 			<MuiPickersUtilsProvider utils={DateFnsUtils}>

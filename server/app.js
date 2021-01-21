@@ -20,14 +20,19 @@ mongoose
 	.catch((err) => console.error(err));
 
 const indexRouter = require("./routes/index");
+const apiRouter = require("./routes/api");
 const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
+const placesRouter = require("./routes/places");
+const quotesRouter = require("./routes/quotes");
+const favoritesRouter = require("./routes/favorites");
 const profileRouter = require("./routes/profile");
 const auth = require("./middleware/auth");
 
 const { json, urlencoded } = express;
 
 var app = express();
+app.use(express.json());
 
 app.use(cors());
 app.use(logger("dev"));
@@ -37,8 +42,15 @@ app.use(cookieParser());
 app.use(express.static(join(__dirname, "public")));
 
 app.use("/", indexRouter);
+<<<<<<< HEAD
+=======
+app.use("/api", apiRouter);
+>>>>>>> dev
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
+app.use("/search-places", placesRouter);
+app.use("/quotes", quotesRouter);
+app.use("/favorites", auth, favoritesRouter);
 app.use("/profile", auth, profileRouter);
 
 // catch 404 and forward to error handler
