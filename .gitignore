@@ -15,11 +15,8 @@ server/.env
 .env.development.local
 .env.test.local
 .env.production.local
-<<<<<<< HEAD
-=======
 .env
 **/.env
->>>>>>> dev
 
 npm-debug.log*
 yarn-debug.log*

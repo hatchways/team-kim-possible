@@ -42,10 +42,7 @@ app.use(cookieParser());
 app.use(express.static(join(__dirname, "public")));
 
 app.use("/", indexRouter);
-<<<<<<< HEAD
-=======
 app.use("/api", apiRouter);
->>>>>>> dev
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/search-places", placesRouter);
