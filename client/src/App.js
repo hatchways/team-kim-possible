@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from "react";
-import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
-import { MuiThemeProvider } from "@material-ui/core";
-import { theme } from "./themes/theme";
 import Navbar from "./components/Navbar";
 import SearchPage from "./pages/SearchPage";
 import { MuiThemeProvider } from "@material-ui/core";
@@ -12,6 +8,7 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Explore from "./components/Explore";
+import { ShoppingCartProvider } from "./components/ShoppingCartContext";
 
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -35,27 +32,36 @@ function App() {
 	return (
 		<BrowserRouter>
 			<MuiThemeProvider theme={theme}>
-				<Switch>
-					<Route exact path="/">
-						<SearchPage />
-						{loggedIn ? null : <SignIn exit={handleModalExit} />}
-					</Route>
-					<Route exact path="/signup">
-						{loggedIn ? (
-							<Redirect to="/" />
-						) : (
-							<SignUp exit={handleModalExit} />
-						)}
-					</Route>
-					<Route exact path="/signin">
-						{loggedIn ? (
-							<Redirect to="/" />
-						) : (
-							<SignIn exit={handleModalExit} />
-						)}
-					</Route>
-					<ProtectedRoute component={Explore} to="/explore" exact />
-				</Switch>
+				<ShoppingCartProvider>
+					<Navbar />
+					<Switch>
+						<Route exact path="/">
+							<SearchPage />
+							{loggedIn ? null : (
+								<SignIn exit={handleModalExit} />
+							)}
+						</Route>
+						<Route exact path="/signup">
+							{loggedIn ? (
+								<Redirect to="/" />
+							) : (
+								<SignUp exit={handleModalExit} />
+							)}
+						</Route>
+						<Route exact path="/signin">
+							{loggedIn ? (
+								<Redirect to="/" />
+							) : (
+								<SignIn exit={handleModalExit} />
+							)}
+						</Route>
+						<ProtectedRoute
+							component={Explore}
+							to="/explore"
+							exact
+						/>
+					</Switch>
+				</ShoppingCartProvider>
 			</MuiThemeProvider>
 		</BrowserRouter>
 	);
