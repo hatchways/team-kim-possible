@@ -39,48 +39,37 @@ const getRouteData = async (
   return response;
 };
 
-const getFlightDetails = (places, quoteDetails, carriers) => {
+const getFlightDetails = (places, quoteDetails, carriers, direction) => {
   //Gets outgoing route details
-  const outboundOriginPlace = places.find(
-    (place) => quoteDetails.OutboundLeg.OriginId === place.PlaceId
-  ).Name;
-  const outboundDestinationPlace = places.find(
-    (place) => quoteDetails.OutboundLeg.DestinationId === place.PlaceId
-  ).Name;
-  const outboundCarrierId = quoteDetails.OutboundLeg.CarrierIds[0];
-  const outboundCarrierName = carriers.find(
-    (carrier) => outboundCarrierId === carrier.CarrierId
-  ).Name;
-  const outboundDepartureDate = quoteDetails.OutboundLeg.DepartureDate;
-
-  const outboundDetails = {
-    originPlace: outboundOriginPlace,
-    destinationPlace: outboundDestinationPlace,
-    carrierName: outboundCarrierName,
-    departureDate: outboundDepartureDate,
-  };
-
+  if (direction === "outbound") {
+    const originPlace = places.find(
+      (place) => quoteDetails.OutboundLeg.OriginId === place.PlaceId
+    ).Name;
+    const destinationPlace = places.find(
+      (place) => quoteDetails.OutboundLeg.DestinationId === place.PlaceId
+    ).Name;
+    const carrierId = quoteDetails.OutboundLeg.CarrierIds[0];
+    const carrierName = carriers.find(
+      (carrier) => carrierId === carrier.CarrierId
+    ).Name;
+    const departureDate = quoteDetails.OutboundLeg.DepartureDate;
+    return { originPlace, destinationPlace, carrierName, departureDate };
+  }
   //Gets inbound route details
-  const inboundOriginPlace = places.find(
-    (place) => quoteDetails.InboundLeg.OriginId === place.PlaceId
-  ).Name;
-  const inboundDestinationPlace = places.find(
-    (place) => quoteDetails.InboundLeg.DestinationId === place.PlaceId
-  ).Name;
-  const inboundCarrierId = quoteDetails.InboundLeg.CarrierIds[0];
-  const inboundCarrierName = carriers.find(
-    (carrier) => inboundCarrierId === carrier.CarrierId
-  ).Name;
-  const inboundDepartureDate = quoteDetails.InboundLeg.DepartureDate;
-
-  const inboundDetails = {
-    originPlace: inboundOriginPlace,
-    destinationPlace: inboundDestinationPlace,
-    carrierName: inboundCarrierName,
-    departureDate: inboundDepartureDate,
-  };
-  //Returns both detail objects
-  return { outboundDetails, inboundDetails };
+  if (direction === "inbound") {
+    const originPlace = places.find(
+      (place) => quoteDetails.InboundLeg.OriginId === place.PlaceId
+    ).Name;
+    const destinationPlace = places.find(
+      (place) => quoteDetails.InboundLeg.DestinationId === place.PlaceId
+    ).Name;
+    const carrierId = quoteDetails.InboundLeg.CarrierIds[0];
+    const carrierName = carriers.find(
+      (carrier) => carrierId === carrier.CarrierId
+    ).Name;
+    const departureDate = quoteDetails.InboundLeg.DepartureDate;
+    return { originPlace, destinationPlace, carrierName, departureDate };
+  }
 };
 
 export { getCityId, getRouteData, getFlightDetails };
