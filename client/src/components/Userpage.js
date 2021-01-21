@@ -4,12 +4,17 @@ import { Grid, Button, Typography } from "@material-ui/core";
 import Avatar from "./BigAvatar";
 import ExploreCard from "./ExploreCard";
 import "fontsource-roboto";
-import "./userpage.css";
 
 const useStyles = makeStyles((themes) => ({
+  root: {
+    maxWidth: "100%",
+    overflowX: "auto",
+  },
   grid: {
     width: "100%",
     margin: "0px",
+    maxWidth: "100%",
+    overflowX: "hidden",
   },
   leftQuadrant: {
     width: "30%",
@@ -79,7 +84,7 @@ const useStyles = makeStyles((themes) => ({
   FavouriteSpace: {
     marginTop: "10%",
   },
-  root: {
+  buttongray: {
     color: "#808080",
   },
   email: {
@@ -119,11 +124,11 @@ export default function UserPage() {
         <Grid item xs={12} className={classes.FavouriteSpace}>
           <Button fullWidth>Favourite Destinations</Button>
           <br></br>
-          <Button fullWidth className={classes.root}>
+          <Button fullWidth className={classes.buttongray}>
             Notifications
           </Button>
           <br></br>
-          <Button fullWidth className={classes.root}>
+          <Button fullWidth className={classes.buttongray}>
             Account Settings
           </Button>
           <br></br>
