@@ -32,32 +32,25 @@ function App() {
 			<MuiThemeProvider theme={theme}>
 				<Switch>
 					<Route exact path="/">
-						<SearchPage></SearchPage>
-						{loggedIn ? null : (
-							<SignIn exit={handleModalExit}></SignIn>
-						)}
+						<SearchPage />
+						{loggedIn ? null : <SignIn exit={handleModalExit} />}
 					</Route>
 					<Route exact path="/signup">
 						{loggedIn ? (
-							<Redirect to="/"></Redirect>
+							<Redirect to="/" />
 						) : (
-							<SignUp exit={handleModalExit}></SignUp>
+							<SignUp exit={handleModalExit} />
 						)}
 					</Route>
-
 					<Route exact path="/signin">
 						{loggedIn ? (
-							<Redirect to="/"></Redirect>
+							<Redirect to="/" />
 						) : (
-							<SignIn exit={handleModalExit}></SignIn>
+							<SignIn exit={handleModalExit} />
 						)}
 					</Route>
-
-					<ProtectedRoute
-						component={Explore}
-						to="/explore"
-						exact
-					></ProtectedRoute>
+					<ProtectedRoute component={Hotels} to="/hotels" exact />
+					<ProtectedRoute component={Explore} to="/explore" exact />
 				</Switch>
 			</MuiThemeProvider>
 		</BrowserRouter>

@@ -7,9 +7,9 @@ function ProtectedRoute({ component: Component, ...rest }) {
 			{...rest}
 			render={(props) => {
 				if (localStorage.loggedIn) {
-					return <Component {...props}></Component>;
+					return <Component {...props} />;
 				} else {
-					return <Redirect pathname="/"></Redirect>;
+					return <Redirect pathname="/" />;
 				}
 			}}
 		/>
