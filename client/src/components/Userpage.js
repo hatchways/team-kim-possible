@@ -1,8 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Button } from "@material-ui/core";
+import { Grid, Button, Typography } from "@material-ui/core";
 import Avatar from "./BigAvatar";
 import ExploreCard from "./ExploreCard";
+import "fontsource-roboto";
 import "./userpage.css";
 
 const useStyles = makeStyles((themes) => ({
@@ -68,18 +69,21 @@ const useStyles = makeStyles((themes) => ({
     left: "13%",
   },
   h3: {
-    fontSize: "30px",
-    marginLeft: "20%",
+    marginLeft: "21%",
+    marginTop: "4%",
   },
   exploreButton: {
     color: "black",
-    marginTop: "6%",
+    marginTop: "8%",
   },
   FavouriteSpace: {
     marginTop: "10%",
   },
   root: {
     color: "#808080",
+  },
+  email: {
+    color: "#9EA1BC",
   },
 }));
 
@@ -94,11 +98,13 @@ export default function UserPage() {
             <Avatar />
           </paper>
         </Grid>
-        <Grid item xs={12}>
-          <h3 className={classes.alignment}>John Doe</h3>
-          <p className={classes.alignment} style={{ color: "#9EA1BC" }}>
-            johndoe1@gmail.com
-          </p>
+        <Grid item xs={12} className={classes.alignment}>
+          <Typography variant="h5" gutterBottom>
+            John Smith
+          </Typography>
+          <Typography className={classes.email} gutterBottom>
+            johnsmith1@gmail.com
+          </Typography>
         </Grid>
         <Grid item xs={12} />
 
@@ -128,7 +134,9 @@ export default function UserPage() {
       </Grid>
       <Grid container spacing={4} className={classes.rightQuadrant}>
         <Grid item xs={8}>
-          <h3 className={classes.h3}>Favourite Destinations</h3>
+          <Typography className={classes.h3} variant="h4" gutterBottom>
+            Favourite Destinations
+          </Typography>
         </Grid>
         <Grid item xs={4}>
           <Button
