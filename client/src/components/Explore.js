@@ -34,30 +34,35 @@ function Explore() {
       country: "Norway",
       img:
         "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      liked: false,
     },
     {
       location: "Chichibu",
       country: "Japan",
       img:
         "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      liked: false,
     },
     {
       location: "Copenhagen",
       country: "Denmark",
       img:
         "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      liked: false,
     },
     {
       location: "Vancouver",
       country: "Canada",
       img:
         "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      liked: false,
     },
     {
       location: "Stockholm",
       country: "Sweden",
       img:
         "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      liked: false,
     },
   ]);
 
@@ -68,6 +73,9 @@ function Explore() {
           location={exploreCard.location}
           country={exploreCard.country}
           img={exploreCard.img}
+          onLike={() => {
+            exploreCard["liked"] = true;
+          }}
         ></ExploreCard>
       </Grid>
     );

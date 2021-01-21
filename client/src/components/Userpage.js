@@ -92,8 +92,90 @@ const useStyles = makeStyles((themes) => ({
   },
 }));
 
+let invisibleCount = 0;
 export default function UserPage() {
   const classes = useStyles();
+  const [exploreCards, setExploreCards] = React.useState([
+    {
+      location: "Oslo",
+      country: "Norway",
+      img:
+        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      liked: false,
+    },
+    {
+      location: "Chichibu",
+      country: "Japan",
+      img:
+        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      liked: true,
+    },
+    {
+      location: "Copenhagen",
+      country: "Denmark",
+      img:
+        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      liked: true,
+    },
+    {
+      location: "Vancouver",
+      country: "Canada",
+      img:
+        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      liked: true,
+    },
+    {
+      location: "Stockholm",
+      country: "Sweden",
+      img:
+        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      liked: false,
+    },
+  ]);
+
+  const listOfExploreCards = exploreCards.map((exploreCard) => {
+    if (exploreCard["liked"] === true) {
+      if (invisibleCount < 2) {
+        invisibleCount++;
+        return (
+          <Grid item xs={3} className={classes.exploreContainer}>
+            <ExploreCard
+              location={exploreCard.location}
+              country={exploreCard.country}
+              img={exploreCard.img}
+              onLike={() => {
+                exploreCard["liked"] = false;
+              }}
+            ></ExploreCard>
+          </Grid>
+        );
+      }
+
+      if (invisibleCount > 1) {
+        invisibleCount = 1;
+        return (
+          <React.Fragment>
+            <Grid item xs={3} className={classes.invisible}>
+              <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
+            </Grid>
+            <Grid item xs={3} className={classes.invisible}>
+              <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
+            </Grid>
+            <Grid item xs={3} className={classes.exploreContainer}>
+              <ExploreCard
+                location={exploreCard.location}
+                country={exploreCard.country}
+                img={exploreCard.img}
+                onLike={() => {
+                  exploreCard["liked"] = false;
+                }}
+              ></ExploreCard>
+            </Grid>
+          </React.Fragment>
+        );
+      }
+    }
+  });
 
   return (
     <Grid container spacing={0} className={classes.grid}>
@@ -153,31 +235,7 @@ export default function UserPage() {
           </Button>
         </Grid>
 
-        <Grid item xs={3} className={classes.exploreContainer}>
-          <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
-        </Grid>
-        <Grid item xs={3} className={classes.exploreContainer}>
-          <ExploreCard location="Oslo" country="Norway"></ExploreCard>
-        </Grid>
-        <Grid item xs={3} className={classes.invisible}>
-          <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
-        </Grid>
-        <Grid item xs={3} className={classes.invisible}>
-          <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
-        </Grid>
-        <Grid item xs={3} className={classes.exploreContainer}>
-          <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
-        </Grid>
-        <Grid item xs={3} className={classes.exploreContainer}>
-          <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
-        </Grid>
-        <Grid item xs={3} className={classes.invisible}>
-          <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
-        </Grid>
-        <Grid item xs={3} className={classes.invisible}>
-          <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
-        </Grid>
-
+        {listOfExploreCards}
         <Grid item xd={6} />
       </Grid>
     </Grid>

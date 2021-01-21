@@ -58,6 +58,7 @@ function ExploreCard(props) {
 
   const handleLiked = () => {
     setLike((prev) => !prev);
+    props.onLike();
   };
 
   return (
