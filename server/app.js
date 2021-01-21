@@ -26,6 +26,7 @@ const placesRouter = require("./routes/places");
 const quotesRouter = require("./routes/quotes");
 const favoritesRouter = require("./routes/favorites");
 const profileRouter = require("./routes/profile");
+const carRentalRouter = require("./routes/car-rental");
 const auth = require("./middleware/auth");
 
 const { json, urlencoded } = express;
@@ -45,6 +46,7 @@ app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/search-places", placesRouter);
 app.use("/quotes", quotesRouter);
+app.use("/carRental", carRentalRouter);
 app.use("/favorites", auth, favoritesRouter);
 app.use("/profile", auth, profileRouter);
 

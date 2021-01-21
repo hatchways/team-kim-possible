@@ -10,6 +10,9 @@ export const theme = createMuiTheme({
   },
   palette: {
     primary: { main: "#DF1B1B" },
+    secondary: {
+      main: "#2196f3",
+    },
   },
   buttonPrimary: {
     backgroundColor: "#ff9800",
