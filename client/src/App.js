@@ -8,7 +8,7 @@ import UserPage from "./components/Userpage";
 import SearchPage from "./pages/SearchPage";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
-import CarRental from "./components/car-rental-search.component";
+import CarRental from "./pages/CarRentalPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Explore from "./components/Explore";
 import { ShoppingCartProvider } from "./components/ShoppingCartContext";

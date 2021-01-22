@@ -61,7 +61,7 @@ export default function ButtonAppBar() {
 						</Link>
 					</Button>
 					<Button className={classes.links}>
-						<Link to="/" className={classes.textDecoration}>
+						<Link to="/carrental" className={classes.textDecoration}>
 							Cars
 						</Link>
 					</Button>
