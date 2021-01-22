@@ -4,7 +4,7 @@ import { Grid, Button, Typography } from "@material-ui/core";
 import Avatar from "./BigAvatar";
 import ExploreCard from "./ExploreCard";
 import "fontsource-roboto";
-
+import "./userpage.css";
 const useStyles = makeStyles((themes) => ({
   root: {
     maxWidth: "100%",
@@ -99,37 +99,32 @@ export default function UserPage() {
     {
       location: "Oslo",
       country: "Norway",
-      img:
-        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
-      liked: false,
+      img: "oslo.png",
+      liked: true,
     },
     {
       location: "Chichibu",
       country: "Japan",
-      img:
-        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      img: "oslo.png",
       liked: true,
     },
     {
       location: "Copenhagen",
       country: "Denmark",
-      img:
-        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      img: "oslo.png",
       liked: true,
     },
     {
       location: "Vancouver",
       country: "Canada",
-      img:
-        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      img: "oslo.png",
       liked: true,
     },
     {
       location: "Stockholm",
       country: "Sweden",
-      img:
-        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
-      liked: false,
+      img: "oslo.png",
+      liked: true,
     },
   ]);
 
@@ -142,7 +137,7 @@ export default function UserPage() {
             <ExploreCard
               location={exploreCard.location}
               country={exploreCard.country}
-              img={exploreCard.img}
+              imgName={exploreCard.img}
               onLike={() => {
                 exploreCard["liked"] = false;
               }}
@@ -232,7 +227,60 @@ export default function UserPage() {
           </Button>
         </Grid>
 
-        {listOfExploreCards}
+        <Grid item xs={3} className={classes.exploreContainer}>
+          <ExploreCard
+            location="Cancun"
+            country="Mexico"
+            imgName="oslo.png"
+            onLike={() => {}}
+          ></ExploreCard>
+        </Grid>
+        <Grid item xs={3} className={classes.exploreContainer}>
+          <ExploreCard
+            location="Oslo"
+            country="Norway"
+            imgName="oslo.png"
+            onLike={() => {}}
+          ></ExploreCard>
+        </Grid>
+        <Grid item xs={3} className={classes.invisible}>
+          <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
+        </Grid>
+        <Grid item xs={3} className={classes.invisible}>
+          <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
+        </Grid>
+        <Grid item xs={3} className={classes.exploreContainer}>
+          <ExploreCard
+            location="Cancun"
+            country="Mexico"
+            imgName="oslo.png"
+            onLike={() => {}}
+          ></ExploreCard>
+        </Grid>
+        <Grid item xs={3} className={classes.exploreContainer}>
+          <ExploreCard
+            location="Cancun"
+            country="Mexico"
+            imgName="oslo.png"
+            onLike={() => {}}
+          ></ExploreCard>
+        </Grid>
+        <Grid item xs={3} className={classes.invisible}>
+          <ExploreCard
+            location="Cancun"
+            country="Mexico"
+            imgName="oslo.png"
+          ></ExploreCard>
+        </Grid>
+        <Grid item xs={3} className={classes.invisible}>
+          <ExploreCard
+            location="Cancun"
+            country="Mexico"
+            imgName="oslo.png"
+          ></ExploreCard>
+        </Grid>
+
+        {/* {listOfExploreCards} */}
       </Grid>
     </Grid>
   );

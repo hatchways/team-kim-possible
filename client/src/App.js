@@ -35,8 +35,8 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Navbar />
-
-            <SearchPage />
+            <UserPage />
+            {/* <SearchPage /> */}
             {loggedIn ? null : <SignIn exit={handleModalExit} />}
           </Route>
           <Route exact path="/signup">
