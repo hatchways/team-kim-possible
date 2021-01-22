@@ -8,7 +8,11 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { MuiThemeProvider } from "@material-ui/core";
 import { theme } from "./themes/theme";
+<<<<<<< HEAD
 >>>>>>> origin
+=======
+import CarRentalPage from "./pages/CarRentalPage";
+>>>>>>> 86dc7ad72a573767be4793bc658dd019e90be568
 import Navbar from "./components/Navbar";
 import UserPage from "./components/Userpage";
 import SearchPage from "./pages/SearchPage";
@@ -16,6 +20,7 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Explore from "./components/Explore";
+import { ShoppingCartProvider } from "./components/ShoppingCartContext";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -36,6 +41,7 @@ function App() {
     setLoggedIn(true);
   };
 
+<<<<<<< HEAD
   return (
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
@@ -110,6 +116,45 @@ function App() {
     </BrowserRouter>
 >>>>>>> origin
   );
+=======
+	return (
+		<BrowserRouter>
+			<MuiThemeProvider theme={theme}>
+				<ShoppingCartProvider>
+					<Navbar />
+					<Switch>
+						<Route exact path="/">
+							<SearchPage />
+							{loggedIn ? null : (
+								<SignIn exit={handleModalExit} />
+							)}
+						</Route>
+						<Route exact path="/signup">
+							{loggedIn ? (
+								<Redirect to="/" />
+							) : (
+								<SignUp exit={handleModalExit} />
+							)}
+						</Route>
+						<Route exact path="/signin">
+							{loggedIn ? (
+								<Redirect to="/" />
+							) : (
+								<SignIn exit={handleModalExit} />
+							)}
+						</Route>
+						<ProtectedRoute
+							component={Explore}
+							to="/explore"
+							exact
+						/>
+            <Route path="/carrental" component={CarRentalPage} />
+					</Switch>
+				</ShoppingCartProvider>
+			</MuiThemeProvider>
+		</BrowserRouter>
+	);
+>>>>>>> 86dc7ad72a573767be4793bc658dd019e90be568
 }
 
 export default App;
