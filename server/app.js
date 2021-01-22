@@ -2,6 +2,7 @@ const createError = require("http-errors");
 const express = require("express");
 const { join } = require("path");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 require("dotenv").config();
@@ -26,6 +27,7 @@ const placesRouter = require("./routes/places");
 const quotesRouter = require("./routes/quotes");
 const favoritesRouter = require("./routes/favorites");
 const profileRouter = require("./routes/profile");
+const stripeRouter = require("./routes/stripe");
 const auth = require("./middleware/auth");
 
 const { json, urlencoded } = express;
@@ -33,6 +35,7 @@ const { json, urlencoded } = express;
 var app = express();
 app.use(express.json());
 
+app.use(cors());
 app.use(logger("dev"));
 app.use(json());
 app.use(urlencoded({ extended: false }));
@@ -47,6 +50,7 @@ app.use("/search-places", placesRouter);
 app.use("/quotes", quotesRouter);
 app.use("/favorites", auth, favoritesRouter);
 app.use("/profile", auth, profileRouter);
+app.use("/stripe", stripeRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
