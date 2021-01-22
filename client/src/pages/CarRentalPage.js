@@ -39,8 +39,7 @@ const CarRentalPage = () => {
       <CarRentalOptions carList={carList} />
       <Grid
         container
-        xs={12}
-        spacing={3}
+        spacing={8}
         justify="space-between"
         alignItems="center"
         className={classes.carCardContainer}

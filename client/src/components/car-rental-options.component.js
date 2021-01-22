@@ -23,6 +23,9 @@ const useStyles = makeStyles({
     "& .MuiOutlinedInput-root": {
       borderRadius: "25px",
     },
+    switch: {
+      color: "#2196f3",
+    },
   },
 });
 
@@ -44,9 +47,9 @@ const CarRentalOptions = (props) => {
         alignItems="center"
         className={classes.searchItemContainer}
       >
-        <Grid item xs={3} className={classes.searchItem}>
+        <Grid item xs className={classes.searchItem}>
           <FormControlLabel
-            control={<Switch color="secondary" />}
+            control={<Switch className={classes.switch} />}
             label={
               <Typography variant="subtitle1" color="textSecondary">
                 <b>Automatic Only</b>
@@ -55,9 +58,13 @@ const CarRentalOptions = (props) => {
             labelPlacement="start"
           />
         </Grid>
-        <Grid item xs={3} className={classes.searchItem}>
+        <Grid item xs className={classes.searchItem}>
           <FormControl variant="outlined" className={classes.select}>
-            <InputLabel>Vehicle Type</InputLabel>
+            <InputLabel>
+              <Typography variant="subtitle2" color="textSecondary">
+                Vehicle Type
+              </Typography>
+            </InputLabel>
             <Select>
               <MenuItem>Car</MenuItem>
               <MenuItem>Car1</MenuItem>
@@ -66,9 +73,13 @@ const CarRentalOptions = (props) => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={3} className={classes.searchItem}>
+        <Grid item xs className={classes.searchItem}>
           <FormControl variant="outlined" className={classes.select}>
-            <InputLabel>Driver </InputLabel>
+            <InputLabel>
+              <Typography variant="subtitle2" color="textSecondary">
+                Driver
+              </Typography>
+            </InputLabel>
             <Select>
               <MenuItem>18+</MenuItem>
               <MenuItem>25+</MenuItem>
@@ -77,9 +88,13 @@ const CarRentalOptions = (props) => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={3} className={classes.searchItem}>
+        <Grid item xs className={classes.searchItem}>
           <FormControl variant="outlined" className={classes.select}>
-            <InputLabel>Filter </InputLabel>
+            <InputLabel>
+              <Typography variant="subtitle2" color="textSecondary">
+                Filter
+              </Typography>
+            </InputLabel>
             <Select>
               <MenuItem>Lowest Price First</MenuItem>
               <MenuItem>Highest Price First</MenuItem>

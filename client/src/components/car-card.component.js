@@ -3,7 +3,6 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
-import AirportShuttleIcon from "@material-ui/icons/AirportShuttle";
 
 const useStyles = makeStyles({
   root: { border: "1px" },
@@ -16,21 +15,19 @@ const useStyles = makeStyles({
   carIcon: {
     fontSize: "100px",
   },
+  carImage: {
+    height: "100%",
+    maxHeight: "200px",
+    maxWidth: "100%",
+  },
 });
 
 const CarCard = (props) => {
-  const classes = useStyles();
+  const classes = useStyles(props);
   const { car } = props;
   if (car) {
     return (
-      <Grid
-        container
-        xs={3}
-        direction="column"
-        justify="space-between"
-        alignItems="stretch"
-        className={classes.root}
-      >
+      <Grid item xs={6} md={4} className={classes.root}>
         <Paper elevation={2} className={classes.paper}>
           <Grid item xs={12} className={classes.carDetail}>
             <Typography variant="h5">
@@ -43,7 +40,11 @@ const CarCard = (props) => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <AirportShuttleIcon className={classes.carIcon} />
+            <img
+              src={`${process.env.PUBLIC_URL}/images/${car.imageUrl}.png`}
+              alt="Car belongs here!"
+              className={classes.carImage}
+            />
           </Grid>
           <Grid item xs={12} className={classes.carDetail}>
             <Typography variant="h4">

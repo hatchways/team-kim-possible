@@ -14,10 +14,19 @@ const useStyles = makeStyles({
   },
   searchItem: {
     textAlign: "left",
-    padding: "15px 5px",
+    padding: "10px 5px",
   },
   right: {
     borderLeft: "1px solid #A9A9A9",
+  },
+  textField: {
+    "& .MuiInputLabel-root": {
+      fontWeight: "bold",
+      color: "#A9A9A9",
+    },
+    "& .MuiInputBase-input": {
+      fontWeight: "bold",
+    },
   },
 });
 
@@ -28,18 +37,39 @@ const CarRentalSearch = () => {
     <Grid container xs={12} justify="space-between" alignItems="center">
       <Grid container xs={5} className={classes.searchItemContainer}>
         <Grid item xs={6} className={classes.searchItem}>
-          Pickup
+          <TextField
+            fullWidth
+            label="Pick-up"
+            InputProps={{ disableUnderline: true }}
+            className={classes.textField}
+          />
         </Grid>
         <Grid item xs={6} className={`${classes.searchItem} ${classes.right}`}>
-          Return
+          <TextField
+            fullWidth
+            label="Return"
+            InputProps={{ disableUnderline: true }}
+            className={classes.textField}
+          />
         </Grid>
       </Grid>
       <Grid container xs={5} className={classes.searchItemContainer}>
         <Grid item xs={6} className={classes.searchItem}>
-          Pickup date
+          <TextField
+            fullWidth
+            label="Pick-up date"
+            InputProps={{ disableUnderline: true }}
+            className={classes.textField}
+          />
         </Grid>
         <Grid item xs={6} className={`${classes.searchItem} ${classes.right}`}>
-          Return date
+          <TextField
+            fullWidth
+            color="primary"
+            label="Return date"
+            InputProps={{ disableUnderline: true }}
+            className={classes.textField}
+          />
         </Grid>
       </Grid>
     </Grid>
