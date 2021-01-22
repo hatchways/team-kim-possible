@@ -10,6 +10,7 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Explore from "./components/Explore";
+import { ShoppingCartProvider } from "./components/ShoppingCartContext";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -30,29 +31,43 @@ function App() {
     setLoggedIn(true);
   };
 
-  return (
-    <BrowserRouter>
-      <MuiThemeProvider theme={theme}>
-        <Switch>
-          <Route exact path="/">
-            <Navbar />
-
-            <SearchPage />
-            {loggedIn ? null : <SignIn exit={handleModalExit} />}
-          </Route>
-          <Route path="/carrental" component={CarRentalPage} />
-          <Route exact path="/signup">
-            {loggedIn ? <Redirect to="/" /> : <SignUp exit={handleModalExit} />}
-          </Route>
-          <Route exact path="/signin">
-            {loggedIn ? <Redirect to="/" /> : <SignIn exit={handleModalExit} />}
-          </Route>
-          <ProtectedRoute component={Explore} to="/explore" exact />
-          <ProtectedRoute component={UserPage} to="/userpage" exact />
-        </Switch>
-      </MuiThemeProvider>
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<MuiThemeProvider theme={theme}>
+				<ShoppingCartProvider>
+					<Navbar />
+					<Switch>
+						<Route exact path="/">
+							<SearchPage />
+							{loggedIn ? null : (
+								<SignIn exit={handleModalExit} />
+							)}
+						</Route>
+						<Route exact path="/signup">
+							{loggedIn ? (
+								<Redirect to="/" />
+							) : (
+								<SignUp exit={handleModalExit} />
+							)}
+						</Route>
+						<Route exact path="/signin">
+							{loggedIn ? (
+								<Redirect to="/" />
+							) : (
+								<SignIn exit={handleModalExit} />
+							)}
+						</Route>
+						<ProtectedRoute
+							component={Explore}
+							to="/explore"
+							exact
+						/>
+            <Route path="/carrental" component={CarRentalPage} />
+					</Switch>
+				</ShoppingCartProvider>
+			</MuiThemeProvider>
+		</BrowserRouter>
+	);
 }
 
 export default App;
