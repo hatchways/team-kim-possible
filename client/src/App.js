@@ -9,7 +9,7 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Explore from "./components/Explore";
-
+import "./App.css";
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -32,11 +32,11 @@ function App() {
   return (
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
-        <Switch>
+        <UserPage />
+        {/* <Switch>
           <Route exact path="/">
             <Navbar />
-            <UserPage />
-            {/* <SearchPage /> */}
+            <SearchPage />
             {loggedIn ? null : <SignIn exit={handleModalExit} />}
           </Route>
           <Route exact path="/signup">
@@ -47,7 +47,7 @@ function App() {
           </Route>
           <ProtectedRoute component={Explore} to="/explore" exact />
           <ProtectedRoute component={UserPage} to="/userpage" exact />
-        </Switch>
+        </Switch> */}
       </MuiThemeProvider>
     </BrowserRouter>
   );

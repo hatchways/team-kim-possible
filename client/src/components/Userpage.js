@@ -4,7 +4,6 @@ import { Grid, Button, Typography } from "@material-ui/core";
 import Avatar from "./BigAvatar";
 import ExploreCard from "./ExploreCard";
 import "fontsource-roboto";
-import "./userpage.css";
 const useStyles = makeStyles((themes) => ({
   root: {
     maxWidth: "100%",
@@ -103,27 +102,27 @@ export default function UserPage() {
       liked: true,
     },
     {
-      location: "Chichibu",
-      country: "Japan",
-      img: "oslo.png",
+      location: "New York",
+      country: "USA",
+      img: "newyork.png",
       liked: true,
     },
     {
-      location: "Copenhagen",
-      country: "Denmark",
-      img: "oslo.png",
+      location: "Bali",
+      country: "Indonesia",
+      img: "bali.png",
       liked: true,
     },
     {
       location: "Vancouver",
       country: "Canada",
-      img: "oslo.png",
+      img: "nature.jpg",
       liked: true,
     },
     {
-      location: "Stockholm",
-      country: "Sweden",
-      img: "oslo.png",
+      location: "Rome",
+      country: "Italy",
+      img: "rome.png",
       liked: true,
     },
   ]);
@@ -160,7 +159,7 @@ export default function UserPage() {
               <ExploreCard
                 location={exploreCard.location}
                 country={exploreCard.country}
-                img={exploreCard.img}
+                imgName={exploreCard.img}
                 onLike={() => {
                   exploreCard["liked"] = false;
                 }}
@@ -227,60 +226,7 @@ export default function UserPage() {
           </Button>
         </Grid>
 
-        <Grid item xs={3} className={classes.exploreContainer}>
-          <ExploreCard
-            location="Bali"
-            country="Indonesia"
-            imgName="bali.png"
-            onLike={() => {}}
-          ></ExploreCard>
-        </Grid>
-        <Grid item xs={3} className={classes.exploreContainer}>
-          <ExploreCard
-            location="Oslo"
-            country="Norway"
-            imgName="oslo.png"
-            onLike={() => {}}
-          ></ExploreCard>
-        </Grid>
-        <Grid item xs={3} className={classes.invisible}>
-          <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
-        </Grid>
-        <Grid item xs={3} className={classes.invisible}>
-          <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
-        </Grid>
-        <Grid item xs={3} className={classes.exploreContainer}>
-          <ExploreCard
-            location="Florida"
-            country="USA"
-            imgName="miami.png"
-            onLike={() => {}}
-          ></ExploreCard>
-        </Grid>
-        <Grid item xs={3} className={classes.exploreContainer}>
-          <ExploreCard
-            location="Vancouver"
-            country="Canada"
-            imgName="nature.jpg"
-            onLike={() => {}}
-          ></ExploreCard>
-        </Grid>
-        <Grid item xs={3} className={classes.invisible}>
-          <ExploreCard
-            location="Cancun"
-            country="Mexico"
-            imgName="oslo.png"
-          ></ExploreCard>
-        </Grid>
-        <Grid item xs={3} className={classes.invisible}>
-          <ExploreCard
-            location="Cancun"
-            country="Mexico"
-            imgName="oslo.png"
-          ></ExploreCard>
-        </Grid>
-
-        {/* {listOfExploreCards} */}
+        {listOfExploreCards}
       </Grid>
     </Grid>
   );
