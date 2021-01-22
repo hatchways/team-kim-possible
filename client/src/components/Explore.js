@@ -5,13 +5,13 @@ import ExploreCard from "./ExploreCard";
 import { Typography } from "@material-ui/core";
 
 const exploreStyles = makeStyles((theme) => ({
-	pageContainer: {
-		overflow: "hidden",
-		marginBottom: "3rem",
-	},
-	pt4: {
-		paddingTop: "3rem",
-	},
+  pageContainer: {
+    overflow: "hidden",
+    marginBottom: "3rem",
+  },
+  pt4: {
+    paddingTop: "3rem",
+  },
 
 	cardContainer: {
 		paddingTop: "2rem",
