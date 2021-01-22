@@ -11,19 +11,6 @@ import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 import { useHistory } from "react-router-dom";
 
 const signUpStyles = makeStyles((theme) => ({
-	container: {
-		position: "fixed",
-		width: "100%",
-		height: "100%",
-		top: "0",
-		right: "0",
-		bottom: "0",
-		margin: "auto",
-		backgroundColor: "inherit",
-		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-	},
 	paper: {
 		position: "relative",
 		overflow: "hidden",
@@ -92,13 +79,7 @@ function SignUp(props) {
 	const page1 = () => {
 		return (
 			<div>
-				<Grid
-					container
-					item
-					xs={12}
-					justify="center"
-					alignItems="center"
-				>
+				<Grid container item xs={12} justify="center" alignItems="center">
 					<Grid item xs={8}>
 						<Box mt={4.5}>
 							{nameError ? (
@@ -187,9 +168,7 @@ function SignUp(props) {
 									helperText="Passwords must match."
 									variant="outlined"
 									type="password"
-									onChange={(e) =>
-										handleConfirmPasswordChange(e)
-									}
+									onChange={(e) => handleConfirmPasswordChange(e)}
 								/>
 							) : (
 								<TextField
@@ -199,9 +178,7 @@ function SignUp(props) {
 									fullWidth={true}
 									color="secondary"
 									type="password"
-									onChange={(e) =>
-										handleConfirmPasswordChange(e)
-									}
+									onChange={(e) => handleConfirmPasswordChange(e)}
 								/>
 							)}
 						</Box>
@@ -240,33 +217,21 @@ function SignUp(props) {
 	const page2 = () => {
 		return (
 			<div>
-				<Grid
-					container
-					item
-					xs={12}
-					justify="center"
-					alignItems="center"
-				>
+				<Grid container item xs={12} justify="center" alignItems="center">
 					<Grid item xs={9} className={classes.mt2}>
 						<Paper
 							variant="outlined"
 							elevation={0}
 							className={classes.locationPaper}
 						>
-							<Grid
-								container
-								alignItems="center"
-								justify="flex-start"
-							>
+							<Grid container alignItems="center" justify="flex-start">
 								<Grid item xs={1}>
 									<RoomOutlinedIcon
 										className={classes.locationIcon}
 									></RoomOutlinedIcon>
 								</Grid>
 								<Grid item xs={3}>
-									<p className={classes.locationText}>
-										Paris
-									</p>
+									<p className={classes.locationText}>Paris</p>
 								</Grid>
 								<Grid
 									container
@@ -275,10 +240,7 @@ function SignUp(props) {
 									xs={8}
 									className={classes.pr1}
 								>
-									<CloseModal
-										cb={null}
-										modalContainer={false}
-									></CloseModal>
+									<CloseModal cb={null} modalContainer={false}></CloseModal>
 								</Grid>
 							</Grid>
 						</Paper>
@@ -289,11 +251,7 @@ function SignUp(props) {
 							elevation={0}
 							className={classes.locationPaper}
 						>
-							<Grid
-								container
-								alignItems="center"
-								justify="flex-start"
-							>
+							<Grid container alignItems="center" justify="flex-start">
 								<Grid item xs={1}>
 									<RoomOutlinedIcon
 										className={classes.locationIcon}
@@ -416,12 +374,7 @@ function SignUp(props) {
 		<div className={classes.container}>
 			<Paper elevation={3} className={classes.paper}>
 				<CloseModal cb={props.exit} modalContainer={true}></CloseModal>
-				<Grid
-					container
-					direction="column"
-					justify="center"
-					alignItems="center"
-				>
+				<Grid container direction="column" justify="center" alignItems="center">
 					{/* TOP TEXT - HEADER */}
 
 					<SignInModalHeader
@@ -431,9 +384,7 @@ function SignUp(props) {
 
 					{/* FORM SECTION */}
 
-					<form onSubmit={handleFormSubmit}>
-						{page ? page2() : page1()}
-					</form>
+					<form onSubmit={handleFormSubmit}>{page ? page2() : page1()}</form>
 
 					{/* FOOTER */}
 

@@ -30,6 +30,22 @@ const appStyles = makeStyles((theme) => ({
 	},
 }));
 
+const appStyles = makeStyles((theme) => ({
+	container: {
+		position: "fixed",
+		width: "100%",
+		height: "100%",
+		top: "0",
+		right: "0",
+		bottom: "0",
+		margin: "auto",
+		backgroundColor: "rgba(0,0,0, 0.5)",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+	},
+}));
+
 function App() {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const classes = appStyles(theme);

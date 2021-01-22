@@ -5,13 +5,17 @@ import ExploreCard from "./ExploreCard";
 import { Typography } from "@material-ui/core";
 
 const exploreStyles = makeStyles((theme) => ({
-  pageContainer: {
-    overflow: "hidden",
-    marginBottom: "3rem",
-  },
-  pt4: {
-    paddingTop: "3rem",
-  },
+	pageContainer: {
+		overflow: "hidden",
+		marginBottom: "3rem",
+	},
+	pt4: {
+		paddingTop: "3rem",
+	},
+
+	textAlign: {
+		textAlign: "center",
+	},
 
 	cardContainer: {
 		paddingTop: "2rem",
@@ -20,7 +24,8 @@ const exploreStyles = makeStyles((theme) => ({
 	},
 
 	headerSpacing: {
-		margin: "2rem 0 4rem 0",
+		margin: "2rem 0 1rem 0",
+		textAlign: "center",
 	},
 }));
 
@@ -42,57 +47,55 @@ function Explore() {
 	];
 
 	return (
-		<Grid
-			container
-			justify="center"
-			alignItems="center"
-			direction="row"
-			className={classes.pageContainer}
-		>
+		<>
 			<Grid
 				container
-				item
-				xs={12}
 				justify="center"
 				alignItems="center"
-				className={classes.pt4}
+				direction="row"
+				className={classes.pageContainer}
 			>
 				<Grid
+					container
 					item
 					xs={12}
-					container
 					justify="center"
 					alignItems="center"
+					className={classes.pt4}
 				>
-					<Typography variant="h2">Explore Destinations</Typography>
+					<Grid item xs={12} container justify="center" alignItems="center">
+						<Typography variant="h2" className={classes.textAlign}>
+							Explore Destinations
+						</Typography>
+					</Grid>
+				</Grid>
+				<Grid item>
+					<Typography variant="h5" className={classes.headerSpacing}>
+						World's Top Destinations to Explore
+					</Typography>
+				</Grid>
+				<Grid
+					container
+					item
+					justify="center"
+					alignItems="center"
+					spacing={5}
+					className={classes.cardContainer}
+				>
+					{locations.map((loc) => {
+						return (
+							<Grid item xs={12} lg={3}>
+								<ExploreCard
+									location={loc.location}
+									country={loc.country}
+									imgName={loc.imgName}
+								></ExploreCard>
+							</Grid>
+						);
+					})}
 				</Grid>
 			</Grid>
-			<Grid item>
-				<Typography variant="h5" className={classes.headerSpacing}>
-					World's Top Destinations to Explore
-				</Typography>
-			</Grid>
-			<Grid
-				container
-				item
-				justify="center"
-				alignItems="center"
-				spacing={5}
-				className={classes.cardContainer}
-			>
-				{locations.map((loc) => {
-					return (
-						<Grid item xs={12} lg={3}>
-							<ExploreCard
-								location={loc.location}
-								country={loc.country}
-								imgName={loc.imgName}
-							></ExploreCard>
-						</Grid>
-					);
-				})}
-			</Grid>
-		</Grid>
+		</>
 	);
 }
 
