@@ -7,28 +7,28 @@ import TimelineContent from "@material-ui/lab/TimelineContent";
 import TimelineDot from "@material-ui/lab/TimelineDot";
 
 const CustomTimeline = (props) => {
-  const { begin, end } = props;
-  return (
-    <Timeline>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot />
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>
-          <b>{begin}</b>
-        </TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot />
-        </TimelineSeparator>
-        <TimelineContent>
-          <b>{end}</b>
-        </TimelineContent>
-      </TimelineItem>
-    </Timeline>
-  );
+	const { begin, end } = props;
+	return (
+		<Timeline>
+			<TimelineItem>
+				<TimelineSeparator>
+					<TimelineDot />
+					<TimelineConnector />
+				</TimelineSeparator>
+				<TimelineContent>
+					<b>{begin}</b>
+				</TimelineContent>
+			</TimelineItem>
+			<TimelineItem>
+				<TimelineSeparator>
+					<TimelineDot />
+				</TimelineSeparator>
+				<TimelineContent>
+					<b>{end}</b>
+				</TimelineContent>
+			</TimelineItem>
+		</Timeline>
+	);
 };
 
 export default CustomTimeline;
