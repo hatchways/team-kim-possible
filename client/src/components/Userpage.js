@@ -176,9 +176,9 @@ export default function UserPage() {
     <Grid container spacing={0} className={classes.grid}>
       <Grid container spacing={1} className={classes.leftQuadrant}>
         <Grid item xs={12} className={classes.container}>
-          <paper className={classes.alignment}>
+          <div className={classes.alignment}>
             <Avatar />
-          </paper>
+          </div>
         </Grid>
         <Grid item xs={12} className={classes.alignment}>
           <Typography variant="h5" gutterBottom>
@@ -229,9 +229,9 @@ export default function UserPage() {
 
         <Grid item xs={3} className={classes.exploreContainer}>
           <ExploreCard
-            location="Cancun"
-            country="Mexico"
-            imgName="oslo.png"
+            location="Bali"
+            country="Indonesia"
+            imgName="bali.png"
             onLike={() => {}}
           ></ExploreCard>
         </Grid>
@@ -251,17 +251,17 @@ export default function UserPage() {
         </Grid>
         <Grid item xs={3} className={classes.exploreContainer}>
           <ExploreCard
-            location="Cancun"
-            country="Mexico"
-            imgName="oslo.png"
+            location="Florida"
+            country="USA"
+            imgName="miami.png"
             onLike={() => {}}
           ></ExploreCard>
         </Grid>
         <Grid item xs={3} className={classes.exploreContainer}>
           <ExploreCard
-            location="Cancun"
-            country="Mexico"
-            imgName="oslo.png"
+            location="Vancouver"
+            country="Canada"
+            imgName="nature.jpg"
             onLike={() => {}}
           ></ExploreCard>
         </Grid>
