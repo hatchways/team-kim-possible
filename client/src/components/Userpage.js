@@ -197,7 +197,7 @@ export default function UserPage() {
 
         <Button
           variant="outlined"
-          style={{ color: "#BEC1E2" }}
+          color="secondary"
           className={classes.alignment}
         >
           Edit
@@ -205,15 +205,12 @@ export default function UserPage() {
 
         <Grid item xs={12} className={classes.FavouriteSpace}>
           <Button fullWidth>Favourite Destinations</Button>
-          <br></br>
           <Button fullWidth className={classes.buttongray}>
             Notifications
           </Button>
-          <br></br>
           <Button fullWidth className={classes.buttongray}>
             Account Settings
           </Button>
-          <br></br>
         </Grid>
         <Grid item xs={12} className={classes.misc}>
           <Button fullWidth>Logout</Button>
@@ -236,7 +233,6 @@ export default function UserPage() {
         </Grid>
 
         {listOfExploreCards}
-        <Grid item xd={6} />
       </Grid>
     </Grid>
   );
