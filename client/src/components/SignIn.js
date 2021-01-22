@@ -83,7 +83,7 @@ function SignIn(props) {
 	return (
 		<div className={classes.container}>
 			<Paper elevation={3} className={classes.paper}>
-				<CloseModal cb={props.exit} modalContainer={true}></CloseModal>
+				<CloseModal cb={null} modalContainer={true}></CloseModal>
 				<Grid
 					container
 					direction="column"
