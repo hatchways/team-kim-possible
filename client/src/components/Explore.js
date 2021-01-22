@@ -3,7 +3,6 @@ import { Grid } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import ExploreCard from "./ExploreCard";
 import { Typography } from "@material-ui/core";
-import Navbar from "./Navbar";
 
 const exploreStyles = makeStyles((theme) => ({
 	pageContainer: {
@@ -25,7 +24,8 @@ const exploreStyles = makeStyles((theme) => ({
 	},
 
 	headerSpacing: {
-		margin: "2rem 0 4rem 0",
+		margin: "2rem 0 1rem 0",
+		textAlign: "center",
 	},
 }));
 
@@ -70,10 +70,7 @@ function Explore() {
 					</Grid>
 				</Grid>
 				<Grid item>
-					<Typography
-						variant="h5"
-						className={(classes.headerSpacing, classes.textAlign)}
-					>
+					<Typography variant="h5" className={classes.headerSpacing}>
 						World's Top Destinations to Explore
 					</Typography>
 				</Grid>

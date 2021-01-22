@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
 		flexGrow: 1,
 		color: "#6464FF",
 	},
+	navTitle: {
+		textDecoration: "none",
+	},
 	navbar: {
 		backgroundColor: "#fff",
 		color: "black",
@@ -25,13 +28,14 @@ const useStyles = makeStyles((theme) => ({
 		position: "relative",
 	},
 	links: {
-		color: "black",
+		padding: "1rem",
+		color: `${theme.palette.secondary.main}`,
 		"&:hover": {
-			color: "orange",
+			color: `${theme.palette.primary.main}`,
 		},
 	},
 	textDecoration: {
-		textDecoration: "none",
+		textDecorationLine: "none",
 	},
 }));
 
@@ -43,28 +47,26 @@ export default function ButtonAppBar() {
 			<AppBar position="static" className={classes.navbar} elevation={5}>
 				<Toolbar>
 					<Typography variant="h6" className={classes.title}>
-						Travel Booking
+						<Link className={classes.navTitle} to="/">
+							Travel Booking
+						</Link>
 					</Typography>
-					<Button className={classes.links}>
-						<Link to="/explore" className={classes.textDecoration}>
-							Explore
-						</Link>
-					</Button>
-					<Button className={classes.links}>
-						<Link to="/" className={classes.textDecoration}>
-							Flights
-						</Link>
-					</Button>
-					<Button className={classes.links}>
-						<Link to="/hotels" className={classes.textDecoration}>
-							Hotels
-						</Link>
-					</Button>
-					<Button className={classes.links}>
-						<Link to="/carrental" className={classes.textDecoration}>
-							Cars
-						</Link>
-					</Button>
+					<Link to="/explore" className={classes.textDecoration}>
+						<Button className={classes.links}>
+							<Typography variant="button">Explore</Typography>
+						</Button>
+					</Link>
+					<Link to="/" className={classes.textDecoration}>
+						<Button className={classes.links}>
+							<Typography variant="button">Flights</Typography>
+						</Button>
+					</Link>
+					<Link to="/hotels" className={classes.textDecoration}>
+						<Button className={classes.links}>Hotels</Button>
+					</Link>
+					<Link to="/carrental" className={classes.textDecoration}>
+						<Button className={classes.links}>Cars</Button>
+					</Link>
 					<Link to={"/userpage"}>
 						<Avatar src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/2ee38b4e-1ad8-433e-b83b-5f1492547b2d/d3a4k16-486f7e33-afd1-4d1d-a573-ff3d9ea74e8f.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvMmVlMzhiNGUtMWFkOC00MzNlLWI4M2ItNWYxNDkyNTQ3YjJkXC9kM2E0azE2LTQ4NmY3ZTMzLWFmZDEtNGQxZC1hNTczLWZmM2Q5ZWE3NGU4Zi5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.g16PZQ0d4y8s6zV_SIhLryhy9X6UXCC0ZMN0mIW35Uk" />
 					</Link>
