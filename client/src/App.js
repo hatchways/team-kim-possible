@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { MuiThemeProvider } from "@material-ui/core";
 import { theme } from "./themes/theme";
+import CarRentalPage from "./pages/CarRentalPage";
 import Navbar from "./components/Navbar";
 import UserPage from "./components/Userpage";
 import SearchPage from "./pages/SearchPage";
@@ -61,12 +62,12 @@ function App() {
 							to="/explore"
 							exact
 						/>
+            <Route path="/carrental" component={CarRentalPage} />
 					</Switch>
 				</ShoppingCartProvider>
 			</MuiThemeProvider>
 		</BrowserRouter>
 	);
-
 }
 
 export default App;
