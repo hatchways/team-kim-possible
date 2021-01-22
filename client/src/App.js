@@ -8,8 +8,10 @@ import UserPage from "./components/Userpage";
 import SearchPage from "./pages/SearchPage";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
+import CarRental from "./components/car-rental-search.component";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Explore from "./components/Explore";
+import { ShoppingCartProvider } from "./components/ShoppingCartContext";
 
 const appStyles = makeStyles((theme) => ({
 	container: {
@@ -50,43 +52,46 @@ function App() {
 	return (
 		<BrowserRouter>
 			<MuiThemeProvider theme={theme}>
-				<Navbar />
-				<Switch>
-					<Route exact path="/">
-						<SearchPage />
-						{loggedIn ? null : (
-							<div className={classes.container}>
-								<SignIn exit={handleModalExit} />
-							</div>
-						)}
-					</Route>
-					<Route exact path="/signup">
-						{loggedIn ? (
-							<Redirect to="/" />
-						) : (
-							<>
-								<SearchPage />
-								<div className={classes.container}>
-									<SignUp exit={handleModalExit} />
-								</div>
-							</>
-						)}
-					</Route>
-					<Route exact path="/signin">
-						{loggedIn ? (
-							<Redirect to="/" />
-						) : (
-							<>
-								<SearchPage />
+				<ShoppingCartProvider>
+					<Navbar />
+					<Switch>
+						<Route exact path="/">
+							<SearchPage />
+							{loggedIn ? null : (
 								<div className={classes.container}>
 									<SignIn exit={handleModalExit} />
 								</div>
-							</>
-						)}
-					</Route>
-					<ProtectedRoute exact path="/userpage" component={UserPage} />
-					<ProtectedRoute exact path="/explore" component={Explore} />
-				</Switch>
+							)}
+						</Route>
+						<Route exact path="/signup">
+							{loggedIn ? (
+								<Redirect to="/" />
+							) : (
+								<>
+									<SearchPage />
+									<div className={classes.container}>
+										<SignUp exit={handleModalExit} />
+									</div>
+								</>
+							)}
+						</Route>
+						<Route exact path="/signin">
+							{loggedIn ? (
+								<Redirect to="/" />
+							) : (
+								<>
+									<SearchPage />
+									<div className={classes.container}>
+										<SignIn exit={handleModalExit} />
+									</div>
+								</>
+							)}
+						</Route>
+						<ProtectedRoute exact path="/carrental" component={CarRental} />
+						<ProtectedRoute exact path="/userpage" component={UserPage} />
+						<ProtectedRoute exact path="/explore" component={Explore} />
+					</Switch>
+				</ShoppingCartProvider>
 			</MuiThemeProvider>
 		</BrowserRouter>
 	);
