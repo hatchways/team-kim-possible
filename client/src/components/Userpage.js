@@ -4,7 +4,6 @@ import { Grid, Button, Typography } from "@material-ui/core";
 import Avatar from "./BigAvatar";
 import ExploreCard from "./ExploreCard";
 import "fontsource-roboto";
-
 const useStyles = makeStyles((themes) => ({
   root: {
     maxWidth: "100%",
@@ -99,37 +98,32 @@ export default function UserPage() {
     {
       location: "Oslo",
       country: "Norway",
-      img:
-        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
-      liked: false,
-    },
-    {
-      location: "Chichibu",
-      country: "Japan",
-      img:
-        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      img: "oslo.png",
       liked: true,
     },
     {
-      location: "Copenhagen",
-      country: "Denmark",
-      img:
-        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      location: "New York",
+      country: "USA",
+      img: "newyork.png",
+      liked: true,
+    },
+    {
+      location: "Bali",
+      country: "Indonesia",
+      img: "bali.png",
       liked: true,
     },
     {
       location: "Vancouver",
       country: "Canada",
-      img:
-        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
+      img: "nature.jpg",
       liked: true,
     },
     {
-      location: "Stockholm",
-      country: "Sweden",
-      img:
-        "https://www.worldatlas.com/r/w960-q80/upload/a1/28/76/shutterstock-133005938.jpg",
-      liked: false,
+      location: "Rome",
+      country: "Italy",
+      img: "rome.png",
+      liked: true,
     },
   ]);
 
@@ -142,7 +136,7 @@ export default function UserPage() {
             <ExploreCard
               location={exploreCard.location}
               country={exploreCard.country}
-              img={exploreCard.img}
+              imgName={exploreCard.img}
               onLike={() => {
                 exploreCard["liked"] = false;
               }}
@@ -165,7 +159,7 @@ export default function UserPage() {
               <ExploreCard
                 location={exploreCard.location}
                 country={exploreCard.country}
-                img={exploreCard.img}
+                imgName={exploreCard.img}
                 onLike={() => {
                   exploreCard["liked"] = false;
                 }}
@@ -181,9 +175,9 @@ export default function UserPage() {
     <Grid container spacing={0} className={classes.grid}>
       <Grid container spacing={1} className={classes.leftQuadrant}>
         <Grid item xs={12} className={classes.container}>
-          <paper className={classes.alignment}>
+          <div className={classes.alignment}>
             <Avatar />
-          </paper>
+          </div>
         </Grid>
         <Grid item xs={12} className={classes.alignment}>
           <Typography variant="h5" gutterBottom>

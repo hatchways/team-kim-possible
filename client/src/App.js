@@ -2,37 +2,56 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { MuiThemeProvider } from "@material-ui/core";
 import { theme } from "./themes/theme";
-import CarRentalPage from "./pages/CarRentalPage";
+import { makeStyles } from "@material-ui/core/styles";
 import Navbar from "./components/Navbar";
 import UserPage from "./components/Userpage";
 import SearchPage from "./pages/SearchPage";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
+import CarRental from "./pages/CarRentalPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Explore from "./components/Explore";
 import { ShoppingCartProvider } from "./components/ShoppingCartContext";
 import HotelsPage from "./pages/HotelsPage";
 import CarRental from "./pages/CarRentalPage";
 
+const appStyles = makeStyles((theme) => ({
+	container: {
+		position: "fixed",
+		width: "100%",
+		height: "100%",
+		top: "0",
+		right: "0",
+		bottom: "0",
+		margin: "auto",
+		backgroundColor: "rgba(0,0,0, 0.5)",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+	},
+}));
+
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+	const [loggedIn, setLoggedIn] = useState(false);
+	const classes = appStyles(theme);
 
-  useEffect(() => {
-    checkLoggedIn();
-  });
+	useEffect(() => {
+		checkLoggedIn();
+	});
 
-  const checkLoggedIn = () => {
-    if (localStorage.loggedIn) {
-      return setLoggedIn(true);
-    } else {
-      return setLoggedIn(false);
-    }
-  };
+	const checkLoggedIn = () => {
+		if (localStorage.loggedIn) {
+			return setLoggedIn(true);
+		} else {
+			return setLoggedIn(false);
+		}
+	};
 
-  const handleModalExit = () => {
-    setLoggedIn(true);
-  };
+	const handleModalExit = () => {
+		setLoggedIn(true);
+	};
 
+<<<<<<< HEAD
   return (
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
@@ -49,6 +68,54 @@ function App() {
       </MuiThemeProvider>
     </BrowserRouter>
   );
+=======
+	return (
+		<BrowserRouter>
+			<MuiThemeProvider theme={theme}>
+				<ShoppingCartProvider>
+					<Navbar />
+					<Switch>
+						<Route exact path="/">
+							<SearchPage />
+							{loggedIn ? null : (
+								<div className={classes.container}>
+									<SignIn exit={handleModalExit} />
+								</div>
+							)}
+						</Route>
+						<Route exact path="/signup">
+							{loggedIn ? (
+								<Redirect to="/" />
+							) : (
+								<>
+									<SearchPage />
+									<div className={classes.container}>
+										<SignUp exit={handleModalExit} />
+									</div>
+								</>
+							)}
+						</Route>
+						<Route exact path="/signin">
+							{loggedIn ? (
+								<Redirect to="/" />
+							) : (
+								<>
+									<SearchPage />
+									<div className={classes.container}>
+										<SignIn exit={handleModalExit} />
+									</div>
+								</>
+							)}
+						</Route>
+						<ProtectedRoute exact path="/carrental" component={CarRental} />
+						<ProtectedRoute exact path="/userpage" component={UserPage} />
+						<ProtectedRoute exact path="/explore" component={Explore} />
+					</Switch>
+				</ShoppingCartProvider>
+			</MuiThemeProvider>
+		</BrowserRouter>
+	);
+>>>>>>> 482170f3cc125d8f9f8ff81b80dc2ad4bf237a93
 }
 
 export default App;

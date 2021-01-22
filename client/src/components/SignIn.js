@@ -10,19 +10,6 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 const signInStyles = makeStyles((theme) => ({
-	container: {
-		position: "fixed",
-		width: "100%",
-		height: "100%",
-		top: "0",
-		right: "0",
-		bottom: "0",
-		margin: "auto",
-		backgroundColor: "rgba(0,0,0, 0.5)",
-		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-	},
 	paper: {
 		position: "relative",
 		overflow: "hidden",
@@ -84,12 +71,7 @@ function SignIn(props) {
 		<div className={classes.container}>
 			<Paper elevation={3} className={classes.paper}>
 				<CloseModal cb={null} modalContainer={true}></CloseModal>
-				<Grid
-					container
-					direction="column"
-					justify="center"
-					alignItems="center"
-				>
+				<Grid container direction="column" justify="center" alignItems="center">
 					{/* TOP TEXT - HEADER */}
 
 					<SignInModalHeader
@@ -100,13 +82,7 @@ function SignIn(props) {
 					{/* FORM SECTION */}
 
 					<form onSubmit={handleFormSubmit} style={{ width: "100%" }}>
-						<Grid
-							container
-							item
-							xs={12}
-							justify="center"
-							alignItems="center"
-						>
+						<Grid container item xs={12} justify="center" alignItems="center">
 							<Grid item xs={8}>
 								<Box mt={4.5}>
 									<TextField
@@ -129,20 +105,13 @@ function SignIn(props) {
 										fullWidth={true}
 										color="secondary"
 										type="password"
-										onChange={(e) =>
-											handlePasswordChange(e)
-										}
+										onChange={(e) => handlePasswordChange(e)}
 									/>
 								</Box>
 							</Grid>
 						</Grid>
 						{signInErr ? (
-							<Grid
-								item
-								container
-								justify="center"
-								alignItems="center"
-							>
+							<Grid item container justify="center" alignItems="center">
 								<FormHelperText
 									error
 									children="Could not sign user in"
@@ -152,12 +121,7 @@ function SignIn(props) {
 						) : null}
 						{/* BUTTON */}
 
-						<Grid
-							container
-							justify="center"
-							alignItems="center"
-							item
-						>
+						<Grid container justify="center" alignItems="center" item>
 							<Grid item xs={5}>
 								<Button
 									color={"primary"}

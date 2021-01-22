@@ -11,6 +11,7 @@ import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 import { useHistory } from "react-router-dom";
 
 const signUpStyles = makeStyles((theme) => ({
+<<<<<<< HEAD
   container: {
     position: "fixed",
     width: "100%",
@@ -53,6 +54,37 @@ const signUpStyles = makeStyles((theme) => ({
   pr1: {
     paddingRight: "1rem",
   },
+=======
+	paper: {
+		position: "relative",
+		overflow: "hidden",
+		width: "500px",
+	},
+	continueButton: {
+		color: "white",
+		fontSize: "16px",
+		borderRadius: "6px",
+		marginTop: "3rem",
+		padding: "0.75rem 5rem 0.75rem 5rem",
+	},
+	sidePadding: {
+		padding: "0rem 1rem 0rem 1rem",
+	},
+	locationPaper: {
+		margin: "0.5rem 0 0.5rem 0",
+	},
+	locationText: {
+		marginLeft: "1.25rem",
+		fontWeight: "bold",
+	},
+	locationIcon: {
+		paddingLeft: "0.75rem",
+		color: `${theme.palette.secondary.main}`,
+	},
+	pr1: {
+		paddingRight: "1rem",
+	},
+>>>>>>> 482170f3cc125d8f9f8ff81b80dc2ad4bf237a93
 
   mt2: {
     marginTop: "2rem",
@@ -89,6 +121,7 @@ function SignUp(props) {
   const [signUpErr, setSignUpErr] = useState(false);
   const [page, setPage2] = useState(false);
 
+<<<<<<< HEAD
   const page1 = () => {
     return (
       <div>
@@ -117,6 +150,36 @@ function SignUp(props) {
               )}
             </Box>
           </Grid>
+=======
+	const page1 = () => {
+		return (
+			<div>
+				<Grid container item xs={12} justify="center" alignItems="center">
+					<Grid item xs={8}>
+						<Box mt={4.5}>
+							{nameError ? (
+								<TextField
+									error
+									id="filled-error-helper-text"
+									label="Name"
+									fullWidth={true}
+									helperText="Please put a name."
+									variant="outlined"
+									onChange={(e) => handleNameChange(e)}
+								/>
+							) : (
+								<TextField
+									id="Name"
+									label="Name"
+									variant="outlined"
+									fullWidth={true}
+									color="secondary"
+									onChange={(e) => handleNameChange(e)}
+								/>
+							)}
+						</Box>
+					</Grid>
+>>>>>>> 482170f3cc125d8f9f8ff81b80dc2ad4bf237a93
 
           <Grid item xs={8}>
             <Box mt={2}>
@@ -170,6 +233,7 @@ function SignUp(props) {
             </Box>
           </Grid>
 
+<<<<<<< HEAD
           <Grid item xs={8}>
             <Box mt={2}>
               {passwordMatchError ? (
@@ -197,6 +261,35 @@ function SignUp(props) {
             </Box>
           </Grid>
         </Grid>
+=======
+					<Grid item xs={8}>
+						<Box mt={2}>
+							{passwordMatchError ? (
+								<TextField
+									error
+									id="filled-error-helper-text"
+									label="Confirm Password"
+									fullWidth={true}
+									helperText="Passwords must match."
+									variant="outlined"
+									type="password"
+									onChange={(e) => handleConfirmPasswordChange(e)}
+								/>
+							) : (
+								<TextField
+									id="Confirm-Password"
+									label="Confirm Password"
+									variant="outlined"
+									fullWidth={true}
+									color="secondary"
+									type="password"
+									onChange={(e) => handleConfirmPasswordChange(e)}
+								/>
+							)}
+						</Box>
+					</Grid>
+				</Grid>
+>>>>>>> 482170f3cc125d8f9f8ff81b80dc2ad4bf237a93
 
         {/* BUTTON */}
         {signUpErr ? (
@@ -227,6 +320,7 @@ function SignUp(props) {
     );
   };
 
+<<<<<<< HEAD
   const page2 = () => {
     return (
       <div>
@@ -292,6 +386,73 @@ function SignUp(props) {
             <p className={classes.secondary}>Add More</p>
           </Grid>
         </Grid>
+=======
+	const page2 = () => {
+		return (
+			<div>
+				<Grid container item xs={12} justify="center" alignItems="center">
+					<Grid item xs={9} className={classes.mt2}>
+						<Paper
+							variant="outlined"
+							elevation={0}
+							className={classes.locationPaper}
+						>
+							<Grid container alignItems="center" justify="flex-start">
+								<Grid item xs={1}>
+									<RoomOutlinedIcon
+										className={classes.locationIcon}
+									></RoomOutlinedIcon>
+								</Grid>
+								<Grid item xs={3}>
+									<p className={classes.locationText}>Paris</p>
+								</Grid>
+								<Grid
+									container
+									justify="flex-end"
+									item
+									xs={8}
+									className={classes.pr1}
+								>
+									<CloseModal cb={null} modalContainer={false}></CloseModal>
+								</Grid>
+							</Grid>
+						</Paper>
+					</Grid>
+					<Grid item xs={9}>
+						<Paper
+							variant="outlined"
+							elevation={0}
+							className={classes.locationPaper}
+						>
+							<Grid container alignItems="center" justify="flex-start">
+								<Grid item xs={1}>
+									<RoomOutlinedIcon
+										className={classes.locationIcon}
+									></RoomOutlinedIcon>
+								</Grid>
+								<Grid item xs={3}>
+									<p className={classes.locationText}>Bali</p>
+								</Grid>
+								<Grid
+									container
+									justify="flex-end"
+									item
+									xs={8}
+									className={classes.pr1}
+								>
+									<CloseModal
+										cb={handleExit}
+										modalContainer={false}
+									></CloseModal>
+								</Grid>
+							</Grid>
+						</Paper>
+					</Grid>
+					<Grid container item xs={4} justify="center">
+						<p className={classes.secondary}>Add More</p>
+					</Grid>
+				</Grid>
+>>>>>>> 482170f3cc125d8f9f8ff81b80dc2ad4bf237a93
 
         {/* BUTTON */}
 
@@ -383,12 +544,21 @@ function SignUp(props) {
     sendSignUpRequest();
   };
 
+<<<<<<< HEAD
   return (
     <div className={classes.container}>
       <Paper elevation={3} className={classes.paper}>
         <CloseModal cb={props.exit} modalContainer={true}></CloseModal>
         <Grid container direction="column" justify="center" alignItems="center">
           {/* TOP TEXT - HEADER */}
+=======
+	return (
+		<div className={classes.container}>
+			<Paper elevation={3} className={classes.paper}>
+				<CloseModal cb={props.exit} modalContainer={true}></CloseModal>
+				<Grid container direction="column" justify="center" alignItems="center">
+					{/* TOP TEXT - HEADER */}
+>>>>>>> 482170f3cc125d8f9f8ff81b80dc2ad4bf237a93
 
           <SignInModalHeader
             title="Sign Up"
@@ -397,7 +567,11 @@ function SignUp(props) {
 
           {/* FORM SECTION */}
 
+<<<<<<< HEAD
           <form onSubmit={handleFormSubmit}>{page ? page2() : page1()}</form>
+=======
+					<form onSubmit={handleFormSubmit}>{page ? page2() : page1()}</form>
+>>>>>>> 482170f3cc125d8f9f8ff81b80dc2ad4bf237a93
 
           {/* FOOTER */}
 
