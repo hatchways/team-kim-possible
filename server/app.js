@@ -7,17 +7,17 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-// mongoose
-//   .connect(process.env.MONGO_URI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useFindAndModify: false,
-//     useCreateIndex: true,
-//   })
-//   .then(() => {
-//     console.log("DB Connected!");
-//   })
-//   .catch((err) => console.error(err));
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  })
+  .then(() => {
+    console.log("DB Connected!");
+  })
+  .catch((err) => console.error(err));
 
 const indexRouter = require("./routes/index");
 const apiRouter = require("./routes/api");
