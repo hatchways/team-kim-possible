@@ -1,18 +1,8 @@
-<<<<<<< HEAD
-import React from "react";
-<<<<<<< Updated upstream
-import { BrowserRouter, Route } from "react-router-dom";
-import LandingPage from "./pages/Landing";
-=======
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { MuiThemeProvider } from "@material-ui/core";
 import { theme } from "./themes/theme";
-<<<<<<< HEAD
->>>>>>> origin
-=======
 import CarRentalPage from "./pages/CarRentalPage";
->>>>>>> 86dc7ad72a573767be4793bc658dd019e90be568
 import Navbar from "./components/Navbar";
 import UserPage from "./components/Userpage";
 import SearchPage from "./pages/SearchPage";
@@ -21,52 +11,8 @@ import SignIn from "./components/SignIn";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Explore from "./components/Explore";
 import { ShoppingCartProvider } from "./components/ShoppingCartContext";
-
-function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-
-  useEffect(() => {
-    checkLoggedIn();
-  });
-
-  const checkLoggedIn = () => {
-    if (localStorage.loggedIn) {
-      return setLoggedIn(true);
-    } else {
-      return setLoggedIn(false);
-    }
-  };
-
-  const handleModalExit = () => {
-    setLoggedIn(true);
-  };
-
-<<<<<<< HEAD
-  return (
-    <BrowserRouter>
-      <MuiThemeProvider theme={theme}>
-        <Switch>
-          <Route exact path="/">
-            <Navbar />
-
-<<<<<<< HEAD
-    <MuiThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Route path="/" component={Navbar} />
-        <p> A lot of cool stuff</p>
-      </BrowserRouter>
-    </MuiThemeProvider>
-=======
-import { MuiThemeProvider } from "@material-ui/core";
-import { theme } from "./themes/theme";
-import Navbar from "./components/Navbar";
-import SearchPage from "./pages/SearchPage";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
-import { theme } from "./themes/theme";
-import SignUp from "./components/SignUp";
-import SignIn from "./components/SignIn";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Explore from "./components/Explore";
+import HotelsPage from "./pages/HotelsPage";
+import CarRental from "./pages/CarRentalPage";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -90,71 +36,19 @@ function App() {
   return (
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
+        <Navbar />
         <Switch>
-          <Route exact path="/">
-=======
->>>>>>> origin
-            <SearchPage />
-            {loggedIn ? null : <SignIn exit={handleModalExit} />}
-          </Route>
-          <Route exact path="/signup">
-            {loggedIn ? <Redirect to="/" /> : <SignUp exit={handleModalExit} />}
-          </Route>
-          <Route exact path="/signin">
-            {loggedIn ? <Redirect to="/" /> : <SignIn exit={handleModalExit} />}
-          </Route>
-          <ProtectedRoute component={Explore} to="/explore" exact />
-<<<<<<< HEAD
+          <Route exact path="/" component={SearchPage} />
+          <Route exact path="/signin" component={SignIn} />
+          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/explorepage" component={Explore} />
+          <Route exact path="/userpage" component={UserPage} />
+          <Route exact path="/hotels" component={HotelsPage} />
+          <Route exact path="/cars" component={CarRental} />
         </Switch>
       </MuiThemeProvider>
     </BrowserRouter>
->>>>>>> Stashed changes
-=======
-          <ProtectedRoute component={UserPage} to="/userpage" exact />
-        </Switch>
-      </MuiThemeProvider>
-    </BrowserRouter>
->>>>>>> origin
   );
-=======
-	return (
-		<BrowserRouter>
-			<MuiThemeProvider theme={theme}>
-				<ShoppingCartProvider>
-					<Navbar />
-					<Switch>
-						<Route exact path="/">
-							<SearchPage />
-							{loggedIn ? null : (
-								<SignIn exit={handleModalExit} />
-							)}
-						</Route>
-						<Route exact path="/signup">
-							{loggedIn ? (
-								<Redirect to="/" />
-							) : (
-								<SignUp exit={handleModalExit} />
-							)}
-						</Route>
-						<Route exact path="/signin">
-							{loggedIn ? (
-								<Redirect to="/" />
-							) : (
-								<SignIn exit={handleModalExit} />
-							)}
-						</Route>
-						<ProtectedRoute
-							component={Explore}
-							to="/explore"
-							exact
-						/>
-            <Route path="/carrental" component={CarRentalPage} />
-					</Switch>
-				</ShoppingCartProvider>
-			</MuiThemeProvider>
-		</BrowserRouter>
-	);
->>>>>>> 86dc7ad72a573767be4793bc658dd019e90be568
 }
 
 export default App;
