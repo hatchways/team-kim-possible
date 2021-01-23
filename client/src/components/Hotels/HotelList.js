@@ -3,140 +3,124 @@ import { Grid, Typography, Container } from "@material-ui/core";
 import StarIcon from "@material-ui/icons/Star";
 import { makeStyles } from "@material-ui/core/styles";
 import { hotels } from "./hotels";
-import { Wrapper } from "./styled";
 import Image from "material-ui-image";
 
-const hotel = {
-  name: "W Bali-Semiynak",
-  image: "string",
-  stars: 5,
-  location: "W Bali-Seminyak",
-  reviews: {
-    score: 8.1,
-    review: "Excellent",
-    numberOfReviews: 597,
+const useStyles = makeStyles({
+  wrapper: {
+    padding: "20px",
+    background: "#fff",
+    marginBottom: "20px",
+    borderRadius: "10px",
   },
-  price: 175,
-};
-
+  img: {
+    borderRadius: "10px",
+  },
+  container: {
+    padding: "0",
+  },
+  grid5: {
+    paddingLeft: "10px",
+  },
+  grid3: {
+    paddingBottom: "20px",
+  },
+  icon: {
+    color: "#facd39",
+  },
+  location: {
+    color: "#c98ef5",
+    fontWeight: "400",
+  },
+  number: {
+    color: "#c98ef5",
+    fontWeight: "400",
+  },
+  nights: {
+    color: "#c98ef5",
+    fontWeight: "400",
+  },
+  rating: {
+    backgroundColor: "#4577ff",
+    color: "#fff",
+    borderRadius: "5px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  reviews: {
+    paddingLeft: "5px",
+  },
+  content: {
+    fontWeight: "500",
+  },
+  nights: {
+    fontSize: "0.9rem",
+  },
+});
 const HotelList = () => {
+  const classes = useStyles();
   return (
-    <Wrapper>
-      <Grid container className="ht">
-        <Grid item xs={12} sm={4}>
-          <Image src="/images/hotel1.jpg" />
-        </Grid>
-        <Grid
-          container
-          xs={12}
-          sm={4}
-          direction="column"
-          justify="space-evenly"
-        >
-          <Typography variant="h4">W-Bali-Semiynak</Typography>
-          <Container>
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-          </Container>
-          <Typography variant="subtitle1" className="subtitle">
-            W-Bali-Semiynak
-          </Typography>
-          <Grid container>
-            <Grid item sm={2} className="rating">
-              {" "}
-              8.1
-            </Grid>
-            <Grid item sm={10} className="review-wrapper">
-              <Typography variant="" display="block" className="review-content">
-                Excellent
-              </Typography>
-              <Typography variant="">597 Reviews</Typography>
+    <div className="root">
+      {hotels.map((hotel) => (
+        <Grid container className={classes.wrapper}>
+          <Grid item xs={12} sm={4}>
+            <Image
+              src={hotel.image}
+              cover
+              aspectRatio={4 / 3}
+              className={classes.img}
+            />
+          </Grid>
+          <Grid
+            container
+            xs={12}
+            sm={5}
+            direction="column"
+            justify="space-evenly"
+            className={classes.grid5}
+          >
+            <Typography variant="h4">{hotel.name}</Typography>
+            <Container className={classes.container}>
+              {[...new Array(5)].map((i) => (
+                <StarIcon className={classes.icon} />
+              ))}
+            </Container>
+            <Typography variant="h6" className={classes.location}>
+              {hotel.location}
+            </Typography>
+            <Grid container>
+              <Grid item sm={2} className={classes.rating}>
+                {" "}
+                {hotel.reviews.score}
+              </Grid>
+              <Grid item sm={10} className={classes.reviews}>
+                <Typography display="block" className={classes.content}>
+                  {hotel.reviews.review}
+                </Typography>
+                <Typography display="block" className={classes.number}>
+                  {hotel.reviews.numberOfReviews} reviews
+                </Typography>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-        <Grid container xs={12} sm={4} direction="column">
-          <Typography variant="" display="block">
-            $175
-          </Typography>
-          <Typography variant="" display="block">
-            per night
-          </Typography>
-        </Grid>
-      </Grid>
-
-      <Grid container className="ht">
-        <Grid item xs={12} sm={4}>
-          <Image src="/images/hotel2.jpg" />
-        </Grid>
-        <Grid item xs={12} sm={4} className="wrapper">
-          <Typography variant="h4">W-Bali-Semiynak</Typography>
-          <Container>
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-          </Container>
-          <Typography variant="subtitle1">W-Bali-Semiynak</Typography>
-          <Grid container>
-            <Grid item sm={2}>
-              {" "}
-              8.1
-            </Grid>
-            <Grid item sm={10}>
-              <Typography variant="" display="block">
-                Excellent
-              </Typography>
-              <Typography variant="">597 Reviews</Typography>
-            </Grid>
+          <Grid
+            container
+            xs={12}
+            sm={3}
+            direction="column"
+            justify="flex-end"
+            className={classes.grid3}
+          >
+            <Typography variant="h3" display="block">
+              {hotel.price}
+            </Typography>
+            <Typography variant="" display="block" className={classes.nights}>
+              per night
+            </Typography>
           </Grid>
         </Grid>
-        <Grid item xs={12} sm={4}>
-          <Typography variant="" display="block">
-            $175
-          </Typography>
-          <Typography variant="">per night</Typography>
-        </Grid>
-      </Grid>
-
-      <Grid container className="ht">
-        <Grid item xs={12} sm={4}>
-          <Image src="/images/hotel3.jpg" />
-        </Grid>
-        <Grid item xs={12} sm={4} className="wrapper">
-          <Typography variant="h4">W-Bali-Semiynak</Typography>
-          <Container>
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-          </Container>
-          <Typography variant="subtitle1">W-Bali-Semiynak</Typography>
-          <Grid container>
-            <Grid item sm={2}>
-              {" "}
-              8.1
-            </Grid>
-            <Grid item sm={10}>
-              <Typography variant="" display="block">
-                Excellent
-              </Typography>
-              <Typography variant="">597 Reviews</Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <Typography variant="" display="block">
-            $175
-          </Typography>
-          <Typography variant="">per night</Typography>
-        </Grid>
-      </Grid>
-    </Wrapper>
+      ))}
+    </div>
   );
 };
 

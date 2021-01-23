@@ -1,8 +1,8 @@
 export const hotels = [
   {
     name: "W Bali-Semiynak",
-    image: "string",
-    stars: 5,
+    image: "/images/hotel1.jpg",
+    rating: 5,
     location: "W Bali-Seminyak",
     reviews: {
       score: 8.1,
@@ -13,8 +13,8 @@ export const hotels = [
   },
   {
     name: "Alila Ubud",
-    image: "string",
-    stars: 5,
+    image: "/images/hotel2.jpg",
+    rating: 5,
     location: "Alila Ubud",
     reviews: {
       score: 9.6,
@@ -25,8 +25,8 @@ export const hotels = [
   },
   {
     name: "The Kanyon Jungle Resort by Pramana",
-    image: "string",
-    stars: 5,
+    image: "/images/hotel3.jpg",
+    rating: 5,
     location: "Janyon Jungle-Seminyak",
     reviews: {
       score: 9.6,

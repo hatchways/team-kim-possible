@@ -8,7 +8,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
-  root: { marginTop: "30px" },
+  root: { margin: "30px 0" },
   item: {
     marginRight: "20px",
     padding: "0 20px;",
@@ -28,10 +28,10 @@ const HotelSearch = () => {
     <div className={classes.root}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Grid container justify="center">
-          <Grid item xs={12} sm={3} className="item">
-            <Input placeholder="Bali" fullWidth className="input" />
+          <Grid item xs={12} sm={3} className={classes.item}>
+            <Input placeholder="Bali" fullWidth className={classes.input} />
           </Grid>
-          <Grid item xs={12} sm={3} className="item">
+          <Grid item xs={12} sm={3} className={classes.item}>
             <Grid container justify="space-between">
               <Grid item xs={12} sm={5}>
                 <KeyboardDatePicker
@@ -39,7 +39,7 @@ const HotelSearch = () => {
                   variant="inline"
                   format="MM/dd/yyyy"
                   margin="normal"
-                  className="date"
+                  className={classes.date}
                   value={new Date()}
                   minDate={new Date()}
                   onChange={handleChange}
@@ -52,7 +52,7 @@ const HotelSearch = () => {
                   variant="inline"
                   format="MM/dd/yyyy"
                   margin="normal"
-                  className="date"
+                  className={classes.date}
                   value={new Date()}
                   minDate={new Date()}
                   onChange={handleChange}
@@ -60,11 +60,11 @@ const HotelSearch = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12} sm={3} className="item">
+          <Grid item xs={12} sm={3} className={classes.item}>
             <Input
               placeholder="1 room, 2 travellers"
               fullWidth
-              className="input"
+              className={classes.input}
             />
           </Grid>
         </Grid>
