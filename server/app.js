@@ -6,7 +6,7 @@ const cors = require("cors");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const path = require("path");
-require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
+require("dotenv").config();
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -29,6 +29,7 @@ const quotesRouter = require("./routes/quotes");
 const favoritesRouter = require("./routes/favorites");
 const profileRouter = require("./routes/profile");
 const carRentalRouter = require("./routes/car-rental");
+const hotelRouter = require("./routes/hotel");
 const stripeRouter = require("./routes/stripe");
 const auth = require("./middleware/auth");
 
@@ -51,6 +52,7 @@ app.use("/login", loginRouter);
 app.use("/search-places", placesRouter);
 app.use("/quotes", quotesRouter);
 app.use("/carRental", carRentalRouter);
+app.use("/hotels", hotelRouter);
 app.use("/favorites", auth, favoritesRouter);
 app.use("/profile", auth, profileRouter);
 app.use("/stripe", stripeRouter);

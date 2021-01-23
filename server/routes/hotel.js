@@ -1,4 +1,7 @@
-export const hotels = [
+const express = require("express");
+const router = express.Router();
+
+const hotelList = [
   {
     name: "W Bali-Semiynak",
     image: "/images/hotel1.jpg",
@@ -36,3 +39,13 @@ export const hotels = [
     price: 180,
   },
 ];
+
+router.get("/", async function (req, res, next) {
+  try {
+    res.status(200).json({ hotelList });
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+module.exports = router;

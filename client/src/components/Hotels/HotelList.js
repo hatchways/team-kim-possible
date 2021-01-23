@@ -2,7 +2,6 @@ import React from "react";
 import { Grid, Typography, Container } from "@material-ui/core";
 import StarIcon from "@material-ui/icons/Star";
 import { makeStyles } from "@material-ui/core/styles";
-import { hotels } from "./hotels";
 import Image from "material-ui-image";
 
 const useStyles = makeStyles({
@@ -56,12 +55,24 @@ const useStyles = makeStyles({
   nights: {
     fontSize: "0.9rem",
   },
+  noFound: {
+    textAlign: "center",
+    padding: "20px",
+  },
 });
-const HotelList = () => {
+const HotelList = ({ hotelList }) => {
   const classes = useStyles();
+
+  if (hotelList.length === 0) {
+    return (
+      <Container className={classes.noFound}>
+        <Typography variant="h4"> No hotels found</Typography>
+      </Container>
+    );
+  }
   return (
     <div className="root">
-      {hotels.map((hotel) => (
+      {hotelList.map((hotel) => (
         <Grid container className={classes.wrapper}>
           <Grid item xs={12} sm={4}>
             <Image
