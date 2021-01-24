@@ -66,7 +66,7 @@ const HotelList = ({ hotelList }) => {
   if (hotelList.length === 0) {
     return (
       <Container className={classes.noFound}>
-        <Typography variant="h4"> No hotels found</Typography>
+        <Typography variant="h4"> Sorry, No hotels found</Typography>
       </Container>
     );
   }
