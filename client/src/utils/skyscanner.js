@@ -16,7 +16,7 @@ const getCityId = async (city) => {
     },
   });
   //Places[0] is the city. Places[1] is the first, usually major airport
-  return response.data.Places[1].PlaceId;
+  return response.data.Places[0].PlaceId;
 };
 
 const getRouteData = async (
@@ -88,4 +88,23 @@ const getFlightDetails = (places, quoteDetails, carriers) => {
   //Returns both detail objects
 };
 
-export { getCityId, getRouteData, getFlightDetails };
+const getCityName = async (query) => {
+  const response = await axios({
+    method: "get",
+    url:
+      "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/",
+    params: {
+      query,
+    },
+    headers: {
+      "x-rapidapi-key": "12ace0bfd9msh34dee4306bb93d3p1da922jsn4c10b1bd8ee4",
+      "x-rapidapi-host":
+        "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
+      useQueryString: true,
+    },
+  });
+  const names = response.data.Places.map((place) => place.PlaceName);
+  return names;
+};
+
+export { getCityId, getRouteData, getFlightDetails, getCityName };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import "date-fns";
 import {
   Grid,
@@ -8,7 +8,11 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  TextField,
+  Container,
+  Typography,
 } from "@material-ui/core";
+import { Autocomplete } from "@material-ui/lab";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
@@ -16,7 +20,7 @@ import {
 } from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { getCityId, getRouteData } from "../utils/skyscanner";
+import { getCityId, getRouteData, getCityName } from "../utils/skyscanner";
 
 const cities = ["Paris", "London", "Seattle"];
 const useStyles = makeStyles({
@@ -29,6 +33,7 @@ const useStyles = makeStyles({
     boxShadow: "0 0 5px 5px rgba(221, 221, 240, 0.7)",
     display: "flex",
     alignItems: "center",
+    display: "relative",
   },
   item: {
     padding: "0 20px",
@@ -42,20 +47,22 @@ const useStyles = makeStyles({
     borderRadius: "5px",
   },
   formControl: {
-    width: "100%",
     marginTop: "16px",
   },
   input: {
     fontSize: "0.8rem",
+  },
+  optionsContainer: {
+    display: "absolute",
   },
 });
 const Search = (props) => {
   const classes = useStyles();
   const { state, setState } = props;
 
-  const handleChange = (e) => {
-    setState({ ...state, [e.target.name]: e.target.value });
-  };
+  const [optionsDeparture, setOptionsDeparture] = useState([]);
+  const [optionsArrival, setOptionsArrival] = useState([]);
+
   const handleSubmit = async () => {
     const departureLocationId = await getCityId(state.departureCity);
     const arrivalLocationId = await getCityId(state.arrivalCity);
@@ -73,44 +80,47 @@ const Search = (props) => {
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Grid container>
           <Grid item xs={12} sm={2} className={classes.item}>
-            <FormControl className={classes.formControl}>
-              <InputLabel shrink>From</InputLabel>
-              <Select
-                className={classes.input}
-                name="departureCity"
-                value={state.departureCity}
-                onChange={handleChange}
-                displayEmpty
-              >
-                <MenuItem disabled value="">
-                  <em>City</em>
-                </MenuItem>
-                {cities.map((city) => (
-                  <MenuItem value={city}>{city}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <Autocomplete
+              className={classes.formControl}
+              options={optionsDeparture}
+              autoComplete
+              autoHighlight
+              groupLabel
+              value={state.departureCity}
+              getOptionLabel={(option) => option}
+              onChange={(_, newValue) => {
+                setState(() => ({ ...state, departureCity: newValue }));
+              }}
+              onInputChange={async (_, newInputValue) => {
+                const response = await getCityName(newInputValue);
+                setOptionsDeparture(response);
+              }}
+              renderInput={(params) => <TextField {...params} label="From" />}
+            />
+
             <Divider orientation="vertical" flexItem />
           </Grid>
 
           <Grid item xs={12} sm={2} className={classes.item}>
-            <FormControl className={classes.formControl}>
-              <InputLabel shrink>Where to go</InputLabel>
-              <Select
-                className={classes.input}
-                name="arrivalCity"
-                value={state.arrivalCity}
-                onChange={handleChange}
-                displayEmpty
-              >
-                <MenuItem disabled value="">
-                  <em>City</em>
-                </MenuItem>
-                {cities.map((city) => (
-                  <MenuItem value={city}>{city}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <Autocomplete
+              className={classes.formControl}
+              options={optionsArrival}
+              autoHighlight
+              autoComplete
+              includeInputInList
+              value={state.arrivalCity}
+              getOptionLabel={(option) => option}
+              onChange={(_, newValue) => {
+                setState(() => ({ ...state, arrivalCity: newValue }));
+              }}
+              onInputChange={async (_, newInputValue) => {
+                const response = await getCityName(newInputValue);
+                setOptionsArrival(response);
+              }}
+              renderInput={(params) => (
+                <TextField {...params} label="To" shrink />
+              )}
+            />
             <Divider orientation="vertical" flexItem />
           </Grid>
 
@@ -150,7 +160,9 @@ const Search = (props) => {
                 className={classes.input}
                 name="numOfTravellers"
                 value={state.numOfTravellers}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setState({ ...state, numOfTravellers: e.target.value })
+                }
               >
                 <MenuItem value={1}>1</MenuItem>
                 <MenuItem value={2}>2</MenuItem>
