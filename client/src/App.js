@@ -10,8 +10,9 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import CarRental from "./pages/CarRentalPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Explore from "./components/Explore";
+import Explore from "./pages/Explore";
 import { ShoppingCartProvider } from "./components/ShoppingCartContext";
+import ShoppingCartTest from "./components/ShoppingCartTest";
 
 const appStyles = makeStyles((theme) => ({
 	container: {
@@ -55,7 +56,7 @@ function App() {
 				<ShoppingCartProvider>
 					<Navbar />
 					<Switch>
-						<Route exact path="/">
+						<Route exact path='/'>
 							<SearchPage />
 							{loggedIn ? null : (
 								<div className={classes.container}>
@@ -63,9 +64,9 @@ function App() {
 								</div>
 							)}
 						</Route>
-						<Route exact path="/signup">
+						<Route exact path='/signup'>
 							{loggedIn ? (
-								<Redirect to="/" />
+								<Redirect to='/' />
 							) : (
 								<>
 									<SearchPage />
@@ -75,9 +76,9 @@ function App() {
 								</>
 							)}
 						</Route>
-						<Route exact path="/signin">
+						<Route exact path='/signin'>
 							{loggedIn ? (
-								<Redirect to="/" />
+								<Redirect to='/' />
 							) : (
 								<>
 									<SearchPage />
@@ -87,9 +88,14 @@ function App() {
 								</>
 							)}
 						</Route>
-						<ProtectedRoute exact path="/carrental" component={CarRental} />
-						<ProtectedRoute exact path="/userpage" component={UserPage} />
-						<ProtectedRoute exact path="/explore" component={Explore} />
+						<ProtectedRoute exact path='/carrental' component={CarRental} />
+						<ProtectedRoute exact path='/userpage' component={UserPage} />
+						<ProtectedRoute exact path='/explore' component={Explore} />
+						<ProtectedRoute
+							exact
+							path='/shoppingCartTest'
+							component={ShoppingCartTest}
+						/>
 					</Switch>
 				</ShoppingCartProvider>
 			</MuiThemeProvider>

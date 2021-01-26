@@ -8,16 +8,16 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-  })
-  .then(() => {
-    console.log("DB Connected!");
-  })
-  .catch((err) => console.error(err));
+	.connect(process.env.MONGO_URI, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+		useFindAndModify: false,
+		useCreateIndex: true,
+	})
+	.then(() => {
+		console.log("DB Connected!");
+	})
+	.catch((err) => console.error(err));
 
 const indexRouter = require("./routes/index");
 const apiRouter = require("./routes/api");
@@ -29,6 +29,7 @@ const favoritesRouter = require("./routes/favorites");
 const profileRouter = require("./routes/profile");
 const carRentalRouter = require("./routes/car-rental");
 const stripeRouter = require("./routes/stripe");
+const shoppingCartRouter = require("./routes/shopping-cart");
 const auth = require("./middleware/auth");
 
 const { json, urlencoded } = express;
@@ -53,27 +54,28 @@ app.use("/carRental", carRentalRouter);
 app.use("/favorites", auth, favoritesRouter);
 app.use("/profile", auth, profileRouter);
 app.use("/stripe", stripeRouter);
+app.use("/shopping-cart", shoppingCartRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
+	next(createError(404));
 });
 
 // error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.json({ error: err });
+	// render the error page
+	res.status(err.status || 500);
+	res.json({ error: err });
 });
 
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
-  console.log(`Server Running at ${port}`);
+	console.log(`Server Running at ${port}`);
 });
 
 module.exports = app;

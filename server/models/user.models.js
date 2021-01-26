@@ -29,6 +29,10 @@ const userSchema = mongoose.Schema({
 	profilePictureUrl: {
 		type: String,
 	},
+	shoppingCart: {
+		type: Object,
+		default: {},
+	},
 });
 
 userSchema.methods.generateAuthenticationToken = async (user) => {

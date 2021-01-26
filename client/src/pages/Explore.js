@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
-import ExploreCard from "./ExploreCard";
+import ExploreCard from "../components/ExploreCard";
 import { Typography } from "@material-ui/core";
 
 const exploreStyles = makeStyles((theme) => ({
@@ -12,7 +12,6 @@ const exploreStyles = makeStyles((theme) => ({
 	pt4: {
 		paddingTop: "3rem",
 	},
-
 	textAlign: {
 		textAlign: "center",
 	},

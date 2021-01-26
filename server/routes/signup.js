@@ -8,11 +8,13 @@ router.post("/", async function (req, res, next) {
 			name: req.body.name,
 			email: req.body.email,
 			password: req.body.password,
+			shoppingCart: null,
 		});
 
 		await user.save();
 		const token = await user.generateAuthenticationToken(user);
-		res.cookie("authenticationToken", token, { httpOnly: true, expires: 0 })
+		res
+			.cookie("authenticationToken", token, { httpOnly: true, expires: 0 })
 			.status(201)
 			.send({ responseMessage: "Signup success!" });
 	} catch (e) {
