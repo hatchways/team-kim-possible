@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from "react";
+import React, { useState, useRef } from "react";
 import "date-fns";
 import {
   Grid,
@@ -9,8 +9,6 @@ import {
   MenuItem,
   Select,
   TextField,
-  Container,
-  Typography,
 } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import DateFnsUtils from "@date-io/date-fns";
@@ -22,7 +20,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { getCityId, getRouteData, getCityName } from "../utils/skyscanner";
 
-const cities = ["Paris", "London", "Seattle"];
 const useStyles = makeStyles({
   root: {
     height: "90px",
@@ -33,7 +30,6 @@ const useStyles = makeStyles({
     boxShadow: "0 0 5px 5px rgba(221, 221, 240, 0.7)",
     display: "flex",
     alignItems: "center",
-    display: "relative",
   },
   item: {
     padding: "0 20px",
@@ -63,6 +59,9 @@ const Search = (props) => {
   const [optionsDeparture, setOptionsDeparture] = useState([]);
   const [optionsArrival, setOptionsArrival] = useState([]);
 
+  const timeoutRef1 = useRef();
+  const timeoutRef2 = useRef();
+
   const handleSubmit = async () => {
     const departureLocationId = await getCityId(state.departureCity);
     const arrivalLocationId = await getCityId(state.arrivalCity);
@@ -91,9 +90,14 @@ const Search = (props) => {
               onChange={(_, newValue) => {
                 setState(() => ({ ...state, departureCity: newValue }));
               }}
-              onInputChange={async (_, newInputValue) => {
-                const response = await getCityName(newInputValue);
-                setOptionsDeparture(response);
+              onInputChange={(_, newInputValue) => {
+                if (timeoutRef1.current) {
+                  clearTimeout(timeoutRef1.current);
+                }
+                timeoutRef1.current = setTimeout(async () => {
+                  const response = await getCityName(newInputValue);
+                  setOptionsDeparture(response);
+                }, 500);
               }}
               renderInput={(params) => <TextField {...params} label="From" />}
             />
@@ -114,8 +118,13 @@ const Search = (props) => {
                 setState(() => ({ ...state, arrivalCity: newValue }));
               }}
               onInputChange={async (_, newInputValue) => {
-                const response = await getCityName(newInputValue);
-                setOptionsArrival(response);
+                if (timeoutRef2.current) {
+                  clearTimeout(timeoutRef2.current);
+                }
+                timeoutRef2.current = setTimeout(async () => {
+                  const response = await getCityName(newInputValue);
+                  setOptionsArrival(response);
+                }, 500);
               }}
               renderInput={(params) => (
                 <TextField {...params} label="To" shrink />
