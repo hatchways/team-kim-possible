@@ -123,22 +123,6 @@ const Search = (props) => {
             />
             <Divider orientation="vertical" flexItem />
           </Grid>
-
-          <Grid item xs={12} sm={2} className={classes.item}>
-            <KeyboardDatePicker
-              disableToolbar
-              variant="inline"
-              format="MM/dd/yyyy"
-              margin="normal"
-              className={classes.input}
-              label="Arrival"
-              value={state.arrivalDate}
-              minDate={new Date()}
-              onChange={(e) => setState({ ...state, arrivalDate: e })}
-            />
-            <Divider orientation="vertical" flexItem />
-          </Grid>
-
           <Grid item xs={12} sm={2} className={classes.item}>
             <KeyboardDatePicker
               disableToolbar
@@ -150,6 +134,20 @@ const Search = (props) => {
               value={state.departureDate}
               minDate={new Date()}
               onChange={(e) => setState({ ...state, departureDate: e })}
+            />
+            <Divider orientation="vertical" flexItem />
+          </Grid>
+          <Grid item xs={12} sm={2} className={classes.item}>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="inline"
+              format="MM/dd/yyyy"
+              margin="normal"
+              className={classes.input}
+              label="Arrival"
+              value={state.arrivalDate}
+              minDate={new Date()}
+              onChange={(e) => setState({ ...state, arrivalDate: e })}
             />
             <Divider orientation="vertical" flexItem />
           </Grid>
