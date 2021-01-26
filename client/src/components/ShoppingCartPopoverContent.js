@@ -3,6 +3,8 @@ import { ShoppingCartContext } from "./ShoppingCartContext";
 import { Typography, Grid } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import { deleteFromShoppingCart } from "../utils/shoppingCart";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const shoppingCartStyles = makeStyles((theme) => ({
 	container: {
@@ -23,6 +25,10 @@ const shoppingCartStyles = makeStyles((theme) => ({
 	checkoutSpacing: {
 		marginTop: "1rem",
 	},
+	deleteButton: {
+		maxWidth: "9px",
+		padding: "0px",
+	},
 }));
 
 function ShoppingCartPopoverContent() {
@@ -35,6 +41,39 @@ function ShoppingCartPopoverContent() {
 	for (let i = 0; i < shoppingCart.length; i++) {
 		prices.push(shoppingCart[i].price);
 	}
+
+	const totalCartText = () => {
+		return (
+			<>
+				<Grid item>
+					<Typography variant='h6'>Total: {""} </Typography>
+				</Grid>
+				<Grid item className={classes.totalLeftSpacing}>
+					<Typography variant='h6'>
+						${prices.reduce((total, amount) => total + amount)}
+					</Typography>
+				</Grid>
+			</>
+		);
+	};
+
+	const emptyCartText = () => {
+		return <Typography variant='h6'> Empty Cart! </Typography>;
+	};
+
+	const checkOutCartText = () => {
+		return (
+			<Grid item className={classes.checkoutSpacing}>
+				<Link to='/checkout'>
+					<Typography variant='body2'>Click Here For Checkout</Typography>
+				</Link>
+			</Grid>
+		);
+	};
+
+	const handleDeleteFromShoppingCart = (e, item) => {
+		deleteFromShoppingCart(shoppingCart, setShoppingCart, item);
+	};
 
 	return (
 		<Grid
@@ -52,31 +91,29 @@ function ShoppingCartPopoverContent() {
 					container
 					justify='space-between'
 					alignItems='center'
+					direction='row'
 					item
-					xs={12}
 					className={classes.cartItemContainer}>
-					<Typography variant='h6'>{item.name}</Typography>
-					<Typography variant='body1' className={classes.itemPrice}>
-						${item.price}
-					</Typography>
+					<Grid item>
+						<Typography variant='h6'>{item.name}</Typography>
+					</Grid>
+
+					<Grid item>
+						<Typography variant='body1' className={classes.itemPrice}>
+							${item.price}
+						</Typography>
+
+						<DeleteIcon
+							onClick={(e) => handleDeleteFromShoppingCart(e, item)}
+						/>
+					</Grid>
 				</Grid>
 			))}
 
 			<Grid item justify='center' container className={classes.totalTopSpacing}>
-				<Grid item>
-					<Typography variant='h6'>Total: {""} </Typography>
-				</Grid>
-				<Grid item className={classes.totalLeftSpacing}>
-					<Typography variant='h6'>
-						${prices.reduce((total, amount) => total + amount)}
-					</Typography>
-				</Grid>
+				{prices.length > 0 ? totalCartText() : emptyCartText()}
 			</Grid>
-			<Grid item className={classes.checkoutSpacing}>
-				<Link to='/checkout'>
-					<Typography variant='body2'>Click Here For Checkout</Typography>
-				</Link>
-			</Grid>
+			{prices.length > 0 ? checkOutCartText() : null}
 		</Grid>
 	);
 }

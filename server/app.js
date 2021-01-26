@@ -54,7 +54,7 @@ app.use("/carRental", carRentalRouter);
 app.use("/favorites", auth, favoritesRouter);
 app.use("/profile", auth, profileRouter);
 app.use("/stripe", stripeRouter);
-app.use("/shopping-cart", shoppingCartRouter);
+app.use("/shopping-cart", auth, shoppingCartRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

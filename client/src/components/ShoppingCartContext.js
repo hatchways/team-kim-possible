@@ -1,8 +1,20 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
+import axios from "axios";
 
 export const ShoppingCartContext = createContext();
 
 export const ShoppingCartProvider = (props) => {
+	// useEffect = () => {
+	// 	const fetchCart = async () => {
+	// 		try {
+	// 			await axios.get("/shopping-cart/get-cart");
+	// 		} catch (e) {
+	// 			console.log(e);
+	// 		}
+	// 	};
+
+	// 	fetchCart();
+	// };
 	const exampleCart = [
 		{
 			name: "Audi",

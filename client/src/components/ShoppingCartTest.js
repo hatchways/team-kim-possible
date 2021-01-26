@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { ShoppingCartContext } from "./ShoppingCartContext";
 import { Grid, Button } from "@material-ui/core";
 import { addToShoppingCart } from "../utils/shoppingCart";
@@ -43,14 +43,6 @@ function ShoppingCartTest() {
 						))}
 					</Grid>
 				</Grid>
-			</Grid>
-			<Grid
-				container
-				alignItems='center'
-				direction='column'
-				style={{ marginTop: "16rem" }}>
-				<h1>Total Price</h1>
-				<h2>${prices.reduce((total, amount) => total + amount)}</h2>
 			</Grid>
 		</div>
 	);
