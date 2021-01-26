@@ -29,6 +29,7 @@ const favoritesRouter = require("./routes/favorites");
 const profileRouter = require("./routes/profile");
 const carRentalRouter = require("./routes/car-rental");
 const stripeRouter = require("./routes/stripe");
+const exploreRouter = require("./routes/explore");
 const auth = require("./middleware/auth");
 
 const { json, urlencoded } = express;
@@ -53,6 +54,7 @@ app.use("/carRental", carRentalRouter);
 app.use("/favorites", auth, favoritesRouter);
 app.use("/profile", auth, profileRouter);
 app.use("/stripe", stripeRouter);
+app.use("/explore", exploreRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
