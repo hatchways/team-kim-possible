@@ -52,7 +52,7 @@ app.use("/quotes", quotesRouter);
 app.use("/carRental", carRentalRouter);
 app.use("/favorites", auth, favoritesRouter);
 app.use("/profile", auth, profileRouter);
-app.use("/stripe", stripeRouter);
+app.use("/save-stripe-token", stripeRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
