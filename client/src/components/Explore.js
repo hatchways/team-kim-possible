@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Grid, Button } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import ExploreCard from "./ExploreCard";
+import ShuffleIcon from "@material-ui/icons/Shuffle";
 import { Typography } from "@material-ui/core";
 import axios from "axios";
 import { returnArrayRandom } from "../utils/utilFunctions";
@@ -46,7 +47,6 @@ function Explore() {
   useEffect(() => {
     getLocations();
   }, []);
-  console.log(locations);
   return (
     <>
       <Grid
@@ -90,7 +90,7 @@ function Explore() {
               className={classes.button}
               onClick={() => getLocations()}
             >
-              Shuffle Locations
+              Shuffle <ShuffleIcon />
             </Button>
           </Grid>
           {locations
