@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Paper, Grid, Button } from "@material-ui/core";
+import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
@@ -68,7 +69,9 @@ function ExploreCard(props) {
             </Grid>
           </Grid>
           <Grid item xs={3} container justify="center" alignItems="center">
-            <Button className={classes.button}>Book a flight!</Button>
+            <Link href="/" underline="none">
+              <Button className={classes.button}>Book a flight!</Button>
+            </Link>
           </Grid>
           <Grid item xs={3} container justify="flex-end" alignItems="center">
             {liked ? (
