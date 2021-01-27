@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import ExploreCard from "./ExploreCard";
 import { Typography } from "@material-ui/core";
@@ -29,6 +29,7 @@ const exploreStyles = makeStyles((theme) => ({
     margin: "2rem 0 1rem 0",
     textAlign: "center",
   },
+  button: theme.buttonPrimary,
 }));
 
 function Explore() {
@@ -37,15 +38,15 @@ function Explore() {
   const theme = useTheme();
   const classes = exploreStyles(theme);
   const [locations, setLocations] = useState();
+  const getLocations = async () => {
+    const response = await axios.get("/explore");
+    const randomEight = returnArrayRandom(response.data.locations, 8);
+    setLocations(randomEight);
+  };
   useEffect(() => {
-    const getLocations = async () => {
-      const response = await axios.get("/explore");
-      const randomEight = returnArrayRandom(response.data.locations, 8);
-      setLocations(randomEight);
-    };
     getLocations();
   }, []);
-
+  console.log(locations);
   return (
     <>
       <Grid
@@ -82,6 +83,16 @@ function Explore() {
           spacing={5}
           className={classes.cardContainer}
         >
+          <Grid container alignItems="center" justify="center">
+            <Button
+              variant="contained"
+              size="large"
+              className={classes.button}
+              onClick={() => getLocations()}
+            >
+              Shuffle Locations
+            </Button>
+          </Grid>
           {locations
             ? locations.map((loc) => {
                 return (

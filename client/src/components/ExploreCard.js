@@ -5,10 +5,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const exploreCardStyles = makeStyles((theme, props) => ({
   mainPaper: (props) => ({
-    background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 90%, rgba(0, 0, 0, 0.65) 100%), url(https://team-kim-possible.s3.us-east-2.amazonaws.com/images/${props.imgName})`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center center",
-    backgroundSize: "cover",
+    background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 90%, rgba(0, 0, 0, 0.65) 100%), url(https://team-kim-possible.s3.us-east-2.amazonaws.com/images/${props.imgName}) center center/cover no-repeat `,
     borderRadius: "18px",
   }),
   emptyTopSpace: {
@@ -45,6 +42,7 @@ const exploreCardStyles = makeStyles((theme, props) => ({
 
 function ExploreCard(props) {
   const classes = exploreCardStyles(props);
+  console.log(props);
 
   const [liked, setLike] = useState(false);
 
@@ -52,7 +50,6 @@ function ExploreCard(props) {
     setLike((prev) => !prev);
     // props.onLike();
   };
-
   return (
     <Paper elevation={1} className={classes.mainPaper}>
       <Grid container direction="column" justify="center">
