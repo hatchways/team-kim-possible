@@ -42,7 +42,6 @@ const exploreCardStyles = makeStyles((theme, props) => ({
 
 function ExploreCard(props) {
   const classes = exploreCardStyles(props);
-  console.log(props);
 
   const [liked, setLike] = useState(false);
 
@@ -64,17 +63,12 @@ function ExploreCard(props) {
             </Grid>
           </Grid>
           <Grid item xs={6} container justify="flex-end" alignItems="center">
-            {liked ? (
-              <FavoriteIcon
-                className={classes.favoriteIconLiked}
-                onClick={() => handleLiked()}
-              ></FavoriteIcon>
-            ) : (
-              <FavoriteIcon
-                className={classes.favoriteIcon}
-                onClick={() => handleLiked()}
-              ></FavoriteIcon>
-            )}
+            <FavoriteIcon
+              className={
+                liked ? classes.favoriteIconLiked : classes.favoriteIcon
+              }
+              onClick={() => handleLiked()}
+            ></FavoriteIcon>
           </Grid>
         </Grid>
       </Grid>

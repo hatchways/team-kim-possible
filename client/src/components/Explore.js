@@ -38,15 +38,26 @@ function Explore() {
   //THIS: props.location.toLowerCase() === saved image name
   const theme = useTheme();
   const classes = exploreStyles(theme);
-  const [locations, setLocations] = useState();
-  const getLocations = async () => {
+  const [locations, setLocations] = useState([]);
+  const [allLocations, setAllLocations] = useState();
+
+  //On page load(not shuffle), this component is rendered four times
+  //If this becomes an issue, perhaphs create a parent component just for handling allLocations and pass down
+  //as prop?
+  const getInitialLocations = async () => {
     const response = await axios.get("/explore");
+    setAllLocations(response.data.locations);
     const randomEight = returnArrayRandom(response.data.locations, 8);
     setLocations(randomEight);
   };
+  const shuffleLocations = () => {
+    const randomEight = returnArrayRandom(allLocations, 8);
+    setLocations(randomEight);
+  };
   useEffect(() => {
-    getLocations();
+    getInitialLocations();
   }, []);
+
   return (
     <>
       <Grid
@@ -88,24 +99,22 @@ function Explore() {
               variant="contained"
               size="large"
               className={classes.button}
-              onClick={() => getLocations()}
+              onClick={() => shuffleLocations()}
             >
               Shuffle <ShuffleIcon />
             </Button>
           </Grid>
-          {locations
-            ? locations.map((loc) => {
-                return (
-                  <Grid item xs={12} lg={3}>
-                    <ExploreCard
-                      location={loc.location}
-                      country={loc.country}
-                      imgName={loc.imgName}
-                    ></ExploreCard>
-                  </Grid>
-                );
-              })
-            : null}
+          {locations.map((loc) => {
+            return (
+              <Grid item xs={12} lg={3} key={loc.id}>
+                <ExploreCard
+                  location={loc.location}
+                  country={loc.country}
+                  imgName={loc.imgName}
+                ></ExploreCard>
+              </Grid>
+            );
+          })}
         </Grid>
       </Grid>
     </>
