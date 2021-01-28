@@ -12,6 +12,7 @@ import CarRental from "./pages/CarRentalPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Explore from "./components/Explore";
 import { ShoppingCartProvider } from "./components/ShoppingCartContext";
+import HotelsPage from "./pages/HotelsPage";
 
 const appStyles = makeStyles((theme) => ({
   container: {
@@ -90,6 +91,7 @@ function App() {
             <ProtectedRoute exact path="/carrental" component={CarRental} />
             <ProtectedRoute exact path="/userpage" component={UserPage} />
             <ProtectedRoute exact path="/explore" component={Explore} />
+            <ProtectedRoute exact path="/hotels" component={HotelsPage} />
           </Switch>
         </ShoppingCartProvider>
       </MuiThemeProvider>
