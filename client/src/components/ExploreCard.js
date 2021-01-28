@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Paper, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import axios from "axios";
 
 const exploreCardStyles = makeStyles((theme, props) => ({
   mainPaper: (props) => ({
@@ -41,13 +42,17 @@ const exploreCardStyles = makeStyles((theme, props) => ({
 }));
 
 function ExploreCard(props) {
-  const classes = exploreCardStyles(props);
+  const { alreadyLiked, location } = props;
+  const classes = exploreCardStyles(location);
 
-  const [liked, setLike] = useState(false);
-
-  const handleLiked = () => {
+  const [liked, setLike] = useState(alreadyLiked);
+  if (location.location === "Sapporo" || "Amsterdam") {
+    console.log(location.location, liked);
+  }
+  const handleLiked = async () => {
+    const response = await axios.put("/favorites", { location, add: !liked });
+    console.log(response);
     setLike((prev) => !prev);
-    // props.onLike();
   };
   return (
     <Paper elevation={1} className={classes.mainPaper}>
@@ -56,10 +61,10 @@ function ExploreCard(props) {
         <Grid container item xs={12} className={classes.cardDataContainer}>
           <Grid item xs={6} container justify="flex-start" alignItems="center">
             <Grid item xs={12}>
-              <p className={classes.locationText}>{props.location},</p>
+              <p className={classes.locationText}>{location.location},</p>
             </Grid>
             <Grid item xs={12}>
-              <p className={classes.locationCountryText}>{props.country}</p>
+              <p className={classes.locationCountryText}>{location.country}</p>
             </Grid>
           </Grid>
           <Grid item xs={6} container justify="flex-end" alignItems="center">

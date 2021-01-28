@@ -4,17 +4,24 @@ const { User } = require("../models/user.models");
 
 //PUT /favorites
 router.put("/", async function (req, res, next) {
-  const { cityId, add } = req.body;
+  console.log(req.body);
+  const { location, add } = req.body;
   const user = await User.findById(req.user._id);
-
+  console.log(user);
   if (add) {
-    user.favorites = [...user.favorites, cityId];
+    user.favorites = [...user.favorites, location];
   } else {
-    user.favorites = user.favorites.filter((i) => i !== cityId);
+    console.log("filtering");
+    user.favorites = user.favorites.filter((fav) => fav.id !== location.id);
   }
-
   const updatedUser = await user.save();
-  res.json(updatedUser);
+  console.log(updatedUser);
+  res.status(200).send(updatedUser);
+});
+
+router.get("/getAllFavorites", async function (req, res, next) {
+  const user = await User.findById(req.user._id);
+  res.status(200).send(user.favorites);
 });
 
 module.exports = router;

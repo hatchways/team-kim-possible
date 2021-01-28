@@ -33,31 +33,38 @@ const exploreStyles = makeStyles((theme) => ({
   button: theme.buttonPrimary,
 }));
 
-function Explore() {
+function Explore(props) {
   //To get image for exploreCard, make sure the image is saved in public with the name of the place. ex: "public/images/cancun.png"
   //THIS: props.location.toLowerCase() === saved image name
   const theme = useTheme();
   const classes = exploreStyles(theme);
   const [locations, setLocations] = useState([]);
-  const [allLocations, setAllLocations] = useState();
-
+  const { favorites, allLocations } = props;
   //On page load(not shuffle), this component is rendered four times
   //If this becomes an issue, perhaphs create a parent component just for handling allLocations and pass down
   //as prop?
-  const getInitialLocations = async () => {
-    const response = await axios.get("/explore");
-    setAllLocations(response.data.locations);
-    const randomEight = returnArrayRandom(response.data.locations, 8);
-    setLocations(randomEight);
-  };
   const shuffleLocations = () => {
     const randomEight = returnArrayRandom(allLocations, 8);
     setLocations(randomEight);
   };
-  useEffect(() => {
-    getInitialLocations();
-  }, []);
 
+  useEffect(() => {
+    const getInitialLocations = async () => {
+      const randomLocations = allLocations
+        ? returnArrayRandom(
+            allLocations,
+            8 - (favorites ? favorites.length : 0)
+          )
+        : [];
+      favorites.forEach((e) => (e.liked = true));
+
+      setLocations([...favorites, ...randomLocations]);
+    };
+
+    getInitialLocations();
+  }, [allLocations, favorites]);
+  console.log(locations);
+  console.log("render!");
   return (
     <>
       <Grid
@@ -108,9 +115,9 @@ function Explore() {
             return (
               <Grid item xs={12} lg={3} key={loc.id}>
                 <ExploreCard
-                  location={loc.location}
-                  country={loc.country}
+                  location={loc}
                   imgName={loc.imgName}
+                  alreadyLiked={loc.liked ? true : false}
                 ></ExploreCard>
               </Grid>
             );
