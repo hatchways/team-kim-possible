@@ -92,7 +92,7 @@ function App() {
             <ProtectedRoute exact path='/carrental' component={CarRental} />
             <ProtectedRoute exact path='/userpage' component={UserPage} />
             <ProtectedRoute exact path='/explore' component={Explore} />
-            {/* <ProtectedRoute exact path="/hotels" component={HotelsPage} /> */}
+            <ProtectedRoute exact path='/hotels' component={HotelsPage} />
           </Switch>
         </ShoppingCartProvider>
       </MuiThemeProvider>

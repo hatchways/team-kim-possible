@@ -16,9 +16,6 @@ function FlightDetails(props) {
   const classes = useStyles();
 
   const { quoteDetails, places, carriers } = props;
-  console.log(places);
-  console.log(quoteDetails);
-  console.log(carriers);
   const { outboundDetails, inboundDetails } = getFlightDetails(
     places,
     quoteDetails,
