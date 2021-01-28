@@ -1,61 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const { Flights } = require("./flights.models");
+const { Cars } = require("./cars.models");
 
-const FlightSchema = new Schema({
-  departureDate: {
-    type: Date,
-    required: true,
-  },
-  returnDate: {
-    type: Date,
-  },
-  departureLocation: {
-    type: String,
-    required: true,
-  },
-  destinationLocation: {
-    type: String,
-    required: true,
-  },
-  price: {
-    //In Cents
-    type: Number,
-    required: true,
-  },
-});
-
-const hotelSchema = new Schema({
-  name: {
-    type: String,
-    maxlength: 50,
-    required: true,
-  },
-  numberOfOccupants: {
-    type: Number,
-    min: 1,
-    max: 4,
-    required: true,
-  },
-  roomNumber: {
-    type: String,
-    required: true,
-  },
-  checkInDate: {
-    type: Date,
-    required: true,
-  },
-  checkOutDate: {
-    type: Date,
-    required: true,
-  },
-  price: {
-    //In Cents
-    type: Number,
-    required: true,
-  },
-});
-
-const TripsSchema = new Schema({
+const tripsSchema = new Schema({
   email: {
     type: String,
     required: true,
@@ -69,14 +17,22 @@ const TripsSchema = new Schema({
     },
   },
   flight: {
-    type: [FlightSchema],
+    type: [Flights],
     required: true,
   },
   hotel: {
-    type: [hotelSchema],
+    type: [Hotels],
     required: false,
+  },
+  car: {
+    type: [Cars],
+    required: false,
+  },
+  totalCost: {
+    //in cents
+    type: Number,
   },
 });
 
-const Trips = mongoose.model("Trips", TripsSchema);
+const Trips = mongoose.model("Trips", tripsSchema);
 module.exports = { Trips };
