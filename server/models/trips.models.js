@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const validator = require("validator");
 const { Flights } = require("./flights.models");
 const { Cars } = require("./cars.models");
+const { Hotels } = require("./hotels.models");
 
 const tripsSchema = new Schema({
   email: {
@@ -17,7 +19,8 @@ const tripsSchema = new Schema({
     },
   },
   flight: {
-    type: [Flights],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Flights,
     required: true,
   },
   hotel: {
