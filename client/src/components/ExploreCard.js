@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Paper, Grid, Button } from "@material-ui/core";
+import { Paper, Grid } from "@material-ui/core";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -13,7 +13,8 @@ const exploreCardStyles = makeStyles((theme, props) => ({
     borderRadius: "18px",
   }),
   emptyTopSpace: {
-    paddingTop: "23rem",
+    minHeight: "23rem",
+    position: "relative",
   },
   cardDataContainer: {
     borderTop: `1px solid ${theme.palette.primary.light}`,
@@ -42,7 +43,21 @@ const exploreCardStyles = makeStyles((theme, props) => ({
     height: "2rem",
     width: "2rem",
   },
-  button: theme.buttonPrimary,
+  link: {
+    position: "absolute",
+    display: "flex",
+    borderRadius: "18px",
+    height: "100%",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0)",
+    color: "rgba(255,255,255,0)",
+    "&:hover": {
+      backgroundColor: "rgba(0,0,0,0.5)",
+      color: "rgba(255,255,255,1)",
+    },
+  },
 }));
 
 function ExploreCard(props) {
@@ -58,7 +73,16 @@ function ExploreCard(props) {
   return (
     <Paper elevation={1} className={classes.mainPaper}>
       <Grid container direction="column" justify="center">
-        <Grid item xs={12} className={classes.emptyTopSpace}></Grid>
+        <Grid item xs={12} className={classes.emptyTopSpace}>
+          <Link
+            href={`/?destination=${props.location}`}
+            underline="none"
+            className={classes.link}
+          >
+            <div>Book a flight to {props.location}!</div>
+          </Link>
+        </Grid>
+
         <Grid container item xs={12} className={classes.cardDataContainer}>
           <Grid item xs={6} container justify="flex-start" alignItems="center">
             <Grid item xs={12}>
@@ -68,11 +92,13 @@ function ExploreCard(props) {
               <p className={classes.locationCountryText}>{props.country}</p>
             </Grid>
           </Grid>
-          <Grid item xs={3} container justify="center" alignItems="center">
-            <Link href="/" underline="none">
-              <Button className={classes.button}>Book a flight!</Button>
-            </Link>
-          </Grid>
+          <Grid
+            item
+            xs={3}
+            container
+            justify="center"
+            alignItems="center"
+          ></Grid>
           <Grid item xs={3} container justify="flex-end" alignItems="center">
             {liked ? (
               <FavoriteIcon
