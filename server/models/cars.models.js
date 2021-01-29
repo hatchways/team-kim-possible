@@ -15,6 +15,9 @@ const carsSchema = new Schema({
     type: Date,
     required: true,
   },
+  image: {
+    type: String,
+  },
   price: {
     //In Cents
     type: Number,

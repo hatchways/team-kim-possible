@@ -4,19 +4,13 @@ const validator = require("validator");
 const { Flights } = require("./flights.models");
 const { Cars } = require("./cars.models");
 const { Hotels } = require("./hotels.models");
+const { User } = require("./user.models");
 
 const tripsSchema = new Schema({
-  email: {
-    type: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: User,
     required: true,
-    lowercase: true,
-    unique: true,
-    validate: {
-      validator: function (value) {
-        return validator.isEmail(value);
-      },
-      message: (props) => `${props.value} is not a valid email!`,
-    },
   },
   flight: {
     type: mongoose.Schema.Types.ObjectId,
@@ -31,6 +25,14 @@ const tripsSchema = new Schema({
     type: [Cars],
     required: false,
   },
+    startDate: {
+    type: Date,
+    required: true,
+  },
+  endDate: {
+    type: Date,
+    required: true,
+
   totalCost: {
     //in cents
     type: Number,

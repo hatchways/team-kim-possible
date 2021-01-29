@@ -17,6 +17,9 @@ const flightsSchema = new Schema({
     type: String,
     required: true,
   },
+  carrier: {
+    type: String,
+  },
   price: {
     //In Cents
     type: Number,
