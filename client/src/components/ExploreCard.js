@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Paper, Grid } from "@material-ui/core";
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
+import { Typography } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
 const exploreCardStyles = makeStyles((theme, props) => ({
@@ -46,7 +47,7 @@ const exploreCardStyles = makeStyles((theme, props) => ({
   link: {
     position: "absolute",
     display: "flex",
-    borderRadius: "18px",
+    borderRadius: "18px 18px 0 0",
     height: "100%",
     width: "100%",
     justifyContent: "center",
@@ -79,7 +80,9 @@ function ExploreCard(props) {
             underline="none"
             className={classes.link}
           >
-            <div>Book a flight to {props.location}!</div>
+            <Typography variant="h4">
+              Book a flight to {props.location}!
+            </Typography>
           </Link>
         </Grid>
 
