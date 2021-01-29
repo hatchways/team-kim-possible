@@ -20,16 +20,21 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { getCityId, getRouteData, getCityName } from "../utils/skyscanner";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     height: "90px",
-    width: "80%",
     background: "white",
     margin: "0 auto",
     borderRadius: "20px",
     boxShadow: "0 0 5px 5px rgba(221, 221, 240, 0.7)",
     display: "flex",
     alignItems: "center",
+    [theme.breakpoints.down("sm")]: {
+      height: "400px",
+    },
+    [theme.breakpoints.up("sm")]: {
+      height: "100px",
+    },
   },
   item: {
     padding: "0 20px",
@@ -51,7 +56,7 @@ const useStyles = makeStyles({
   optionsContainer: {
     display: "absolute",
   },
-});
+}));
 const Search = (props) => {
   const classes = useStyles();
   const { state, setState } = props;
@@ -75,7 +80,7 @@ const Search = (props) => {
   };
 
   return (
-    <div className={classes.root}>
+    <Grid item className={classes.root}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Grid container>
           <Grid item xs={12} sm={2} className={classes.item}>
@@ -193,7 +198,7 @@ const Search = (props) => {
           </Grid>
         </Grid>
       </MuiPickersUtilsProvider>
-    </div>
+    </Grid>
   );
 };
 

@@ -20,7 +20,11 @@ function SearchResults(props) {
   } = state.routeData;
   console.log(state.routeData);
   if (quotes.length < 1) {
-    return <div>Sorry, there are no matching flights!</div>;
+    return (
+      <Typography align="center" variant="h3">
+        Sorry, there are no matching flights!
+      </Typography>
+    );
   }
   return (
     <div className={classes.root}>

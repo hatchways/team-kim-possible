@@ -4,13 +4,19 @@ import Search from "../components/Search";
 import SearchResults from "../components/search-results.component";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    height: "calc(100vh - 100px)",
-    position: "relative",
+    height: "1000px",
+    [theme.breakpoints.down("sm")]: {
+      height: "inherit",
+      minHeight: "600px",
+    },
   },
   main: {
     height: "calc(100vh - 100px - 130px)",
+    [theme.breakpoints.down("sm")]: {
+      height: "60%",
+    },
   },
   footer: {
     height: "130px",
@@ -24,16 +30,36 @@ const useStyles = makeStyles({
   header: {
     fontWeight: "550",
     fontSize: "2rem",
+    [theme.breakpoints.down("sm")]: {},
   },
   item7: {
-    backgroundImage: 'url("/images/searchHero.png")',
+    background: 'url("/images/searchHero.png") no-repeat center center/cover',
+    [theme.breakpoints.down("sm")]: {
+      height: "60%",
+      position: "absolute",
+      width: "100%",
+      zIndex: "-1",
+    },
+    [theme.breakpoints.down("lg")]: {
+      height: "100%",
+      maxWidth: "inherit",
+    },
   },
   searchContainer: {
     position: "absolute",
-    bottom: "90px",
-    width: "100%",
+    top: "50%",
+    [theme.breakpoints.down("sm")]: {
+      top: "0",
+      position: "inherit",
+      height: "60%",
+      width: "100%",
+    },
   },
-});
+  results: {
+    backgroundColor: "#ffffff",
+    borderRadius: "20px",
+  },
+}));
 
 const SearchPage = () => {
   const classes = useStyles();
@@ -46,27 +72,40 @@ const SearchPage = () => {
     routeData: null,
   });
   return (
-    <div className={classes.root}>
-      <Grid>
-        <Grid container className={classes.main}>
-          <Grid item xs={12} sm={5} className={classes.item5}>
+    <Grid container className={classes.root}>
+      <Grid container className={classes.main}>
+        <Grid
+          container
+          item
+          xs={12}
+          sm={5}
+          spacing={2}
+          className={classes.item5}
+        >
+          <Grid item xs={12}>
             <Typography variant="h4" className={classes.header}>
               Find the flight and start the holiday
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={7} className={classes.item7}></Grid>
         </Grid>
-        <Grid item xs={12} className={classes.footer}></Grid>
+        <Grid
+          item
+          container
+          xs={12}
+          className={classes.searchContainer}
+          justify="center"
+        >
+          <Search state={state} setState={setState} />
+        </Grid>
+        <Grid item xs={12} sm={7} className={classes.item7}></Grid>
       </Grid>
-      <Container className={classes.searchContainer}>
-        <Search state={state} setState={setState} />
-      </Container>
+      <Grid item xs={0} md={12} className={classes.footer}></Grid>
       {state.routeData ? (
-        <Container>
+        <Container className={classes.results}>
           <SearchResults state={state} setState={setState} />
         </Container>
       ) : null}
-    </div>
+    </Grid>
   );
 };
 
