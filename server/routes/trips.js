@@ -6,14 +6,21 @@ const { Hotels } = require("../models/hotels.models");
 const { User } = require("../models/user.models");
 
 // Get routes.
-router.get("/", async (req, res) => {});
-
+router.get("/", async (req, res) => {
+  //Will return a users trip data based on email
+  Trips.find({ email: req.body.email }, function (err, result) {
+    if (err) {
+      return res.status(400);
+    } else {
+      return result;
+    }
+  });
+});
 router.post("/", async (req, res) => {
   //Create the trip object that will be used for creating the DB. Creates only the required schema properties
   tripData = {
     user: user._id,
   };
-
   //Create car, hotel, and/or flight if exists
   if (req.body.car) {
     carData = {
@@ -23,11 +30,9 @@ router.post("/", async (req, res) => {
       image: req.body.image,
       price: req.body.dailyPrice,
     };
-
     const car = await new Cars(carData).save();
     tripData["car"] = car._id;
   }
-
   if (req.body.hotel) {
     hotelData = {
       name: req.body.name,
@@ -38,11 +43,9 @@ router.post("/", async (req, res) => {
       image: req.body.image,
       price: req.body.dailyPrice,
     };
-
     const hotel = await new Hotels(hotelData).save();
     tripData["hotel"] = hotel._id;
   }
-
   if (req.body.flight) {
     flightData = {
       departureDate: req.body.departureDate,
@@ -52,16 +55,13 @@ router.post("/", async (req, res) => {
       carrier: req.body.carrier,
       price: req.body.price,
     };
-
     const flight = await new Flights(flightData).save();
     tripData["flight"] = flight._id;
   }
-
   //Get the current user
   const user = await User.findOne({
     email: req.body.email,
   });
-
   //Creates the trip with user + what else exists(car, hotel, flight)
   const trip = new Trips(tripData);
   try {
@@ -73,4 +73,5 @@ router.post("/", async (req, res) => {
     return res.status(400);
   }
 });
+
 module.exports = router;
