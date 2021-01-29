@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     fontWeight: "550",
-    fontSize: "2rem",
     [theme.breakpoints.down("sm")]: {},
   },
   item7: {
@@ -47,9 +46,8 @@ const useStyles = makeStyles((theme) => ({
   },
   searchContainer: {
     position: "absolute",
-    top: "50%",
+    bottom: "130px",
     [theme.breakpoints.down("sm")]: {
-      top: "0",
       position: "inherit",
       height: "60%",
       width: "100%",
@@ -58,6 +56,11 @@ const useStyles = makeStyles((theme) => ({
   results: {
     backgroundColor: "#ffffff",
     borderRadius: "20px",
+    justify: "center",
+    alignItems: "center",
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "30px",
+    },
   },
 }));
 
@@ -83,23 +86,17 @@ const SearchPage = () => {
           className={classes.item5}
         >
           <Grid item xs={12}>
-            <Typography variant="h4" className={classes.header}>
+            <Typography variant="h3" className={classes.header}>
               Find the flight and start the holiday
             </Typography>
           </Grid>
         </Grid>
-        <Grid
-          item
-          container
-          xs={12}
-          className={classes.searchContainer}
-          justify="center"
-        >
+        <Grid item container xs={12} className={classes.searchContainer}>
           <Search state={state} setState={setState} />
         </Grid>
         <Grid item xs={12} sm={7} className={classes.item7}></Grid>
       </Grid>
-      <Grid item xs={0} md={12} className={classes.footer}></Grid>
+      <Grid item md={12} className={classes.footer}></Grid>
       {state.routeData ? (
         <Container className={classes.results}>
           <SearchResults state={state} setState={setState} />

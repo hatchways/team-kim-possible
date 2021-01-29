@@ -36,8 +36,16 @@ const useStyles = makeStyles((theme) => ({
       height: "100px",
     },
   },
+  itemsContainer: {
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column",
+      alignItems: "center",
+    },
+  },
   item: {
     padding: "0 20px",
+    width: "100%",
+    textAlign: "center",
   },
   btn: {
     backgroundColor: "#FAAC2F",
@@ -82,7 +90,7 @@ const Search = (props) => {
   return (
     <Grid item className={classes.root}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container>
+        <Grid container className={classes.itemsContainer}>
           <Grid item xs={12} sm={2} className={classes.item}>
             <Autocomplete
               className={classes.formControl}
