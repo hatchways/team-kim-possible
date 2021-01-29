@@ -3,6 +3,7 @@ import { Container, Grid, Typography } from "@material-ui/core";
 import Search from "../components/Search";
 import SearchResults from "../components/search-results.component";
 import { makeStyles } from "@material-ui/core/styles";
+import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -37,14 +38,20 @@ const useStyles = makeStyles({
 
 const SearchPage = () => {
   const classes = useStyles();
+
+  //Gets destination query param if redirected from explore page
+  const params = new URLSearchParams(window.location.search);
+  const destination = params.get("destination");
+
   const [state, setState] = useState({
     departureCity: "",
-    arrivalCity: "",
+    arrivalCity: destination,
     departureDate: new Date(),
     arrivalDate: new Date(),
     numOfTravellers: 1,
     routeData: null,
   });
+
   return (
     <div className={classes.root}>
       <Grid>
