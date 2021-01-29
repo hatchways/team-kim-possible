@@ -3,74 +3,66 @@ const { Trips } = require("../models/trips.models");
 const { Flights } = require("../models/flights.models");
 const { Cars } = require("../models/cars.models");
 const { Hotels } = require("../models/hotels.models");
+const { User } = require("../models/user.models");
 
 // Get routes.
-// Before user checks out, we can display what they have so far in cart
-router.get("/car", async (req, res) => {});
+router.get("/", async (req, res) => {});
 
-//Post requests
-router.post("/car", async (req, res) => {
-  carData = {
-    name: req.body.name,
-    takeOutDate: "2002-12-09",
-    returnDate: "2002-12-09",
-    image: req.body.image,
-    price: req.body.dailyPrice,
+router.post("/", async (req, res) => {
+  //Create the trip object that will be used for creating the DB. Creates only the required schema properties
+  tripData = {
+    user: user._id,
   };
-  const car = new Cars(carData);
-  try {
-    await car.save();
-    return res.status(200).json({
-      success: true,
-    });
-  } catch (err) {
-    return res.status(400);
-  }
-});
 
-router.post("/hotel", async (req, res) => {
-  hotelData = {
-    name: req.body.name,
-    numberOfOccupants: req.body.numberOfOccupants,
-    roomNumber: req.body.roomNumber,
-    checkInDate: req.body.checkInDate,
-    checkOutDate: req.body.checkOutDate,
-    image: req.body.image,
-    price: req.body.dailyPrice,
-  };
-  const hotel = new Hotels(hotelData);
-  try {
-    await hotel.save();
-    return res.status(200).json({
-      success: true,
-    });
-  } catch (err) {
-    return res.status(400);
-  }
-});
+  //Create car, hotel, and/or flight if exists
+  if (req.body.car) {
+    carData = {
+      name: req.body.name,
+      takeOutDate: "2002-12-09",
+      returnDate: "2002-12-09",
+      image: req.body.image,
+      price: req.body.dailyPrice,
+    };
 
-router.post("/flight", async (req, res) => {
-  flightData = {
-    departureDate: req.body.departureDate,
-    returnDate: req.body.returnDate,
-    departureLocation: req.body.departureDate,
-    destinationLocation: req.body.destinationLocation,
-    carrier: req.body.carrier,
-    price: req.body.price,
-  };
-  const flight = new Flights(flightData);
-  try {
-    await flight.save();
-    return res.status(200).json({
-      success: true,
-    });
-  } catch (err) {
-    return res.status(400);
+    const car = await new Cars(carData).save();
+    tripData["car"] = car._id;
   }
-});
 
-router.post("/trip", async (req, res) => {
-  tripData = {};
+  if (req.body.hotel) {
+    hotelData = {
+      name: req.body.name,
+      numberOfOccupants: req.body.numberOfOccupants,
+      roomNumber: req.body.roomNumber,
+      checkInDate: req.body.checkInDate,
+      checkOutDate: req.body.checkOutDate,
+      image: req.body.image,
+      price: req.body.dailyPrice,
+    };
+
+    const hotel = await new Hotels(hotelData).save();
+    tripData["hotel"] = hotel._id;
+  }
+
+  if (req.body.flight) {
+    flightData = {
+      departureDate: req.body.departureDate,
+      returnDate: req.body.returnDate,
+      departureLocation: req.body.departureDate,
+      destinationLocation: req.body.destinationLocation,
+      carrier: req.body.carrier,
+      price: req.body.price,
+    };
+
+    const flight = await new Flights(flightData).save();
+    tripData["flight"] = flight._id;
+  }
+
+  //Get the current user
+  const user = await User.findOne({
+    email: req.body.email,
+  });
+
+  //Creates the trip with user + what else exists(car, hotel, flight)
   const trip = new Trips(tripData);
   try {
     await trip.save();

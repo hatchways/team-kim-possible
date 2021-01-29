@@ -15,7 +15,7 @@ const tripsSchema = new Schema({
   flight: {
     type: mongoose.Schema.Types.ObjectId,
     ref: Flights,
-    required: true,
+    required: false,
   },
   hotel: {
     type: mongoose.Schema.Types.ObjectId,
