@@ -27,14 +27,14 @@ const tripsSchema = new Schema({
     ref: Cars,
     required: false,
   },
-    startDate: {
+  startDate: {
     type: Date,
     required: true,
   },
   endDate: {
     type: Date,
     required: true,
-
+  },
   totalCost: {
     //in cents
     type: Number,

@@ -15,11 +15,14 @@ const carsSchema = new Schema({
     type: Date,
     required: true,
   },
+  kmsDriven: {
+    type: Number,
+  },
   image: {
     type: String,
   },
   price: {
-    //In Cents
+    //per day in cents
     type: Number,
     required: true,
   },
