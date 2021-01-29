@@ -30,33 +30,47 @@ const exploreStyles = makeStyles((theme) => ({
     margin: "2rem 0 1rem 0",
     textAlign: "center",
   },
+  buttonContainer: {
+    marginBottom: "2rem",
+  },
   button: theme.buttonPrimary,
 }));
 
 function Explore(props) {
   //To get image for exploreCard, make sure the image is saved in public with the name of the place. ex: "public/images/cancun.png"
   //THIS: props.location.toLowerCase() === saved image name
+  const { allLocations } = props;
   const theme = useTheme();
   const classes = exploreStyles(theme);
-  const [locations, setLocations] = useState([]);
+  const [state, setState] = useState({
+    locations: [],
+    favorites: [],
+  });
 
-  const { favorites, allLocations } = props.state;
-  //On page load(not shuffle), this component is rendered four times
-  //If this becomes an issue, perhaphs create a parent component just for handling allLocations and pass down
-  //as prop?
-  const shuffleLocations = () => {
+  const shuffleLocations = async () => {
+    const favoriteData = await axios.get("/favorites/getAllFavorites");
+    const favoritesArray = favoriteData.data;
+    let filteredLocations = allLocations;
+    console.log([].findIndex((e) => e === 1));
+    if (favoritesArray.length > 0) {
+      filteredLocations = allLocations.filter(
+        (location) =>
+          favoritesArray.findIndex((fav) => fav.id === location.id) < 0
+      );
+    }
     const randomLocations = returnArrayRandom(
-      allLocations,
-      8 - favorites.length
+      filteredLocations,
+      8 - favoritesArray.length
     );
-    favorites.forEach((e) => (e.liked = true));
-
-    setLocations([...favorites, ...randomLocations]);
+    favoritesArray.forEach((e) => (e.liked = true));
+    setState({
+      locations: [...favoritesArray, ...randomLocations],
+      favorites: favoritesArray,
+    });
   };
-
   useEffect(() => {
     shuffleLocations();
-  }, [allLocations, favorites]);
+  }, [allLocations]);
   return (
     <>
       <Grid
@@ -93,7 +107,12 @@ function Explore(props) {
           spacing={5}
           className={classes.cardContainer}
         >
-          <Grid container alignItems="center" justify="center">
+          <Grid
+            container
+            alignItems="center"
+            justify="center"
+            className={classes.buttonContainer}
+          >
             <Button
               variant="contained"
               size="large"
@@ -103,9 +122,9 @@ function Explore(props) {
               Shuffle <ShuffleIcon />
             </Button>
           </Grid>
-          {locations.map((loc) => {
+          {state.locations.map((loc) => {
             return (
-              <Grid item xs={12} lg={3} key={loc.id}>
+              <Grid item xs={12} md={6} xl={3} key={loc.id}>
                 <ExploreCard
                   location={loc}
                   imgName={loc.imgName}

@@ -1,37 +1,24 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Explore from "../components/Explore";
+import Loading from "../components/loading.component";
 
 const ExplorePage = () => {
-  const [state, setState] = useState({
-    favorites: [],
-    allLocations: [],
-  });
+  const [allLocations, setAllLocations] = useState([]);
 
   useEffect(() => {
     const getFavorites = async () => {
       const response = await axios.get("/explore");
-      const favoriteData = await axios.get("/favorites/getAllFavorites");
-      const favoritesArray = favoriteData.data;
-      if (favoritesArray.length > 0) {
-        const filteredLocations = response.data.locations.filter(
-          (location) =>
-            favoritesArray.findIndex((fav) => fav.id === location.id) < 0
-        );
-        return setState({
-          favorites: favoritesArray,
-          allLocations: filteredLocations,
-        });
-      }
 
-      setState((state) => ({
-        favorites: favoritesArray,
-        allLocations: response.data.locations,
-      }));
+      setAllLocations(response.data.locations);
     };
     getFavorites();
   }, []);
-  return <Explore state={state} />;
+  //Higher order component just so explore page loads all at once and not favorites first
+  const HOC = Loading(Explore);
+  return (
+    <HOC allLocations={allLocations} isLoading={allLocations.length < 1} />
+  );
 };
 
 export default ExplorePage;
