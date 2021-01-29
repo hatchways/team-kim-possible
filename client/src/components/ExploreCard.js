@@ -47,11 +47,9 @@ function ExploreCard(props) {
 
   const [liked, setLike] = useState(alreadyLiked);
   if (location.location === "Sapporo" || "Amsterdam") {
-    console.log(location.location, liked);
   }
   const handleLiked = async () => {
     const response = await axios.put("/favorites", { location, add: !liked });
-    console.log(response);
     setLike((prev) => !prev);
   };
   return (

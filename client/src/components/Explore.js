@@ -39,32 +39,24 @@ function Explore(props) {
   const theme = useTheme();
   const classes = exploreStyles(theme);
   const [locations, setLocations] = useState([]);
-  const { favorites, allLocations } = props;
+
+  const { favorites, allLocations } = props.state;
   //On page load(not shuffle), this component is rendered four times
   //If this becomes an issue, perhaphs create a parent component just for handling allLocations and pass down
   //as prop?
   const shuffleLocations = () => {
-    const randomEight = returnArrayRandom(allLocations, 8);
-    setLocations(randomEight);
+    const randomLocations = returnArrayRandom(
+      allLocations,
+      8 - favorites.length
+    );
+    favorites.forEach((e) => (e.liked = true));
+
+    setLocations([...favorites, ...randomLocations]);
   };
 
   useEffect(() => {
-    const getInitialLocations = async () => {
-      const randomLocations = allLocations
-        ? returnArrayRandom(
-            allLocations,
-            8 - (favorites ? favorites.length : 0)
-          )
-        : [];
-      favorites.forEach((e) => (e.liked = true));
-
-      setLocations([...favorites, ...randomLocations]);
-    };
-
-    getInitialLocations();
+    shuffleLocations();
   }, [allLocations, favorites]);
-  console.log(locations);
-  console.log("render!");
   return (
     <>
       <Grid
