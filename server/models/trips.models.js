@@ -18,11 +18,13 @@ const tripsSchema = new Schema({
     required: true,
   },
   hotel: {
-    type: [Hotels],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Hotels,
     required: false,
   },
   car: {
-    type: [Cars],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Cars,
     required: false,
   },
     startDate: {
