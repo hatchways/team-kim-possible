@@ -5,6 +5,7 @@ import { useTheme, makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { deleteFromShoppingCart } from "../utils/shoppingCart";
 import DeleteIcon from "@material-ui/icons/Delete";
+import CloseIcon from "@material-ui/icons/Close";
 import axios from "axios";
 
 const shoppingCartStyles = makeStyles((theme) => ({
@@ -20,6 +21,10 @@ const shoppingCartStyles = makeStyles((theme) => ({
   itemPrice: {
     fontStyle: "italic",
   },
+
+  carText: {
+    textAlign: "center",
+  },
   totalTopSpacing: {
     marginTop: "2rem",
   },
@@ -32,6 +37,9 @@ const shoppingCartStyles = makeStyles((theme) => ({
   destinationText: {
     marginTop: "1rem",
     textAlign: "center",
+  },
+  XSpacing: {
+    marginLeft: "0.5rem",
   },
 }));
 
@@ -142,62 +150,100 @@ function ShoppingCartPopoverContent() {
                 <strong>{flight.destinationPlace}</strong>
               </Typography>
             </Grid>
-            <Typography variant='h6'>
-              ${flight.price}{" "}
-              <DeleteIcon
+            <Grid item container xs={6} justify='flex-end' alignItems='center'>
+              <Typography variant='h6'>${flight.price}</Typography>
+              <CloseIcon
                 onClick={(e) => handleDeleteFromShoppingCart(e, flight)}
+                className={classes.XSpacing}
               />
-            </Typography>
+            </Grid>
           </Grid>
         </Grid>
       ) : null}
 
       {hotel ? (
-        <Grid item container className={classes.totalTopSpacing}>
+        <Grid
+          item
+          container
+          className={classes.totalTopSpacing}
+          direction='column'>
           <Grid item>
             {" "}
             <Typography variant={"h6"}>Hotel:</Typography>
-            <p>{hotel.name}</p>
-            <p>${hotel.price}</p>
-            <DeleteIcon
-              onClick={(e) => handleDeleteFromShoppingCart(e, hotel)}
-            />
+            <Grid
+              item
+              xs={12}
+              container
+              justify='space-between'
+              alignItems='center'>
+              <Grid
+                item
+                container
+                xs={6}
+                direction='column'
+                className={classes.carText}>
+                <Typography variant='body1'>
+                  <strong>{hotel.name}</strong>
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                container
+                xs={6}
+                justify='flex-end'
+                alignItems='center'>
+                <Typography variant='h6'>${hotel.price}</Typography>
+                <CloseIcon
+                  onClick={(e) => handleDeleteFromShoppingCart(e, hotel)}
+                  className={classes.XSpacing}
+                />
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       ) : null}
 
       {car ? (
-        <Grid item container className={classes.totalTopSpacing}>
+        <Grid
+          item
+          container
+          className={classes.totalTopSpacing}
+          direction='column'>
           <Grid item>
             {" "}
             <Typography variant={"h6"}>Car:</Typography>
-            <p>{car.name}</p>
-            <p>${car.price}</p>
-            <DeleteIcon onClick={(e) => handleDeleteFromShoppingCart(e, car)} />
+            <Grid
+              item
+              xs={12}
+              container
+              justify='space-between'
+              alignItems='center'>
+              <Grid
+                item
+                container
+                xs={6}
+                direction='column'
+                className={classes.carText}>
+                <Typography variant='body1'>
+                  <strong>{car.name}</strong>
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                container
+                xs={6}
+                justify='flex-end'
+                alignItems='center'>
+                <Typography variant='h6'>${car.price}</Typography>
+                <CloseIcon
+                  onClick={(e) => handleDeleteFromShoppingCart(e, car)}
+                  className={classes.XSpacing}
+                />
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       ) : null}
-
-      {/* {shoppingCart.map((item) => (
-        <Grid
-          container
-          justify='space-between'
-          alignItems='center'
-          direction='row'
-          item
-          className={classes.cartItemsContainer}>
-          <Grid item>
-            <Typography variant='h6'>{item.name}</Typography>
-          </Grid>
-
-          <Grid item>
-            <Typography variant='body1' className={classes.itemPrice}>
-              ${item.price}
-            </Typography>
-
-          </Grid>
-        </Grid>
-      ))} */}
 
       <Grid item justify='center' container className={classes.totalTopSpacing}>
         {prices.length > 0 ? totalCartText() : emptyCartText()}
