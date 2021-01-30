@@ -27,39 +27,15 @@ router.post("/", async (req, res) => {
   };
   //Create car, hotel, and/or flight if exists
   if (req.body.car) {
-    carData = {
-      name: req.body.car.name,
-      takeOutDate: req.body.car.takeOutDate,
-      returnDate: req.body.car.returnDate,
-      image: req.body.car.image,
-      price: req.body.car.dailyPrice,
-    };
-    const car = await new Cars(carData).save();
+    const car = await new Cars(req.body.car).save();
     tripData["car"] = car._id;
   }
   if (req.body.hotel) {
-    hotelData = {
-      name: req.body.hotel.name,
-      numberOfOccupants: req.body.hotel.numberOfOccupants,
-      roomNumber: req.body.hotel.roomNumber,
-      checkInDate: req.body.hotel.checkInDate,
-      checkOutDate: req.body.hotel.checkOutDate,
-      image: req.body.hotel.image,
-      price: req.body.hotel.dailyPrice,
-    };
-    const hotel = await new Hotels(hotelData).save();
+    const hotel = await new Hotels(req.body.hotel).save();
     tripData["hotel"] = hotel._id;
   }
   if (req.body.flight) {
-    flightData = {
-      departureDate: req.body.flight.departureDate,
-      returnDate: req.body.flight.returnDate,
-      departureLocation: req.body.flight.departureDate,
-      destinationLocation: req.body.flight.destinationLocation,
-      carrier: req.body.flight.carrier,
-      price: req.body.flight.price,
-    };
-    const flight = await new Flights(flightData).save();
+    const flight = await new Flights(req.body.flight).save();
     tripData["flight"] = flight._id;
   }
   //Creates the trip with user + what else exists(car, hotel, flight)
