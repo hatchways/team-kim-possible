@@ -4,7 +4,6 @@ import { Typography, Grid } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { deleteFromShoppingCart } from "../utils/shoppingCart";
-import DeleteIcon from "@material-ui/icons/Delete";
 import CloseIcon from "@material-ui/icons/Close";
 import axios from "axios";
 

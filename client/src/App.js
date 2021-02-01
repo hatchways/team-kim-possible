@@ -14,6 +14,8 @@ import Explore from "./pages/Explore";
 import { ShoppingCartProvider } from "./components/ShoppingCartContext";
 import ShoppingCartTest from "./components/ShoppingCartTest";
 import HotelsPage from "./pages/HotelsPage";
+import Stripe from "./components/Stripe";
+import CheckoutPage from "./pages/CheckoutPage";
 
 const appStyles = makeStyles((theme) => ({
   container: {
@@ -93,6 +95,8 @@ function App() {
             <ProtectedRoute exact path='/userpage' component={UserPage} />
             <ProtectedRoute exact path='/explore' component={Explore} />
             <ProtectedRoute exact path='/hotels' component={HotelsPage} />
+            <ProtectedRoute exact path='/checkout' component={CheckoutPage} />
+            <ProtectedRoute exact path='/stripe' component={Stripe} />
           </Switch>
         </ShoppingCartProvider>
       </MuiThemeProvider>
