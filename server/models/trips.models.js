@@ -12,21 +12,6 @@ const tripsSchema = new Schema({
     ref: User,
     required: true,
   },
-  flight: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: Flights,
-    required: false,
-  },
-  hotel: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: Hotels,
-    required: false,
-  },
-  car: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: Cars,
-    required: false,
-  },
   startDate: {
     type: Date,
     required: true,
@@ -38,6 +23,21 @@ const tripsSchema = new Schema({
   totalCost: {
     //in cents
     type: Number,
+  },
+  car: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Cars,
+    required: false,
+  },
+  flight: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Flights,
+    required: false,
+  },
+  hotel: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Hotels,
+    required: false,
   },
 });
 

@@ -1,9 +1,10 @@
-const router = express.Router();
 const { Trips } = require("../models/trips.models");
 const { Flights } = require("../models/flights.models");
 const { Cars } = require("../models/cars.models");
 const { Hotels } = require("../models/hotels.models");
 const { User } = require("../models/user.models");
+const express = require("express");
+const router = express.Router();
 
 // Get routes
 router.get("/", async (req, res) => {
@@ -21,9 +22,13 @@ router.post("/", async (req, res) => {
   const user = await User.findOne({
     email: req.body.email,
   });
+
   //Create the trip object that will be used for creating the DB. Creates only the required schema properties
   tripData = {
     user: user._id,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
+    totalCost: 0,
   };
   //Create car, hotel, and/or flight if exists
   if (req.body.car) {
