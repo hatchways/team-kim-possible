@@ -9,6 +9,7 @@ import ApartmentIcon from "@material-ui/icons/Apartment";
 import { ShoppingCartContext } from "../components/ShoppingCartContext";
 import axios from "axios";
 import DirectionsCarIcon from "@material-ui/icons/DirectionsCar";
+import CheckoutForm from "../components/CheckoutForm";
 
 const checkoutStyles = makeStyles((theme) => ({
   cartSummaryContainer: {
@@ -100,7 +101,10 @@ function CheckoutPage() {
         </Grid>
         <Grid item className={classes.priceText}>
           <Typography variant='h5'>
-            ${prices.reduce((total, amount) => total + amount)}
+            $
+            {prices.length > 0
+              ? prices.reduce((total, amount) => total + amount)
+              : null}
           </Typography>
         </Grid>
       </>
@@ -113,8 +117,15 @@ function CheckoutPage() {
 
   return (
     <Grid container justify='center' className={classes.pageContainer}>
-      <Grid item className={classes.checkoutContainer}>
-        log
+      <Grid
+        item
+        className={classes.checkoutContainer}
+        container
+        justify='center'
+        alignItems='center'>
+        <Elements stripe={stripePromise}>
+          <CheckoutForm />
+        </Elements>
       </Grid>
       <Grid item className={classes.cartSummaryContainer}>
         <Grid container justify='center' alignItems='center' direction='column'>

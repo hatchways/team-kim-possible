@@ -12,7 +12,6 @@ import CarRental from "./pages/CarRentalPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Explore from "./pages/Explore";
 import { ShoppingCartProvider } from "./components/ShoppingCartContext";
-import ShoppingCartTest from "./components/ShoppingCartTest";
 import HotelsPage from "./pages/HotelsPage";
 import Stripe from "./components/Stripe";
 import CheckoutPage from "./pages/CheckoutPage";
