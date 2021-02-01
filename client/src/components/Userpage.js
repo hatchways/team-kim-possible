@@ -4,6 +4,7 @@ import { Grid, Button, Typography } from "@material-ui/core";
 import Avatar from "./BigAvatar";
 import ExploreCard from "./ExploreCard";
 import "fontsource-roboto";
+
 const useStyles = makeStyles((themes) => ({
   root: {
     maxWidth: "100%",
@@ -127,6 +128,8 @@ export default function UserPage() {
     },
   ]);
 
+  const { name, email } = JSON.parse(localStorage.getItem("loggedIn"));
+
   const listOfExploreCards = exploreCards.map((exploreCard) => {
     if (exploreCard["liked"] === true) {
       if (invisibleCount < 2) {
@@ -181,10 +184,10 @@ export default function UserPage() {
         </Grid>
         <Grid item xs={12} className={classes.alignment}>
           <Typography variant="h5" gutterBottom>
-            John Smith
+            {name.toUpperCase()}
           </Typography>
           <Typography className={classes.email} gutterBottom>
-            johnsmith1@gmail.com
+            {email}
           </Typography>
         </Grid>
         <Grid item xs={12} />

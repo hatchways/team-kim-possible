@@ -22,7 +22,14 @@ router.post("/", async function (req, res, next) {
     return res
       .cookie("authenticationToken", token, { httpOnly: true, expires: 0 })
       .status(201)
-      .send({ responseMessage: "Login success!" });
+      .send({
+        responseMessage: "Login success!",
+        user: {
+          name: user.name,
+          email: user.email,
+          home: user.home,
+        },
+      });
   }
 
   res.status(404).send({

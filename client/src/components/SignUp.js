@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Paper, TextField, Grid, FormHelperText } from "@material-ui/core";
+import { Autocomplete } from "@material-ui/lab";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
@@ -9,6 +10,7 @@ import CloseModal from "./MuiComponents/CloseModal";
 import axios from "axios";
 import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 import { useHistory } from "react-router-dom";
+import { getCityName } from "../utils/skyscanner";
 
 const signUpStyles = makeStyles((theme) => ({
   paper: {
@@ -75,6 +77,9 @@ function SignUp(props) {
   const [emailValidationError, setEmailValidationError] = useState(false);
   const [signUpErr, setSignUpErr] = useState(false);
   const [page, setPage2] = useState(false);
+  const [home, setHome] = useState("");
+  const [options, setOptions] = useState([]);
+  const timeoutRef = useRef();
 
   const page1 = () => {
     return (
@@ -181,6 +186,39 @@ function SignUp(props) {
                   onChange={(e) => handleConfirmPasswordChange(e)}
                 />
               )}
+            </Box>
+          </Grid>
+
+          <Grid item xs={8}>
+            <Box mt={2}>
+              <Autocomplete
+                options={options}
+                autoComplete
+                autoHighlight
+                groupLabel
+                value={home}
+                getOptionLabel={(option) => option}
+                onChange={(_, newValue) => {
+                  setHome(newValue);
+                }}
+                onInputChange={(_, newInputValue) => {
+                  if (timeoutRef.current) {
+                    clearTimeout(timeoutRef.current);
+                  }
+                  timeoutRef.current = setTimeout(async () => {
+                    const response = await getCityName(newInputValue);
+                    setOptions(response);
+                  }, 500);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Home Airport"
+                    variant="outlined"
+                    color="secondary"
+                  />
+                )}
+              />
             </Box>
           </Grid>
         </Grid>
@@ -352,15 +390,16 @@ function SignUp(props) {
       return;
     }
     const userData = {
-      name: name,
-      email: email,
-      password: password,
+      name,
+      email,
+      password,
+      home,
     };
 
     const sendSignUpRequest = async () => {
       try {
         const resp = await axios.post("/signup", userData);
-        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("loggedIn", JSON.stringify(resp.data.user));
         setPage2(true);
       } catch (err) {
         setSignUpErr(true);

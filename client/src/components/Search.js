@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "date-fns";
 import {
   Grid,
@@ -55,6 +55,9 @@ const useStyles = makeStyles({
 const Search = (props) => {
   const classes = useStyles();
   const { state, setState } = props;
+  state.departureCity = localStorage.getItem("loggedIn")
+    ? JSON.parse(localStorage.getItem("loggedIn")).home
+    : null;
 
   const [optionsDeparture, setOptionsDeparture] = useState([]);
   const [optionsArrival, setOptionsArrival] = useState([]);
