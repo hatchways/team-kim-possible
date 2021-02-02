@@ -30,6 +30,9 @@ const userSchema = mongoose.Schema({
     type: String,
   },
   home: { type: String },
+  favorites: {
+    type: [Object],
+  },
 });
 
 userSchema.methods.generateAuthenticationToken = async (user) => {

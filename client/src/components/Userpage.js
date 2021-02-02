@@ -92,8 +92,8 @@ const useStyles = makeStyles((themes) => ({
   },
 }));
 
-let invisibleCount = 0;
 export default function UserPage() {
+  let invisibleCount = 0;
   const classes = useStyles();
   const [exploreCards, setExploreCards] = React.useState([
     {
@@ -117,7 +117,7 @@ export default function UserPage() {
     {
       location: "Vancouver",
       country: "Canada",
-      img: "nature.jpg",
+      img: "searchHero.jpg",
       liked: true,
     },
     {

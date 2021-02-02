@@ -21,6 +21,7 @@ mongoose
   .catch((err) => console.error(err));
 
 const indexRouter = require("./routes/index");
+const tripsRouter = require("./routes/trips");
 const apiRouter = require("./routes/api");
 const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
@@ -33,6 +34,7 @@ const hotelRouter = require("./routes/hotel");
 const stripeRouter = require("./routes/stripe");
 const locationsRouter = require("./routes/locations");
 
+const exploreRouter = require("./routes/explore");
 const auth = require("./middleware/auth");
 
 const { json, urlencoded } = express;
@@ -57,8 +59,10 @@ app.use("/carRental", carRentalRouter);
 app.use("/hotels", hotelRouter);
 app.use("/favorites", auth, favoritesRouter);
 app.use("/profile", auth, profileRouter);
-app.use("/stripe", stripeRouter);
 app.use("/locations", locationsRouter);
+app.use("/explore", exploreRouter);
+app.use("/save-stripe-token", stripeRouter);
+app.use("/trips", tripsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
