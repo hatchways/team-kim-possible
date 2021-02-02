@@ -29,11 +29,8 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0 0 5px 5px rgba(221, 221, 240, 0.7)",
     display: "flex",
     alignItems: "center",
-    [theme.breakpoints.down("sm")]: {
-      height: "400px",
-    },
-    [theme.breakpoints.up("sm")]: {
-      height: "100px",
+    [theme.breakpoints.down("xs")]: {
+      minHeight: "400px",
     },
   },
   itemsContainer: {

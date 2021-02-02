@@ -5,13 +5,6 @@ import SearchResults from "../components/search-results.component";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "1000px",
-    [theme.breakpoints.down("sm")]: {
-      height: "inherit",
-      minHeight: "600px",
-    },
-  },
   main: {
     height: "calc(100vh - 100px - 130px)",
     [theme.breakpoints.down("sm")]: {
@@ -40,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
       zIndex: "-1",
     },
     [theme.breakpoints.down("lg")]: {
-      height: "100%",
+      height: "110%",
       maxWidth: "inherit",
     },
   },
@@ -81,7 +74,7 @@ const SearchPage = () => {
   });
 
   return (
-    <Grid container className={classes.root}>
+    <Grid container>
       <Grid container className={classes.main}>
         <Grid
           container
