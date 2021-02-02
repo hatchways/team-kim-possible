@@ -10,7 +10,7 @@ import {
   IconButton,
   AppBar,
   Toolbar,
-  Grid,
+  MenuItem,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -46,9 +46,10 @@ const useStyles = makeStyles((theme) => ({
   textDecoration: {
     textDecorationLine: "none",
   },
+  drawerContainer: { padding: "30px" },
   drawerItem: {
-    textDecorationLine: "none",
-    height: "100%",
+    justifyContent: "center",
+    color: `${theme.palette.primary.light}`,
   },
 }));
 
@@ -76,47 +77,31 @@ export default function ButtonAppBar() {
     setState((prev) => ({ ...prev, drawerOpen: false }));
 
   const drawerItems = (
-    <Grid
-      container
-      justify="center"
-      alignItems="center"
-      style={{ textAlign: "center" }}
-      spacing={3}
-    >
-      <Grid item xs={12}>
-        <Link to="/" className={classes.drawerItem}></Link>
-        <Typography className={classes.links}>
-          <Link to="/" className={classes.drawerItem}>
-            Travel Booking
-          </Link>
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Link to="explore" className={classes.drawerItem}>
-          <Typography className={classes.links}>Explore</Typography>
-        </Link>
-      </Grid>
-      <Grid item xs={12}>
-        <Link to="/" className={classes.drawerItem}>
-          <Typography className={classes.links}>Flights</Typography>
-        </Link>
-      </Grid>
-      <Grid item xs={12}>
-        <Link to="/hotels" className={classes.drawerItem}>
-          <Typography className={classes.links}>Hotels</Typography>
-        </Link>
-      </Grid>
-      <Grid item xs={12}>
-        <Link to="/carrental" className={classes.drawerItem}>
-          <Typography className={classes.links}>Cars</Typography>
-        </Link>
-      </Grid>
-      <Grid item xs={12}>
-        <Link to="/userpage" className={classes.drawerItem}>
-          <Typography className={classes.links}>User</Typography>
-        </Link>
-      </Grid>
-    </Grid>
+    <div className={classes.drawerContainer}>
+      <Link to="/" className={classes.textDecoration}>
+        <MenuItem className={classes.drawerItem}>Travel Booking</MenuItem>
+      </Link>
+
+      <Link to="explore" className={classes.textDecoration}>
+        <MenuItem className={classes.drawerItem}>Explore</MenuItem>
+      </Link>
+
+      <Link to="/" className={classes.textDecoration}>
+        <MenuItem className={classes.drawerItem}>Flights</MenuItem>
+      </Link>
+
+      <Link to="/hotels" className={classes.textDecoration}>
+        <MenuItem className={classes.drawerItem}>Hotels</MenuItem>
+      </Link>
+
+      <Link to="/carrental" className={classes.textDecoration}>
+        <MenuItem className={classes.drawerItem}>Cars</MenuItem>
+      </Link>
+
+      <Link to="/userpage" className={classes.textDecoration}>
+        <MenuItem className={classes.drawerItem}>User</MenuItem>
+      </Link>
+    </div>
   );
 
   const menu = (
