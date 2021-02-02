@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, Typography } from "@material-ui/core";
-import Avatar from "./BigAvatar";
+import Avatar from "./Avatars/BigAvatar";
 import ExploreCard from "./ExploreCard";
 import "fontsource-roboto";
 const useStyles = makeStyles((themes) => ({
@@ -139,8 +139,7 @@ export default function UserPage() {
               imgName={exploreCard.img}
               onLike={() => {
                 exploreCard["liked"] = false;
-              }}
-            ></ExploreCard>
+              }}></ExploreCard>
           </Grid>
         );
       }
@@ -150,10 +149,10 @@ export default function UserPage() {
         return (
           <React.Fragment>
             <Grid item xs={3} className={classes.invisible}>
-              <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
+              <ExploreCard location='Cancun' country='Mexico'></ExploreCard>
             </Grid>
             <Grid item xs={3} className={classes.invisible}>
-              <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
+              <ExploreCard location='Cancun' country='Mexico'></ExploreCard>
             </Grid>
             <Grid item xs={3} className={classes.exploreContainer}>
               <ExploreCard
@@ -162,8 +161,7 @@ export default function UserPage() {
                 imgName={exploreCard.img}
                 onLike={() => {
                   exploreCard["liked"] = false;
-                }}
-              ></ExploreCard>
+                }}></ExploreCard>
             </Grid>
           </React.Fragment>
         );
@@ -180,7 +178,7 @@ export default function UserPage() {
           </div>
         </Grid>
         <Grid item xs={12} className={classes.alignment}>
-          <Typography variant="h5" gutterBottom>
+          <Typography variant='h5' gutterBottom>
             John Smith
           </Typography>
           <Typography className={classes.email} gutterBottom>
@@ -190,10 +188,9 @@ export default function UserPage() {
         <Grid item xs={12} />
 
         <Button
-          variant="outlined"
-          color="secondary"
-          className={classes.alignment}
-        >
+          variant='outlined'
+          color='secondary'
+          className={classes.alignment}>
           Edit
         </Button>
 
@@ -212,16 +209,15 @@ export default function UserPage() {
       </Grid>
       <Grid container spacing={4} className={classes.rightQuadrant}>
         <Grid item xs={8}>
-          <Typography className={classes.h3} variant="h4" gutterBottom>
+          <Typography className={classes.h3} variant='h4' gutterBottom>
             Favourite Destinations
           </Typography>
         </Grid>
         <Grid item xs={4}>
           <Button
-            variant="outlined"
-            size="large"
-            className={classes.exploreButton}
-          >
+            variant='outlined'
+            size='large'
+            className={classes.exploreButton}>
             Explore
           </Button>
         </Grid>

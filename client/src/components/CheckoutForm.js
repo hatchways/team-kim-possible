@@ -40,7 +40,7 @@ const checkoutFormStyles = makeStyles((theme) => ({
   },
 }));
 
-const CheckoutForm = () => {
+const CheckoutForm = (props) => {
   const stripe = useStripe();
   const elements = useElements();
   const theme = useTheme();
@@ -76,8 +76,6 @@ const CheckoutForm = () => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet.
       return;
@@ -94,6 +92,30 @@ const CheckoutForm = () => {
     } else {
       console.log("[PaymentMethod]", paymentMethod);
     }
+
+    let amount = 0;
+    if (props.prices.length > 0) {
+      amount = props.prices.reduce((total, amount) => total + amount);
+    }
+
+    const obj = {
+      name: name,
+      email: email,
+      paymentMethod: paymentMethod,
+      amount: amount,
+    };
+    const newObj = JSON.stringify(obj);
+    fetch(`/save-stripe-token/${newObj}`, {
+      method: "POST",
+    }).then((response) => {
+      response.json().then((data) => {
+        if (data.message) {
+          alert(`Payment Successful`);
+        } else {
+          alert("Payment Failed");
+        }
+      });
+    });
   };
 
   return (

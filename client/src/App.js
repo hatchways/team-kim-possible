@@ -30,6 +30,11 @@ const appStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  navContainer: {
+    width: "100%",
+    height: "100%",
+    opacity: "50%",
+  },
 }));
 
 function App() {
@@ -56,7 +61,13 @@ function App() {
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
         <ShoppingCartProvider>
-          <Navbar />
+          {loggedIn ? (
+            <Navbar />
+          ) : (
+            <div className={classes.navContainer}>
+              <Navbar />
+            </div>
+          )}
           <Switch>
             <Route exact path='/'>
               <SearchPage />

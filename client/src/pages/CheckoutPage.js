@@ -15,8 +15,10 @@ const checkoutStyles = makeStyles((theme) => ({
   cartSummaryContainer: {
     width: "40%",
     borderLeft: `1px solid ${theme.palette.primary.light}`,
-    padding: "2rem",
+    padding: "3rem",
     textAlign: "center",
+    display: "flex",
+    alignItems: "center",
   },
   flightContainer: {
     margin: "1rem 0.5rem 1rem 0.5rem",
@@ -30,9 +32,9 @@ const checkoutStyles = makeStyles((theme) => ({
     backgroundColor: "#ebf0f7",
   },
   checkoutPaper: {
-    marginTop: "2rem",
     padding: "1.5rem 1rem 1.5rem 1rem",
     width: "80%",
+    marginBottom: "1rem",
   },
   pageContainer: {
     height: "calc(100vh - 64px)",
@@ -48,9 +50,34 @@ const checkoutStyles = makeStyles((theme) => ({
   priceText: {
     marginLeft: "1rem",
   },
-  icons: {
+  flightIcon1: {
     paddingRight: "8px",
-    marginBottom: "-7px",
+    marginTop: "-6px",
+    marginBottom: "6px",
+  },
+  flexCol: {
+    display: "flex",
+    justifyContent: "flex-start",
+    flexDirection: "column",
+    padding: "1rem",
+  },
+  originDestinationText: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    marginLeft: "1rem",
+  },
+  hotelCarContainer: {
+    display: "flex",
+    alignItems: "center",
+    padding: "1rem",
+  },
+  hotelIcon: {
+    marginRight: "2.5rem",
+  },
+  orderText: {
+    marginBottom: "1rem",
   },
 }));
 
@@ -111,6 +138,10 @@ function CheckoutPage() {
     );
   };
 
+  const emptyCartText = () => {
+    return <Typography variant='h6'> Empty Cart! </Typography>;
+  };
+
   const stripePromise = loadStripe(
     "pk_test_51IBWOAIGBdXhz29TWRY6MjXouhgfvf3wtJMx3b3hwEozhBQ1so2qxP5WpFLdBwMX0IpIdJsC2LJ0EmKwkBAYHqEF005V3RV8A9"
   );
@@ -124,12 +155,14 @@ function CheckoutPage() {
         justify='center'
         alignItems='center'>
         <Elements stripe={stripePromise}>
-          <CheckoutForm />
+          <CheckoutForm prices={prices} />
         </Elements>
       </Grid>
       <Grid item className={classes.cartSummaryContainer}>
         <Grid container justify='center' alignItems='center' direction='column'>
-          <Typography variant='h4'>Order Summary</Typography>
+          <Typography variant='h4' className={classes.orderText}>
+            Order Summary
+          </Typography>
           <Paper className={classes.checkoutPaper} elevation={2}>
             <Grid container direction='column'>
               <Grid item container>
@@ -144,32 +177,29 @@ function CheckoutPage() {
                       container
                       justify='space-between'
                       alignItems='center'>
-                      <Grid
-                        item
-                        container
-                        xs={6}
-                        direction='column'
-                        className={classes.destinationText}>
-                        <Typography variant='body1'>
-                          <FlightTakeoffIcon
-                            fontSize='large'
-                            className={classes.icons}
-                          />
-                          <strong>{flight.originPlace}</strong>
-                        </Typography>
-                        <Typography variant='body1'>to</Typography>
-                        <Typography variant='body1'>
+                      <Grid item container xs={11}>
+                        <div className={classes.flexCol}>
                           <FlightLandIcon
                             fontSize='large'
-                            className={classes.icons}
+                            className={classes.flightIcon1}
                           />
-                          <strong>{flight.destinationPlace}</strong>
-                        </Typography>
+                          <FlightTakeoffIcon fontSize='large' />
+                        </div>
+
+                        <div className={classes.originDestinationText}>
+                          <Typography variant='body1'>
+                            <strong>{flight.originPlace}</strong>
+                          </Typography>
+                          <Typography variant='body1'>to</Typography>
+                          <Typography variant='body1'>
+                            <strong>{flight.destinationPlace}</strong>
+                          </Typography>
+                        </div>
                       </Grid>
                       <Grid
                         item
                         container
-                        xs={6}
+                        xs={1}
                         justify='flex-end'
                         alignItems='center'>
                         <Typography variant='h6'>
@@ -195,24 +225,22 @@ function CheckoutPage() {
                         container
                         justify='space-between'
                         alignItems='center'>
-                        <Grid
-                          item
-                          container
-                          xs={6}
-                          direction='column'
-                          className={classes.carText}>
-                          <Typography variant='body1'>
+                        <Grid item container xs={9}>
+                          <div className={classes.hotelCarContainer}>
                             <ApartmentIcon
                               fontSize='large'
-                              className={classes.icons}
+                              className={classes.hotelIcon}
                             />
-                            <strong>{hotel.name}</strong>
-                          </Typography>
+
+                            <Typography variant='body1'>
+                              <strong>{hotel.name}</strong>
+                            </Typography>
+                          </div>
                         </Grid>
                         <Grid
                           item
                           container
-                          xs={6}
+                          xs={3}
                           justify='flex-end'
                           alignItems='center'>
                           <Typography variant='h6'>
@@ -243,21 +271,20 @@ function CheckoutPage() {
                         <Grid
                           item
                           container
-                          xs={6}
-                          direction='column'
-                          className={classes.carText}>
+                          xs={10}
+                          className={classes.hotelCarContainer}>
+                          <DirectionsCarIcon
+                            fontSize='large'
+                            className={classes.hotelIcon}
+                          />
                           <Typography variant='body1'>
-                            <DirectionsCarIcon
-                              fontSize='large'
-                              className={classes.icons}
-                            />
                             <strong>{car.name}</strong>
                           </Typography>
                         </Grid>
                         <Grid
                           item
                           container
-                          xs={6}
+                          xs={2}
                           justify='flex-end'
                           alignItems='center'>
                           <Typography variant='h6'>
@@ -269,14 +296,18 @@ function CheckoutPage() {
                   </Grid>
                 ) : null}
               </Grid>
-              <Grid
-                item
-                container
-                justify='center'
-                direction='row'
-                className={classes.subTotalContainer}>
-                {totalCartText()}
-              </Grid>
+              {prices.length > 0 ? (
+                <Grid
+                  item
+                  container
+                  justify='center'
+                  direction='row'
+                  className={classes.subTotalContainer}>
+                  {totalCartText()}
+                </Grid>
+              ) : (
+                emptyCartText()
+              )}
             </Grid>
           </Paper>
         </Grid>

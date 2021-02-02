@@ -5,7 +5,10 @@ import { useTheme, makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { deleteFromShoppingCart } from "../utils/shoppingCart";
 import CloseIcon from "@material-ui/icons/Close";
+import FlightIcon from "@material-ui/icons/Flight";
 import axios from "axios";
+import ApartmentIcon from "@material-ui/icons/Apartment";
+import DirectionsCarIcon from "@material-ui/icons/DirectionsCar";
 
 const shoppingCartStyles = makeStyles((theme) => ({
   container: {
@@ -15,14 +18,9 @@ const shoppingCartStyles = makeStyles((theme) => ({
   cartItemsContainer: {
     marginTop: "1.5rem",
   },
-
   flightContainer: { margin: "1rem" },
   itemPrice: {
     fontStyle: "italic",
-  },
-
-  carText: {
-    textAlign: "center",
   },
   totalTopSpacing: {
     marginTop: "2rem",
@@ -35,14 +33,13 @@ const shoppingCartStyles = makeStyles((theme) => ({
   },
   destinationText: {
     marginTop: "1rem",
-    textAlign: "center",
   },
   XSpacing: {
     marginLeft: "0.5rem",
   },
 }));
 
-function ShoppingCartPopoverContent() {
+function ShoppingCartPopoverContent(props) {
   const theme = useTheme();
   const classes = shoppingCartStyles(theme);
   const [shoppingCart, setShoppingCart] = useContext(ShoppingCartContext);
@@ -102,8 +99,8 @@ function ShoppingCartPopoverContent() {
   const checkOutCartText = () => {
     return (
       <Grid item className={classes.checkoutSpacing}>
-        <Link to='/checkout'>
-          <Typography variant='body2'>Click Here For Checkout</Typography>
+        <Link to='/checkout' onClick={() => props.cbExit()}>
+          <Typography variant='body1'>Click Here For Checkout</Typography>
         </Link>
       </Grid>
     );
@@ -126,9 +123,7 @@ function ShoppingCartPopoverContent() {
 
       {flight ? (
         <Grid container item className={classes.flightContainer}>
-          <Grid item>
-            <Typography variant={"h6"}>Flight:</Typography>
-          </Grid>
+          <FlightIcon fontSize='large' color='secondary' />
           <Grid
             item
             xs={12}
@@ -167,20 +162,14 @@ function ShoppingCartPopoverContent() {
           className={classes.totalTopSpacing}
           direction='column'>
           <Grid item>
-            {" "}
-            <Typography variant={"h6"}>Hotel:</Typography>
+            <ApartmentIcon fontSize='large' color='secondary' />
             <Grid
               item
               xs={12}
               container
               justify='space-between'
               alignItems='center'>
-              <Grid
-                item
-                container
-                xs={6}
-                direction='column'
-                className={classes.carText}>
+              <Grid item container xs={6} direction='column'>
                 <Typography variant='body1'>
                   <strong>{hotel.name}</strong>
                 </Typography>
@@ -209,20 +198,16 @@ function ShoppingCartPopoverContent() {
           className={classes.totalTopSpacing}
           direction='column'>
           <Grid item>
-            {" "}
-            <Typography variant={"h6"}>Car:</Typography>
+            <DirectionsCarIcon
+              fontSize='large'
+              color='secondary'></DirectionsCarIcon>
             <Grid
               item
               xs={12}
               container
               justify='space-between'
               alignItems='center'>
-              <Grid
-                item
-                container
-                xs={6}
-                direction='column'
-                className={classes.carText}>
+              <Grid item container xs={6} direction='column'>
                 <Typography variant='body1'>
                   <strong>{car.name}</strong>
                 </Typography>

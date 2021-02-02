@@ -8,8 +8,8 @@ const stripe = Stripe("process.env.STRIPE_SECRET_KEY");
 
 router.post("/:data", cors(), async (req, res) => {
   const data = JSON.parse(req.params.data);
+
   try {
-    //Sets up a payment intent based on the data provided from frontend
     const paymentIntent = await stripe.paymentIntents.create({
       amount: data.amount,
       currency: "USD",
@@ -21,7 +21,7 @@ router.post("/:data", cors(), async (req, res) => {
     const paymentConfirm = await stripe.paymentIntents.confirm(
       paymentIntent.id,
       {
-        payment_method: "pm_card_visa",
+        payment_method: data.payment_method,
         receipt_email: data.email, //Will send an email receipt to user in live mode
       }
     );
