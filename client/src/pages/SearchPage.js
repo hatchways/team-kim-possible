@@ -3,7 +3,6 @@ import { Container, Grid, Typography } from "@material-ui/core";
 import Search from "../components/Search";
 import SearchResults from "../components/search-results.component";
 import { makeStyles } from "@material-ui/core/styles";
-import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
