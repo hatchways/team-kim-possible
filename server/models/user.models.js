@@ -29,6 +29,9 @@ const userSchema = mongoose.Schema({
   profilePictureUrl: {
     type: String,
   },
+  favorites: {
+    type: [Object],
+  },
 });
 
 userSchema.methods.generateAuthenticationToken = async (user) => {

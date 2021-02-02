@@ -4,13 +4,11 @@ import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import axios from "axios";
 
 const exploreCardStyles = makeStyles((theme, props) => ({
   mainPaper: (props) => ({
-    background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 90%, rgba(0, 0, 0, 0.65) 100%), url(/images/${props.imgName})`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center center",
-    backgroundSize: "cover",
+    background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 90%, rgba(0, 0, 0, 0.65) 100%), url(https://team-kim-possible.s3.us-east-2.amazonaws.com/images/${props.imgName}) center center/cover no-repeat `,
     borderRadius: "18px",
   }),
   emptyTopSpace: {
@@ -46,8 +44,8 @@ const exploreCardStyles = makeStyles((theme, props) => ({
   },
   link: {
     position: "absolute",
-    display: "flex",
     borderRadius: "18px 18px 0 0",
+    display: "flex",
     height: "100%",
     width: "100%",
     justifyContent: "center",
@@ -62,37 +60,36 @@ const exploreCardStyles = makeStyles((theme, props) => ({
 }));
 
 function ExploreCard(props) {
-  const classes = exploreCardStyles(props);
+  const { alreadyLiked, location } = props;
+  const classes = exploreCardStyles(location);
 
-  const [liked, setLike] = useState(false);
+  const [liked, setLike] = useState(alreadyLiked);
 
-  const handleLiked = () => {
+  const handleLiked = async () => {
+    await axios.put("/favorites", { location, add: !liked });
     setLike((prev) => !prev);
-    // props.onLike();
   };
-
   return (
     <Paper elevation={1} className={classes.mainPaper}>
       <Grid container direction="column" justify="center">
         <Grid item xs={12} className={classes.emptyTopSpace}>
           <Link
-            href={`/?destination=${props.location}`}
+            href={`/?destination=${location.location}`}
             underline="none"
             className={classes.link}
           >
             <Typography variant="h4">
-              Book a flight to {props.location}!
+              Book a flight to {location.location}!
             </Typography>
           </Link>
         </Grid>
-
         <Grid container item xs={12} className={classes.cardDataContainer}>
           <Grid item xs={6} container justify="flex-start" alignItems="center">
             <Grid item xs={12}>
-              <p className={classes.locationText}>{props.location},</p>
+              <p className={classes.locationText}>{location.location},</p>
             </Grid>
             <Grid item xs={12}>
-              <p className={classes.locationCountryText}>{props.country}</p>
+              <p className={classes.locationCountryText}>{location.country}</p>
             </Grid>
           </Grid>
           <Grid
@@ -103,17 +100,12 @@ function ExploreCard(props) {
             alignItems="center"
           ></Grid>
           <Grid item xs={3} container justify="flex-end" alignItems="center">
-            {liked ? (
-              <FavoriteIcon
-                className={classes.favoriteIconLiked}
-                onClick={() => handleLiked()}
-              ></FavoriteIcon>
-            ) : (
-              <FavoriteIcon
-                className={classes.favoriteIcon}
-                onClick={() => handleLiked()}
-              ></FavoriteIcon>
-            )}
+            <FavoriteIcon
+              className={
+                liked ? classes.favoriteIconLiked : classes.favoriteIcon
+              }
+              onClick={() => handleLiked()}
+            ></FavoriteIcon>
           </Grid>
         </Grid>
       </Grid>
