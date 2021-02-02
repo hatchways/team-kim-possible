@@ -1,8 +1,21 @@
-import React, { useState, useRef } from "react";
-import { Paper, TextField, Grid, FormHelperText } from "@material-ui/core";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  Paper,
+  TextField,
+  Grid,
+  FormHelperText,
+  Select,
+  Button,
+  MenuItem,
+  Checkbox,
+  ListItemText,
+  FormControl,
+  Input,
+  ClickAwayListener,
+  List,
+} from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import SignInModalFooter from "./MuiComponents/SignInModalFooter";
 import SignInModalHeader from "./MuiComponents/SignInModalHeader";
@@ -60,6 +73,14 @@ const signUpStyles = makeStyles((theme) => ({
     marginTop: "2rem",
     fontSize: "1rem",
   },
+  list: {
+    width: "100%",
+    overflow: "auto",
+    maxHeight: "200px",
+  },
+  select: {
+    marginTop: "20px",
+  },
 }));
 
 function SignUp(props) {
@@ -80,6 +101,43 @@ function SignUp(props) {
   const [home, setHome] = useState("");
   const [options, setOptions] = useState([]);
   const timeoutRef = useRef();
+
+  const [locations, setLocations] = useState([]);
+  const [showSelect, setShowSelect] = useState(false);
+  const [favorites, setFavorites] = useState([]);
+  const wrapperRef = useRef(null);
+
+  useEffect(() => {
+    const getLocations = async () => {
+      const response = await axios.get("/locations");
+      const locations = response.data.locations;
+      console.log(locations);
+      setLocations(locations);
+    };
+    getLocations();
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, true);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, []);
+  console.log(favorites);
+
+  const handleAddMore = () => {
+    setShowSelect(true);
+  };
+  const handleChange = (e) => {
+    setFavorites(e.target.value);
+  };
+
+  const handleClickOutside = (e) => {
+    // if (wrapperRef.current && !wrapperRef.current.contains(e.target))
+    //   console.log("test123");
+    // setShowSelect(false);
+  };
 
   const page1 = () => {
     return (
@@ -256,72 +314,77 @@ function SignUp(props) {
     return (
       <div>
         <Grid container item xs={12} justify="center" alignItems="center">
-          <Grid item xs={9} className={classes.mt2}>
-            <Paper
-              variant="outlined"
-              elevation={0}
-              className={classes.locationPaper}
-            >
-              <Grid container alignItems="center" justify="flex-start">
-                <Grid item xs={1}>
-                  <RoomOutlinedIcon
-                    className={classes.locationIcon}
-                  ></RoomOutlinedIcon>
-                </Grid>
-                <Grid item xs={3}>
-                  <p className={classes.locationText}>Paris</p>
-                </Grid>
-                <Grid
-                  container
-                  justify="flex-end"
-                  item
-                  xs={8}
-                  className={classes.pr1}
+          <List className={classes.list}>
+            {favorites.map((i) => (
+              <Grid item xs={12}>
+                <Paper
+                  variant="outlined"
+                  elevation={0}
+                  className={classes.locationPaper}
                 >
-                  <CloseModal cb={null} modalContainer={false}></CloseModal>
-                </Grid>
+                  <Grid container alignItems="center" justify="flex-start">
+                    <Grid item xs={1}>
+                      <RoomOutlinedIcon
+                        className={classes.locationIcon}
+                      ></RoomOutlinedIcon>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <p className={classes.locationText}>{i}</p>
+                    </Grid>
+                    <Grid
+                      container
+                      justify="flex-end"
+                      item
+                      xs={3}
+                      className={classes.pr1}
+                    >
+                      <CloseModal
+                        cb={handleExit}
+                        modalContainer={false}
+                      ></CloseModal>
+                    </Grid>
+                  </Grid>
+                </Paper>
               </Grid>
-            </Paper>
-          </Grid>
-          <Grid item xs={9}>
-            <Paper
-              variant="outlined"
-              elevation={0}
-              className={classes.locationPaper}
-            >
-              <Grid container alignItems="center" justify="flex-start">
-                <Grid item xs={1}>
-                  <RoomOutlinedIcon
-                    className={classes.locationIcon}
-                  ></RoomOutlinedIcon>
-                </Grid>
-                <Grid item xs={3}>
-                  <p className={classes.locationText}>Bali</p>
-                </Grid>
-                <Grid
-                  container
-                  justify="flex-end"
-                  item
-                  xs={8}
-                  className={classes.pr1}
+            ))}
+          </List>
+
+          <Grid
+            container
+            item
+            xs={4}
+            justify="center"
+            className={classes.select}
+          >
+            {showSelect ? (
+              <FormControl ref={wrapperRef}>
+                <Select
+                  multiple
+                  value={favorites}
+                  onChange={handleChange}
+                  input={<Input />}
+                  renderValue={(selected) => ""}
                 >
-                  <CloseModal
-                    cb={handleExit}
-                    modalContainer={false}
-                  ></CloseModal>
-                </Grid>
-              </Grid>
-            </Paper>
-          </Grid>
-          <Grid container item xs={4} justify="center">
-            <p className={classes.secondary}>Add More</p>
+                  {locations.map((i) => (
+                    <MenuItem key={i._id} value={i.location}>
+                      <Checkbox checked={favorites.indexOf(i.location) > -1} />
+                      <ListItemText primary={i.location} />
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            ) : (
+              <Button className={classes.secondary} onClick={handleAddMore}>
+                Add More
+              </Button>
+            )}
           </Grid>
         </Grid>
 
         {/* BUTTON */}
 
         <Grid container justify="center" alignItems="center" item>
-          <Grid item xs={5}>
+          <Grid item xs={8}>
             <Button
               color={"primary"}
               variant="contained"
@@ -419,7 +482,7 @@ function SignUp(props) {
 
           <SignInModalHeader
             title="Sign Up"
-            subTitle="Track Prices, organize travel plans and access member-only deals"
+            subTitle="Please select your favourite travel destinations"
           ></SignInModalHeader>
 
           {/* FORM SECTION */}
