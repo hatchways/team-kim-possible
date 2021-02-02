@@ -1,3 +1,4 @@
+{
   "name": "client",
   "version": "0.1.0",
   "private": true,
@@ -11,6 +12,7 @@
     "axios": "^0.21.1",
     "date-fns": "^2.16.1",
     "fontsource-roboto": "^4.0.0",
+    "material-ui-image": "^3.3.1",
     "query-string": "^6.13.8",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

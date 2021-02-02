@@ -37,14 +37,20 @@ const useStyles = makeStyles({
 
 const SearchPage = () => {
   const classes = useStyles();
+
+  //Gets destination query param if redirected from explore page
+  const params = new URLSearchParams(window.location.search);
+  const destination = params.get("destination");
+
   const [state, setState] = useState({
     departureCity: "",
-    arrivalCity: "",
+    arrivalCity: destination,
     departureDate: new Date(),
     arrivalDate: new Date(),
     numOfTravellers: 1,
     routeData: null,
   });
+
   return (
     <div className={classes.root}>
       <Grid>
