@@ -51,7 +51,6 @@ function Explore(props) {
     const favoriteData = await axios.get("/favorites/getAllFavorites");
     const favoritesArray = favoriteData.data;
     let filteredLocations = allLocations;
-    console.log([].findIndex((e) => e === 1));
     if (favoritesArray.length > 0) {
       filteredLocations = allLocations.filter(
         (location) =>

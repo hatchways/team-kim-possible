@@ -12,7 +12,8 @@ const exploreCardStyles = makeStyles((theme, props) => ({
     borderRadius: "18px",
   }),
   emptyTopSpace: {
-    paddingTop: "23rem",
+    minHeight: "23rem",
+    position: "relative",
   },
   cardDataContainer: {
     borderTop: `1px solid ${theme.palette.primary.light}`,
@@ -43,8 +44,8 @@ const exploreCardStyles = makeStyles((theme, props) => ({
   },
   link: {
     position: "absolute",
-    display: "flex",
     borderRadius: "18px 18px 0 0",
+    display: "flex",
     height: "100%",
     width: "100%",
     justifyContent: "center",
@@ -63,10 +64,9 @@ function ExploreCard(props) {
   const classes = exploreCardStyles(location);
 
   const [liked, setLike] = useState(alreadyLiked);
-  if (location.location === "Sapporo" || "Amsterdam") {
-  }
+
   const handleLiked = async () => {
-    const response = await axios.put("/favorites", { location, add: !liked });
+    await axios.put("/favorites", { location, add: !liked });
     setLike((prev) => !prev);
   };
   return (
@@ -98,11 +98,15 @@ function ExploreCard(props) {
             container
             justify="center"
             alignItems="center"
-          ></Grid>{" "}
-          <FavoriteIcon
-            className={liked ? classes.favoriteIconLiked : classes.favoriteIcon}
-            onClick={() => handleLiked()}
-          ></FavoriteIcon>
+          ></Grid>
+          <Grid item xs={3} container justify="flex-end" alignItems="center">
+            <FavoriteIcon
+              className={
+                liked ? classes.favoriteIconLiked : classes.favoriteIcon
+              }
+              onClick={() => handleLiked()}
+            ></FavoriteIcon>
+          </Grid>
         </Grid>
       </Grid>
     </Paper>
