@@ -1,17 +1,26 @@
 const express = require("express");
 const router = express.Router();
-const { User } = require("../models/user.models");
-
+const { Trips } = require("../models/trips.models");
+const { Flights } = require("../models/flights.models");
+//Use this route to test anything. Delete prior to production
 router.get("/test", async (req, res) => {
-  const testData = {
-    name: "Alekzander",
-    email: "alekzander@gmail.com",
-    password: "password123unsecureaf",
+  flightData = {
+    departureDate: Date.now(),
+    returnDate: Date.now(),
+    departureLocation: "NYC, USA",
+    destinationLocation: "Vancouver, Canada",
+    price: 50000,
   };
-
-  const user = new User(testData);
+  const flight = new Flights(flightData);
+  const flightObject = await flight.save();
+  const testData = {
+    email: "testEmail492@gmail.com",
+    flight: flightObject._id,
+    totalCost: 50000,
+  };
+  const trip = new Trips(testData);
   try {
-    await user.save();
+    await trip.save();
     return res.status(200).json({
       success: true,
     });
