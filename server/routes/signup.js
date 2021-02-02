@@ -4,14 +4,8 @@ const { User } = require("../models/user.models");
 
 router.post("/", async function (req, res, next) {
   try {
-    // const {name,email,password,home}=req.body;
-    // const user=new User({name,email,password,home})
-    const user = new User({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-      home: req.body.home,
-    });
+    const { name, email, password, home } = req.body;
+    const user = new User({ name, email, password, home });
 
     await user.save();
     const token = await user.generateAuthenticationToken(user);

@@ -399,7 +399,8 @@ function SignUp(props) {
     const sendSignUpRequest = async () => {
       try {
         const resp = await axios.post("/signup", userData);
-        localStorage.setItem("loggedIn", JSON.stringify(resp.data.user));
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("user", JSON.stringify(resp.data.user));
         setPage2(true);
       } catch (err) {
         setSignUpErr(true);

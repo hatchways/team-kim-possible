@@ -55,9 +55,6 @@ const useStyles = makeStyles({
 const Search = (props) => {
   const classes = useStyles();
   const { state, setState } = props;
-  state.departureCity = localStorage.getItem("loggedIn")
-    ? JSON.parse(localStorage.getItem("loggedIn")).home
-    : null;
 
   const [optionsDeparture, setOptionsDeparture] = useState([]);
   const [optionsArrival, setOptionsArrival] = useState([]);
@@ -76,6 +73,15 @@ const Search = (props) => {
     );
     setState({ ...state, routeData: routeData.data });
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setState((state) => ({
+        ...state,
+        departureCity: JSON.parse(localStorage.getItem("user")).home,
+      }));
+    }
+  }, [localStorage.getItem("user")]);
 
   return (
     <div className={classes.root}>

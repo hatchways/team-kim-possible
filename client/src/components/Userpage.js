@@ -128,7 +128,7 @@ export default function UserPage() {
     },
   ]);
 
-  const { name, email } = JSON.parse(localStorage.getItem("loggedIn"));
+  const { name, email } = JSON.parse(localStorage.getItem("user"));
 
   const listOfExploreCards = exploreCards.map((exploreCard) => {
     if (exploreCard["liked"] === true) {

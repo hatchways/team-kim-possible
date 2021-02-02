@@ -56,7 +56,8 @@ function SignIn(props) {
     const sendSignInRequest = async () => {
       try {
         const resp = await axios.post("/login", userData);
-        localStorage.setItem("loggedIn", JSON.stringify(resp.data.user));
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("user", JSON.stringify(resp.data.user));
         history.push("/");
         props.exit();
       } catch (err) {
