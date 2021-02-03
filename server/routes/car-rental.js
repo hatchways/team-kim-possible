@@ -21,23 +21,19 @@ router.get("/", async function (req, res, next) {
 });
 
 //Checkout
+//Add car to checkout
 router.post("/", async function (req, res, next) {
-  carData = {
-    name: "testyota",
-    rate: "33",
-    total: "40",
-    imageUrl: "toyota",
-  };
-  const car = new Cars(carData);
-  await car.save();
+  const car = await Cars.findOne({
+    name: "Honda",
+  });
 
-  var myquery = { name: "updated" };
-  var newvalues = { $set: { name: "alex123", car: car._id } };
+  var myquery = { name: "JOE" };
+  var newvalues = { $set: { name: "updated", car: car._id } };
   User.updateOne(myquery, newvalues, function (err, result) {
     if (err) {
       return res.status(400);
     } else {
-      console.log("test");
+      return res.status(200);
     }
   });
 });
