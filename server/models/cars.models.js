@@ -9,31 +9,24 @@ const carsSchema = new Schema({
   },
   rate: {
     type: String,
-    required: false,
   },
   total: {
     type: String,
-    required: false,
   },
   imageUrl: {
     type: String,
-    required: false,
   },
   takeOutDate: {
     type: Date,
-    required: false,
   },
   returnDate: {
     type: Date,
-    required: false,
   },
   kmsDriven: {
     type: Number,
-    required: false,
   },
   image: {
     type: String,
-    required: false,
   },
 });
 
