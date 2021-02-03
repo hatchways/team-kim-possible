@@ -76,6 +76,7 @@ const CheckoutForm = (props) => {
   };
 
   const handleSubmit = async (event) => {
+    event.preventDefault();
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet.
       return;
