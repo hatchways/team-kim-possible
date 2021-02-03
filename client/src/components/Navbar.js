@@ -78,27 +78,51 @@ export default function ButtonAppBar() {
 
   const drawerItems = (
     <div className={classes.drawerContainer}>
-      <Link to="/" className={classes.textDecoration}>
+      <Link
+        to="/"
+        className={classes.textDecoration}
+        onClick={() => closeDrawer()}
+      >
         <MenuItem className={classes.drawerItem}>Travel Booking</MenuItem>
       </Link>
 
-      <Link to="explore" className={classes.textDecoration}>
+      <Link
+        to="explore"
+        className={classes.textDecoration}
+        onClick={() => closeDrawer()}
+      >
         <MenuItem className={classes.drawerItem}>Explore</MenuItem>
       </Link>
 
-      <Link to="/" className={classes.textDecoration}>
+      <Link
+        to="/"
+        className={classes.textDecoration}
+        onClick={() => closeDrawer()}
+      >
         <MenuItem className={classes.drawerItem}>Flights</MenuItem>
       </Link>
 
-      <Link to="/hotels" className={classes.textDecoration}>
+      <Link
+        to="/hotels"
+        className={classes.textDecoration}
+        onClick={() => closeDrawer()}
+      >
         <MenuItem className={classes.drawerItem}>Hotels</MenuItem>
       </Link>
 
-      <Link to="/carrental" className={classes.textDecoration}>
+      <Link
+        to="/carrental"
+        className={classes.textDecoration}
+        onClick={() => closeDrawer()}
+      >
         <MenuItem className={classes.drawerItem}>Cars</MenuItem>
       </Link>
 
-      <Link to="/userpage" className={classes.textDecoration}>
+      <Link
+        to="/userpage"
+        className={classes.textDecoration}
+        onClick={() => closeDrawer()}
+      >
         <MenuItem className={classes.drawerItem}>User</MenuItem>
       </Link>
     </div>
