@@ -10,11 +10,11 @@ import SignUp from "./components/UserAccount/SignUp";
 import SignIn from "./components/UserAccount/SignIn";
 import CarRental from "./pages/CarRentalPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import Explore from "./pages/Explore";
 import { ShoppingCartProvider } from "./components/ShoppingCart/ShoppingCartContext";
 import HotelsPage from "./pages/HotelsPage";
 import Stripe from "./components/Stripe";
 import CheckoutPage from "./pages/CheckoutPage";
+import ExplorePage from "./pages/ExplorePage";
 
 const appStyles = makeStyles((theme) => ({
   container: {
@@ -103,7 +103,7 @@ function App() {
             </Route>
             <ProtectedRoute exact path='/carrental' component={CarRental} />
             <ProtectedRoute exact path='/userpage' component={UserPage} />
-            <ProtectedRoute exact path='/explore' component={Explore} />
+            <ProtectedRoute exact path='/explore' component={ExplorePage} />
             <ProtectedRoute exact path='/hotels' component={HotelsPage} />
             <ProtectedRoute exact path='/checkout' component={CheckoutPage} />
             <ProtectedRoute exact path='/stripe' component={Stripe} />

@@ -31,8 +31,10 @@ const favoritesRouter = require("./routes/favorites");
 const profileRouter = require("./routes/profile");
 const carRentalRouter = require("./routes/car-rental");
 const hotelRouter = require("./routes/hotel");
+const flightRouter = require("./routes/flight");
 const stripeRouter = require("./routes/stripe");
 const shoppingCartRouter = require("./routes/shopping-cart");
+const exploreRouter = require("./routes/explore");
 const auth = require("./middleware/auth");
 
 const { json, urlencoded } = express;
@@ -55,10 +57,12 @@ app.use("/search-places", placesRouter);
 app.use("/quotes", quotesRouter);
 app.use("/carRental", carRentalRouter);
 app.use("/hotels", hotelRouter);
+app.use("/flights", flightRouter);
 app.use("/favorites", auth, favoritesRouter);
 app.use("/profile", auth, profileRouter);
 app.use("/stripe", stripeRouter);
 app.use("/shopping-cart", auth, shoppingCartRouter);
+app.use("/explore", exploreRouter);
 app.use("/save-stripe-token", stripeRouter);
 app.use("/trips", tripsRouter);
 
