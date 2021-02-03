@@ -4,30 +4,21 @@ const { Hotels } = require("../models/hotels.models");
 const { User } = require("../models/user.models");
 const { Flights } = require("../models/flights.models");
 
-router.get("/", async function (req, res, next) {
-  Hotels.find(function (err, result) {
-    if (err) {
-      return res.status(400);
-    } else {
-      hotelList = result;
-      try {
-        res.status(200).send({ hotelList });
-      } catch (e) {
-        res.status(400).send(e);
-      }
-    }
-  });
-});
-
 //Checkout
-//Add hotel to checkout
+//Create a flight and add it to checkout
 router.post("/", async function (req, res, next) {
-  const hotel = await Hotels.findOne({
-    name: "Alila Ubud",
-  });
+  flightData = {
+    departureDate: "2020-01-01",
+    returnDate: "2020-01-01",
+    departureLocation: "USA",
+    destinationLocation: "EUROPE",
+    price: 1,
+  };
+  const flight = new Flights(flightData);
+  await flight.save();
 
   var myquery = { name: "JOE2" };
-  var newvalues = { $set: { name: "JOE", hotel: hotel._id } };
+  var newvalues = { $set: { name: "JOE", flight: flight._id } };
   User.updateOne(myquery, newvalues, function (err, result) {
     if (err) {
       return res.status(400);
