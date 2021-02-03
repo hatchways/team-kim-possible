@@ -17,6 +17,7 @@ router.put("/", async function (req, res, next) {
 
 router.get("/getAllFavorites", async function (req, res, next) {
   const user = await User.findById(req.user._id);
+  console.log(user);
   res.status(200).send(user.favorites);
 });
 

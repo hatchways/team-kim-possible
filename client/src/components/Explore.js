@@ -15,7 +15,6 @@ const exploreStyles = makeStyles((theme) => ({
   pt4: {
     paddingTop: "3rem",
   },
-
   textAlign: {
     textAlign: "center",
   },
