@@ -5,6 +5,20 @@ const { User } = require("../models/user.models");
 const { Flights } = require("../models/flights.models");
 
 //Checkout
+
+//Get flight by user
+router.get("/checkout", async function (req, res, next) {
+  const user = await User.findOne({
+    name: "JOE",
+  });
+  Flights.findOne({ _id: user.flight }, function (err, result) {
+    if (err) {
+      return res.status(400);
+    } else {
+      return result;
+    }
+  });
+});
 //Create a flight and add it to checkout
 router.post("/", async function (req, res, next) {
   flightData = {

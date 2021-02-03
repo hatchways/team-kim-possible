@@ -21,6 +21,21 @@ router.get("/", async function (req, res, next) {
 });
 
 //Checkout
+
+//Get car by user
+router.get("/checkout", async function (req, res, next) {
+  const user = await User.findOne({
+    name: "JOE",
+  });
+  Cars.findOne({ _id: user.car }, function (err, result) {
+    if (err) {
+      return res.status(400);
+    } else {
+      return result;
+    }
+  });
+});
+
 //Add car to checkout
 router.post("/", async function (req, res, next) {
   const car = await Cars.findOne({
@@ -28,7 +43,7 @@ router.post("/", async function (req, res, next) {
   });
 
   var myquery = { name: "JOE" };
-  var newvalues = { $set: { name: "updated", car: car._id } };
+  var newvalues = { $set: { name: "JOE", car: car._id } };
   User.updateOne(myquery, newvalues, function (err, result) {
     if (err) {
       return res.status(400);

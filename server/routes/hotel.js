@@ -20,6 +20,20 @@ router.get("/", async function (req, res, next) {
 });
 
 //Checkout
+
+//Get hotel by user
+router.get("/checkout", async function (req, res, next) {
+  const user = await User.findOne({
+    name: "JOE",
+  });
+  Hotels.findOne({ _id: user.hotel }, function (err, result) {
+    if (err) {
+      return res.status(400);
+    } else {
+      return result;
+    }
+  });
+});
 //Add hotel to checkout
 router.post("/", async function (req, res, next) {
   const hotel = await Hotels.findOne({
