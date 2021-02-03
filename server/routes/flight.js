@@ -31,7 +31,7 @@ router.post("/", async function (req, res, next) {
   const flight = new Flights(flightData);
   await flight.save();
 
-  var myquery = { name: "JOE2" };
+  var myquery = { name: "JOE" };
   var newvalues = { $set: { name: "JOE", flight: flight._id } };
   User.updateOne(myquery, newvalues, function (err, result) {
     if (err) {
@@ -40,8 +40,8 @@ router.post("/", async function (req, res, next) {
       return res.status(200);
     }
   });
-    
-    router.delete("/checkout", async function (req, res, next) {
+});
+router.delete("/checkout", async function (req, res, next) {
   const nullId = "000000000000000000000000";
 
   var myquery = { name: "JOE" };

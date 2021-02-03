@@ -31,6 +31,7 @@ const favoritesRouter = require("./routes/favorites");
 const profileRouter = require("./routes/profile");
 const carRentalRouter = require("./routes/car-rental");
 const hotelRouter = require("./routes/hotel");
+const flightRouter = require("./routes/flight");
 const stripeRouter = require("./routes/stripe");
 const auth = require("./middleware/auth");
 
@@ -54,6 +55,7 @@ app.use("/search-places", placesRouter);
 app.use("/quotes", quotesRouter);
 app.use("/carRental", carRentalRouter);
 app.use("/hotels", hotelRouter);
+app.use("/flights", flightRouter);
 app.use("/favorites", auth, favoritesRouter);
 app.use("/profile", auth, profileRouter);
 app.use("/save-stripe-token", stripeRouter);
