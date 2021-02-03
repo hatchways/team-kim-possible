@@ -40,6 +40,21 @@ router.post("/", async function (req, res, next) {
       return res.status(200);
     }
   });
+    
+    router.delete("/checkout", async function (req, res, next) {
+  const nullId = "000000000000000000000000";
+
+  var myquery = { name: "JOE" };
+  var newvalues = {
+    $set: { flight: objectId(nullId) },
+  };
+  User.updateOne(myquery, newvalues, function (err, result) {
+    if (err) {
+      return res.status(400);
+    } else {
+      return res.status(200);
+    }
+  });
 });
 
 module.exports = router;
