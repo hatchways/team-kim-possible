@@ -1,8 +1,9 @@
+// For many of the routes you will need to pass JSON data that includes an email associated with the user. Ex: { "email" : "email23@gmail.com "}
+// To add a hotel to the checkout, your req.body needs to have a hotel name. Ex: { "hotel" : "{"name" : "Seoul Troll Resort"}" }
 const express = require("express");
 const router = express.Router();
 const { Hotels } = require("../models/hotels.models");
 const { User } = require("../models/user.models");
-const { Flights } = require("../models/flights.models");
 
 router.get("/", async function (req, res, next) {
   Hotels.find(function (err, result) {
@@ -18,13 +19,11 @@ router.get("/", async function (req, res, next) {
     }
   });
 });
-
-//Checkout
-
+//----Checkout------
 //Get hotel by user
 router.get("/checkout", async function (req, res, next) {
   const user = await User.findOne({
-    name: "JOE",
+    email: req.body.email,
   });
   Hotels.findOne({ _id: user.hotel }, function (err, result) {
     if (err) {
@@ -37,34 +36,36 @@ router.get("/checkout", async function (req, res, next) {
 //Add hotel to checkout
 router.post("/", async function (req, res, next) {
   const hotel = await Hotels.findOne({
-    name: "Alila Ubud",
+    name: req.body.hotel.name,
   });
-
-  var myquery = { name: "JOE2" };
-  var newvalues = { $set: { name: "JOE", hotel: hotel._id } };
-  User.updateOne(myquery, newvalues, function (err, result) {
-    if (err) {
-      return res.status(400);
-    } else {
-      return res.status(200);
+  User.updateOne(
+    { email: req.body.email },
+    { $set: { hotel: hotel._id } },
+    function (err, result) {
+      if (err) {
+        return res.status(400);
+      } else {
+        return res.status(200);
+      }
     }
-  });
+  );
 });
-
+//Delete hotel from checkout
 router.delete("/checkout", async function (req, res, next) {
   const nullId = "000000000000000000000000";
-
-  var myquery = { name: "JOE" };
-  var newvalues = {
-    $set: { hotel: objectId(nullId) },
-  };
-  User.updateOne(myquery, newvalues, function (err, result) {
-    if (err) {
-      return res.status(400);
-    } else {
-      return res.status(200);
+  User.updateOne(
+    { email: req.body.email },
+    {
+      $set: { hotel: objectId(nullId) },
+    },
+    function (err, result) {
+      if (err) {
+        return res.status(400);
+      } else {
+        return res.status(200);
+      }
     }
-  });
+  );
 });
 
 module.exports = router;
