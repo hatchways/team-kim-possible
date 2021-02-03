@@ -11,31 +11,27 @@ const hotelsSchema = new Schema({
     type: Number,
     min: 1,
     max: 4,
+    required: true,
   },
   roomNumber: {
     type: String,
+    required: true,
   },
   checkInDate: {
     type: Date,
+    required: true,
   },
   checkOutDate: {
     type: Date,
+    required: true,
   },
   image: {
     type: String,
   },
-  rating: {
-    type: String,
-  },
-  location: {
-    type: String,
-  },
-  reviews: {
-    type: String,
-  },
   price: {
     //Per night in Cents
-    type: String,
+    type: Number,
+    required: true,
   },
 });
 

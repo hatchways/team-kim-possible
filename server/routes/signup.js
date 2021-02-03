@@ -1,18 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const objectId = require("mongodb").ObjectID;
 const { User } = require("../models/user.models");
 
 router.post("/", async function (req, res, next) {
-  const nullId = "000000000000000000000000";
   try {
     const user = new User({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
-      car: objectId(nullId),
-      flight: objectId(nullId),
-      hotel: objectId(nullId),
+      shoppingCart: [],
     });
 
     await user.save();

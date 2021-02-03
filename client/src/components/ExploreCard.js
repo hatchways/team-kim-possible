@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { Paper, Grid } from "@material-ui/core";
-import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { motion } from "framer-motion";
 
 const exploreCardStyles = makeStyles((theme, props) => ({
   mainPaper: (props) => ({
-    background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 90%, rgba(0, 0, 0, 0.65) 100%), url(https://team-kim-possible.s3.us-east-2.amazonaws.com/images/${props.imgName}) center center/cover no-repeat `,
+    background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.6) 90%, rgba(0, 0, 0, 0.65) 100%), url(/images/${props.imgName})`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center center",
+    backgroundSize: "cover",
     borderRadius: "18px",
   }),
   emptyTopSpace: {
-    minHeight: "23rem",
-    position: "relative",
+    paddingTop: "23rem",
   },
   cardDataContainer: {
     borderTop: `1px solid ${theme.palette.primary.light}`,

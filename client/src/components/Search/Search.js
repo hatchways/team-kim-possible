@@ -20,29 +20,19 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { getCityId, getRouteData, getCityName } from "../../utils/skyscanner";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
     height: "90px",
+    width: "80%",
     background: "white",
     margin: "0 auto",
     borderRadius: "20px",
     boxShadow: "0 0 5px 5px rgba(221, 221, 240, 0.7)",
     display: "flex",
     alignItems: "center",
-    [theme.breakpoints.down("xs")]: {
-      minHeight: "400px",
-    },
-  },
-  itemsContainer: {
-    [theme.breakpoints.down("xs")]: {
-      flexDirection: "column",
-      alignItems: "center",
-    },
   },
   item: {
     padding: "0 20px",
-    width: "100%",
-    textAlign: "center",
   },
   btn: {
     backgroundColor: "#FAAC2F",
@@ -61,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   optionsContainer: {
     display: "absolute",
   },
-}));
+});
 const Search = (props) => {
   const classes = useStyles();
   const { state, setState } = props;
@@ -85,9 +75,9 @@ const Search = (props) => {
   };
 
   return (
-    <Grid item className={classes.root}>
+    <div className={classes.root}>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container className={classes.itemsContainer}>
+        <Grid container>
           <Grid item xs={12} sm={2} className={classes.item}>
             <Autocomplete
               className={classes.formControl}
@@ -201,7 +191,7 @@ const Search = (props) => {
           </Grid>
         </Grid>
       </MuiPickersUtilsProvider>
-    </Grid>
+    </div>
   );
 };
 
