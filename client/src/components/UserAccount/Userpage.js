@@ -1,8 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, Typography } from "@material-ui/core";
-import Avatar from "./Avatars/BigAvatar";
-import ExploreCard from "./ExploreCard";
+import Avatar from "../Avatars/BigAvatar";
+import ExploreCard from "../ExploreCard";
 import "fontsource-roboto";
 const useStyles = makeStyles((themes) => ({
   root: {

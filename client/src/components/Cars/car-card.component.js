@@ -4,7 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Typography, Button } from "@material-ui/core";
 import { addToShoppingCart } from "../../utils/shoppingCart";
-import { ShoppingCartContext } from "../ShoppingCartContext";
+import { ShoppingCartContext } from "../ShoppingCart/ShoppingCartContext";
 
 const useStyles = makeStyles((theme) => ({
   root: { border: "1px" },

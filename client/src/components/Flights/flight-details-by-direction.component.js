@@ -6,9 +6,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import FlightTakeoffIcon from "@material-ui/icons/FlightTakeoff";
 import FlightLandIcon from "@material-ui/icons/FlightLand";
-import CustomTimeline from "../components/custom-timeline.component";
-import { addToShoppingCart } from "../utils/shoppingCart";
-import { ShoppingCartContext } from "./ShoppingCartContext";
+import CustomTimeline from "./custom-timeline.component";
+import { addToShoppingCart } from "../../utils/shoppingCart";
+import { ShoppingCartContext } from "../ShoppingCart/ShoppingCartContext";
 
 const useStyles = makeStyles((theme) => ({
   detail: {

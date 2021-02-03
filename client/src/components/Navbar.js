@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { Popover } from "@material-ui/core";
-import ShoppingCartPopoverContent from "./ShoppingCartPopoverContent";
+import ShoppingCartPopoverContent from "./ShoppingCart/ShoppingCartPopoverContent";
 
 const useStyles = makeStyles((theme) => ({
   root: {
