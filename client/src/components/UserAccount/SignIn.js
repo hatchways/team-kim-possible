@@ -3,9 +3,9 @@ import { Paper, TextField, Grid, FormHelperText } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
-import SignInModalFooter from "./MuiComponents/SignInModalFooter";
-import SignInModalHeader from "./MuiComponents/SignInModalHeader";
-import CloseModal from "./MuiComponents/CloseModal";
+import SignInModalFooter from "../MuiComponents/SignInModalFooter";
+import SignInModalHeader from "../MuiComponents/SignInModalHeader";
+import CloseModal from "../MuiComponents/CloseModal";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 

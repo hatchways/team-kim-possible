@@ -3,7 +3,7 @@ import { ShoppingCartContext } from "./ShoppingCartContext";
 import { Typography, Grid } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import { deleteFromShoppingCart } from "../utils/shoppingCart";
+import { deleteFromShoppingCart } from "../../utils/shoppingCart";
 import CloseIcon from "@material-ui/icons/Close";
 import FlightIcon from "@material-ui/icons/Flight";
 import axios from "axios";
@@ -18,7 +18,7 @@ const shoppingCartStyles = makeStyles((theme) => ({
   cartItemsContainer: {
     marginTop: "1.5rem",
   },
-  flightContainer: { margin: "1rem" },
+  flightContainer: { marginTop: "2rem" },
   itemPrice: {
     fontStyle: "italic",
   },
