@@ -7,33 +7,41 @@ const { Cars } = require("../models/cars.models");
 const { Flights } = require("../models/flights.models");
 
 router.post("/update-cart", async function (req, res, next) {
-  const car = await Cars.findOne({
-    name: "Honda",
-  });
+  const nullId = "000000000000000000000000";
+  for (index in req.body) {
+    if (req.body[index].type === "car") {
+      const car = await Cars.findOne({
+        name: req.body[index].name,
+      });
+    }
 
-  const hotel = await Hotels.findOne({
-    name: "W Bali-Semiynak",
-  });
+    if (req.body[index].type === "hotel") {
+      const hotel = await Hotels.findOne({
+        name: req.body[index].name,
+      });
+    }
 
-  const flightData = {
-    departureDate: "2021-01-01",
-    returnDate: "2021-01-02",
-    departureLocation: "yes",
-    destinationLocation: "req.body[index].destinationPlace",
-    price: "req.body[index].price",
-  };
+    if (req.body[index].type === "flight") {
+      const flightData = {
+        departureDate: "2021-01-01",
+        returnDate: "2021-01-02",
+        departureLocation: req.body[index].originPlace,
+        destinationLocation: req.body[index].destinationPlace,
+        price: req.body[index].price,
+      };
 
-  const flight = new Flights(flightData);
-  await flight.save();
-
+      const flight = new Flights(flightData);
+      await flight.save();
+    }
+  }
   try {
     await User.findOneAndUpdate(
-      { _id: objectId("601b581c8fff800580ec3554") },
+      { _id: objectId("601b58178fff800580ec3553") },
       {
         shoppingCart: {
-          car: car._id,
-          hotel: hotel._id,
-          flight: flight._id,
+          hotel: hotel._id ? hotel._id : objectId(nullId),
+          car: car._id ? car._id : objectId(nullId),
+          flight: flight._id ? flight._id : objectId(nullId),
         },
       }
     );
