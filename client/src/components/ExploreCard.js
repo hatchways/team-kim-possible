@@ -4,6 +4,7 @@ import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import axios from "axios";
 import { motion } from "framer-motion";
 
 const exploreCardStyles = makeStyles((theme, props) => ({
@@ -29,7 +30,6 @@ const exploreCardStyles = makeStyles((theme, props) => ({
     fontSize: "19px",
     margin: "0rem 0rem 1.5rem 2rem",
   },
-
   favoriteIcon: {
     marginRight: "2rem",
     height: "2rem",
@@ -42,32 +42,59 @@ const exploreCardStyles = makeStyles((theme, props) => ({
     height: "2rem",
     width: "2rem",
   },
+  link: {
+    position: "absolute",
+    borderRadius: "18px 18px 0 0",
+    display: "flex",
+    height: "100%",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0)",
+    color: "rgba(255,255,255,0)",
+    "&:hover": {
+      backgroundColor: "rgba(0,0,0,0.5)",
+      color: "rgba(255,255,255,1)",
+    },
+  },
 }));
-
 function ExploreCard(props) {
-  const classes = exploreCardStyles(props);
-
-  const [liked, setLike] = useState(false);
-
-  const handleLiked = () => {
+  const { alreadyLiked, location } = props;
+  const classes = exploreCardStyles(location);
+  const [liked, setLike] = useState(alreadyLiked);
+  const handleLiked = async () => {
+    await axios.put("/favorites", { location, add: !liked });
     setLike((prev) => !prev);
-    // props.onLike();
   };
-
   return (
     <Paper elevation={1} className={classes.mainPaper}>
       <Grid container direction='column' justify='center'>
-        <Grid item xs={12} className={classes.emptyTopSpace}></Grid>
+        <Grid item xs={12} className={classes.emptyTopSpace}>
+          <Link
+            href={`/?destination=${location.location}`}
+            underline='none'
+            className={classes.link}>
+            <Typography variant='h4'>
+              Book a flight to {location.location}!
+            </Typography>
+          </Link>
+        </Grid>
         <Grid container item xs={12} className={classes.cardDataContainer}>
           <Grid item xs={6} container justify='flex-start' alignItems='center'>
             <Grid item xs={12}>
-              <p className={classes.locationText}>{props.location},</p>
+              <p className={classes.locationText}>{location.location},</p>
             </Grid>
             <Grid item xs={12}>
-              <p className={classes.locationCountryText}>{props.country}</p>
+              <p className={classes.locationCountryText}>{location.country}</p>
             </Grid>
           </Grid>
-          <Grid item xs={6} container justify='flex-end' alignItems='center'>
+          <Grid
+            item
+            xs={3}
+            container
+            justify='center'
+            alignItems='center'></Grid>
+          <Grid item xs={3} container justify='flex-end' alignItems='center'>
             {liked ? (
               <motion.div
                 intial={{ scale: 1 }}
@@ -90,5 +117,4 @@ function ExploreCard(props) {
     </Paper>
   );
 }
-
 export default ExploreCard;
