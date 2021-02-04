@@ -35,17 +35,14 @@ const userSchema = mongoose.Schema({
   car: {
     type: mongoose.Schema.Types.ObjectId,
     ref: Cars,
-    required: true,
   },
   flight: {
     type: mongoose.Schema.Types.ObjectId,
     ref: Flights,
-    required: true,
   },
   hotel: {
     type: mongoose.Schema.Types.ObjectId,
     ref: Hotels,
-    required: true,
   },
   favorites: {
     type: [Object],

@@ -61,7 +61,7 @@ app.use("/flights", flightRouter);
 app.use("/favorites", auth, favoritesRouter);
 app.use("/profile", auth, profileRouter);
 app.use("/stripe", stripeRouter);
-app.use("/shopping-cart", auth, shoppingCartRouter);
+app.use("/shopping-cart", shoppingCartRouter);
 app.use("/explore", exploreRouter);
 app.use("/save-stripe-token", stripeRouter);
 app.use("/trips", tripsRouter);

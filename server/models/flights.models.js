@@ -22,7 +22,7 @@ const flightsSchema = new Schema({
   },
   price: {
     //In Cents
-    type: Number,
+    type: String,
     required: true,
   },
 });
