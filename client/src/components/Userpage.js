@@ -3,8 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, Typography } from "@material-ui/core";
 import Avatar from "./BigAvatar";
 import ExploreCard from "./ExploreCard";
+import { useHistory } from "react-router-dom";
 import "fontsource-roboto";
-import { dataContext } from "../context";
 import axios from "axios";
 
 const useStyles = makeStyles((themes) => {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((themes) => {
       margin: "0px",
     },
     rightQuadrant: {
-      width: "90%",
+      width: "70%",
       margin: "0px",
       marginLeft: "30%",
       backgroundImage:
@@ -32,25 +32,12 @@ const useStyles = makeStyles((themes) => {
       position: "absolute",
       marginRight: "-30%",
     },
-    paper: {
-      textAlign: "center",
-      backgroundColor: "transparent",
-    },
     avatar: {
       marginLeft: "41%",
     },
     container: {
       display: "grid",
       marginTop: "9%",
-    },
-    exploreContainer: {
-      marginLeft: "13%",
-      marginRight: "-13%",
-    },
-    invisible: {
-      marginLeft: "10%",
-      marginRight: "-10%",
-      opacity: "0",
     },
     alignment: {
       alignContent: "center",
@@ -63,11 +50,6 @@ const useStyles = makeStyles((themes) => {
       alignContent: "center",
       textAlign: "center",
       margin: "auto",
-    },
-    selected: {
-      textAlign: "center",
-      color: "#F09600",
-      marginLeft: "-38%",
     },
     misc: {
       marginRight: "20px",
@@ -97,12 +79,20 @@ const useStyles = makeStyles((themes) => {
 });
 
 export default function UserPage() {
-  let invisibleCount = 0;
   const classes = useStyles();
   const [exploreCards, setExploreCards] = useState([]);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const history = useHistory();
+
+  const handleExplore = () => {
+    history.push("/explore");
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("loggedIn");
+    history.push("/signin");
+  };
   useEffect(() => {
     const getUser = async () => {
       const user = await axios.get("/profile");
@@ -114,45 +104,21 @@ export default function UserPage() {
     getUser();
   }, []);
   const listOfExploreCards = exploreCards.map((exploreCard) => {
-    // if (exploreCard["liked"] === true) {
-    //   if (invisibleCount < 2) {
-    //     invisibleCount++;
-    //     return (
-    //       <Grid item xs={3} className={classes.exploreContainer}>
-    //         {/* <ExploreCard
-    //           location={exploreCard.location}
-    //           country={exploreCard.country}
-    //           // imgName={exploreCard.img}
-    //           onLike={() => {
-    //             exploreCard["liked"] = false;
-    //           }}
-    //         ></ExploreCard> */}
-    //       </Grid>
-    //     );
-    //   }
-
-    // if (invisibleCount > 1) {
-    //   invisibleCount = 1;
     return (
-      <Grid container>
-        <Grid item xs={3}>
-          <ExploreCard
-            // country={exploreCard.country}
-            imgName={exploreCard.imgName}
-            // onLike={() => {
-            //   exploreCard["liked"] = false;
-            // }}
-            location={{ location: exploreCard.location }}
-            alreadyLiked={true}
-          ></ExploreCard>
-        </Grid>
+      <Grid item xs={5}>
+        <ExploreCard
+          imgName={exploreCard.imgName}
+          location={exploreCard}
+          s
+          alreadyLiked={true}
+        ></ExploreCard>
       </Grid>
     );
   });
 
   return (
-    <Grid container spacing={0} className={classes.grid}>
-      <Grid container spacing={1} className={classes.leftQuadrant}>
+    <Grid container className={classes.grid}>
+      <Grid container item spacing={1} className={classes.leftQuadrant}>
         <Grid item xs={12} className={classes.container}>
           <div className={classes.alignment}>
             <Avatar />
@@ -186,7 +152,9 @@ export default function UserPage() {
           </Button>
         </Grid>
         <Grid item xs={12} className={classes.misc}>
-          <Button fullWidth>Logout</Button>
+          <Button fullWidth onClick={handleLogout}>
+            Logout
+          </Button>
         </Grid>
       </Grid>
       <Grid container spacing={4} className={classes.rightQuadrant}>
@@ -200,12 +168,14 @@ export default function UserPage() {
             variant="outlined"
             size="large"
             className={classes.exploreButton}
+            onClick={handleExplore}
           >
             Explore
           </Button>
         </Grid>
-
-        {listOfExploreCards}
+        <Grid container spacing={4} justify="center">
+          {listOfExploreCards}
+        </Grid>
       </Grid>
     </Grid>
   );

@@ -61,6 +61,8 @@ const exploreCardStyles = makeStyles((theme, props) => ({
 
 function ExploreCard(props) {
   const { alreadyLiked, location } = props;
+  console.log(props.location);
+  console.log(props.imgName);
   const classes = exploreCardStyles(location);
 
   const [liked, setLike] = useState(alreadyLiked);

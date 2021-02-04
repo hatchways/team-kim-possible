@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Button } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import ExploreCard from "./ExploreCard";
@@ -6,7 +6,6 @@ import ShuffleIcon from "@material-ui/icons/Shuffle";
 import { Typography } from "@material-ui/core";
 import axios from "axios";
 import { returnArrayRandom } from "../utils/utilFunctions";
-import { dataContext } from "../context";
 
 const exploreStyles = makeStyles((theme) => ({
   pageContainer: {
@@ -40,10 +39,7 @@ const exploreStyles = makeStyles((theme) => ({
 function Explore(props) {
   //To get image for exploreCard, make sure the image is saved in public with the name of the place. ex: "public/images/cancun.png"
   //THIS: props.location.toLowerCase() === saved image name
-  const {
-    state: { user },
-  } = useContext(dataContext);
-  console.log(user);
+
   const { allLocations } = props;
   const theme = useTheme();
   const classes = exploreStyles(theme);
@@ -74,13 +70,9 @@ function Explore(props) {
   };
   useEffect(() => {
     shuffleLocations();
+    console.log(state.locations);
   }, [allLocations]);
 
-  useEffect(() => {
-    if (user) {
-      setState((state) => ({ ...state, favorites: user.favorites }));
-    }
-  }, [user, setState]);
   return (
     <>
       <Grid

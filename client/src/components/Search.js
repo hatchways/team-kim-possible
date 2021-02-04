@@ -17,6 +17,7 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
 
 import { getCityId, getRouteData, getCityName } from "../utils/skyscanner";
 
@@ -85,13 +86,13 @@ const Search = (props) => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
-      setState((state) => ({
-        ...state,
-        departureCity: JSON.parse(localStorage.getItem("user")).home,
-      }));
-    }
-  }, [setState]);
+    const getHome = async () => {
+      const response = await axios.get("/profile");
+      console.log(response.data.home);
+      setState((state) => ({ ...state, departureCity: response.data.home }));
+    };
+    getHome();
+  }, [state]);
 
   return (
     <Grid item className={classes.root}>

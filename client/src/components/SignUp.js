@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Paper,
   TextField,
@@ -24,7 +24,6 @@ import axios from "axios";
 import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 import { useHistory } from "react-router-dom";
 import { getCityName } from "../utils/skyscanner";
-import { dataContext } from "../context";
 
 const signUpStyles = makeStyles((theme) => ({
   paper: {
@@ -92,6 +91,7 @@ const signUpStyles = makeStyles((theme) => ({
 function SignUp(props) {
   const theme = useTheme();
   const classes = signUpStyles(theme);
+  const history = useHistory();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -102,7 +102,6 @@ function SignUp(props) {
   const [passwordLengthError, setPasswordLengthError] = useState(false);
   const [emailValidationError, setEmailValidationError] = useState(false);
   const [signUpErr, setSignUpErr] = useState(false);
-  const { dispatch } = useContext(dataContext);
   const [home, setHome] = useState("");
   const [options, setOptions] = useState([]);
   const timeoutRef = useRef();
@@ -458,7 +457,6 @@ function SignUp(props) {
       try {
         const resp = await axios.post("/signup", userData);
         localStorage.setItem("loggedIn", "true");
-        localStorage.setItem("user", JSON.stringify(resp.data.user));
         setPage(false);
       } catch (err) {
         setSignUpErr(true);
@@ -471,7 +469,7 @@ function SignUp(props) {
   const handleAddFavorites = () => {
     const sendFavorites = async () => {
       const response = await axios.post("/favorites", { favorites });
-      dispatch({ type: "SET_USER", payload: response.user });
+      history.push("/explore");
       props.exit();
     };
     sendFavorites();
