@@ -23,7 +23,7 @@ import CloseModal from "../MuiComponents/CloseModal";
 import axios from "axios";
 import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 import { useHistory } from "react-router-dom";
-import { getCityName } from "../utils/skyscanner";
+import { getCityName } from "../../utils/skyscanner";
 
 const signUpStyles = makeStyles((theme) => ({
   paper: {
