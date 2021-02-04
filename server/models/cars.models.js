@@ -7,24 +7,26 @@ const carsSchema = new Schema({
     maxlength: 50,
     required: true,
   },
+  rate: {
+    type: String,
+  },
+  total: {
+    type: String,
+  },
+  imageUrl: {
+    type: String,
+  },
   takeOutDate: {
     type: Date,
-    required: true,
   },
   returnDate: {
     type: Date,
-    required: true,
   },
   kmsDriven: {
     type: Number,
   },
   image: {
     type: String,
-  },
-  price: {
-    //per day in cents
-    type: Number,
-    required: true,
   },
 });
 
