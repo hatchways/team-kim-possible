@@ -20,8 +20,8 @@ export default class TakeMoney extends React.Component {
         token={this.onToken}
         amount={this.data.amount}
         email={this.data.email}
-        currency="USD"
-        stripeKey="YOUR_STRIPE_KEY" //Publishable Key
+        currency='USD'
+        stripeKey='pk_test_51IBWOAIGBdXhz29TWRY6MjXouhgfvf3wtJMx3b3hwEozhBQ1so2qxP5WpFLdBwMX0IpIdJsC2LJ0EmKwkBAYHqEF005V3RV8A9' //Publishable Key
       />
     );
   }

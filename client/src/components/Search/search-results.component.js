@@ -1,5 +1,5 @@
 import React from "react";
-import FlightDetails from "../components/flight-details.component";
+import FlightDetails from "../Flights/flight-details.component";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -30,10 +30,10 @@ function SearchResults(props) {
   }
   return (
     <div className={classes.root}>
-      <Typography variant="h3" align="left">
+      <Typography variant='h3' align='left'>
         <b> Best departing flights</b>
       </Typography>
-      <Typography variant="subtitle1" align="left" color="textSecondary">
+      <Typography variant='subtitle1' align='left' color='textSecondary'>
         Total price includes tax + fees. Addtional bag fees and other fees may
         apply.
       </Typography>

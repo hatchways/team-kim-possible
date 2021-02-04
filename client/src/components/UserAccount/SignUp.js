@@ -3,9 +3,9 @@ import { Paper, TextField, Grid, FormHelperText } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
-import SignInModalFooter from "./MuiComponents/SignInModalFooter";
-import SignInModalHeader from "./MuiComponents/SignInModalHeader";
-import CloseModal from "./MuiComponents/CloseModal";
+import SignInModalFooter from "../MuiComponents/SignInModalFooter";
+import SignInModalHeader from "../MuiComponents/SignInModalHeader";
+import CloseModal from "../MuiComponents/CloseModal";
 import axios from "axios";
 import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 import { useHistory } from "react-router-dom";
@@ -79,26 +79,26 @@ function SignUp(props) {
   const page1 = () => {
     return (
       <div>
-        <Grid container item xs={12} justify="center" alignItems="center">
+        <Grid container item xs={12} justify='center' alignItems='center'>
           <Grid item xs={8}>
             <Box mt={4.5}>
               {nameError ? (
                 <TextField
                   error
-                  id="filled-error-helper-text"
-                  label="Name"
+                  id='filled-error-helper-text'
+                  label='Name'
                   fullWidth={true}
-                  helperText="Please put a name."
-                  variant="outlined"
+                  helperText='Please put a name.'
+                  variant='outlined'
                   onChange={(e) => handleNameChange(e)}
                 />
               ) : (
                 <TextField
-                  id="Name"
-                  label="Name"
-                  variant="outlined"
+                  id='Name'
+                  label='Name'
+                  variant='outlined'
                   fullWidth={true}
-                  color="secondary"
+                  color='secondary'
                   onChange={(e) => handleNameChange(e)}
                 />
               )}
@@ -110,20 +110,20 @@ function SignUp(props) {
               {emailValidationError ? (
                 <TextField
                   error
-                  id="filled-error-helper-text"
-                  label="Email Address"
+                  id='filled-error-helper-text'
+                  label='Email Address'
                   fullWidth={true}
-                  helperText="Must be a valid email."
-                  variant="outlined"
+                  helperText='Must be a valid email.'
+                  variant='outlined'
                   onChange={(e) => handleEmailChange(e)}
                 />
               ) : (
                 <TextField
-                  id="Email"
-                  label="Email Address"
-                  variant="outlined"
+                  id='Email'
+                  label='Email Address'
+                  variant='outlined'
                   fullWidth={true}
-                  color="secondary"
+                  color='secondary'
                   onChange={(e) => handleEmailChange(e)}
                 />
               )}
@@ -135,22 +135,22 @@ function SignUp(props) {
               {passwordLengthError ? (
                 <TextField
                   error
-                  id="filled-error-helper-text"
-                  label="Password"
+                  id='filled-error-helper-text'
+                  label='Password'
                   fullWidth={true}
-                  helperText="Passwords must be greater than 6 characters."
-                  variant="outlined"
-                  type="password"
+                  helperText='Passwords must be greater than 6 characters.'
+                  variant='outlined'
+                  type='password'
                   onChange={(e) => handlePasswordChange(e)}
                 />
               ) : (
                 <TextField
-                  id="pass	"
-                  label="Password"
-                  variant="outlined"
+                  id='pass	'
+                  label='Password'
+                  variant='outlined'
                   fullWidth={true}
-                  color="secondary"
-                  type="password"
+                  color='secondary'
+                  type='password'
                   onChange={(e) => handlePasswordChange(e)}
                 />
               )}
@@ -162,22 +162,22 @@ function SignUp(props) {
               {passwordMatchError ? (
                 <TextField
                   error
-                  id="filled-error-helper-text"
-                  label="Confirm Password"
+                  id='filled-error-helper-text'
+                  label='Confirm Password'
                   fullWidth={true}
-                  helperText="Passwords must match."
-                  variant="outlined"
-                  type="password"
+                  helperText='Passwords must match.'
+                  variant='outlined'
+                  type='password'
                   onChange={(e) => handleConfirmPasswordChange(e)}
                 />
               ) : (
                 <TextField
-                  id="Confirm-Password"
-                  label="Confirm Password"
-                  variant="outlined"
+                  id='Confirm-Password'
+                  label='Confirm Password'
+                  variant='outlined'
                   fullWidth={true}
-                  color="secondary"
-                  type="password"
+                  color='secondary'
+                  type='password'
                   onChange={(e) => handleConfirmPasswordChange(e)}
                 />
               )}
@@ -187,25 +187,23 @@ function SignUp(props) {
 
         {/* BUTTON */}
         {signUpErr ? (
-          <Grid item container justify="center" alignItems="center">
+          <Grid item container justify='center' alignItems='center'>
             <FormHelperText
               error
-              children="Could not sign user up"
-              className={classes.signUpErrText}
-            ></FormHelperText>
+              children='Could not sign user up'
+              className={classes.signUpErrText}></FormHelperText>
           </Grid>
         ) : null}
-        <Grid container justify="center" alignItems="center" item>
+        <Grid container justify='center' alignItems='center' item>
           <Grid item xs={4}>
             <Button
               color={"primary"}
-              variant="contained"
+              variant='contained'
               fullWidth={true}
-              size="large"
+              size='large'
               disableRipple={true}
-              type="submit"
-              className={classes.continueButton}
-            >
+              type='submit'
+              className={classes.continueButton}>
               Continue
             </Button>
           </Grid>
@@ -217,29 +215,26 @@ function SignUp(props) {
   const page2 = () => {
     return (
       <div>
-        <Grid container item xs={12} justify="center" alignItems="center">
+        <Grid container item xs={12} justify='center' alignItems='center'>
           <Grid item xs={9} className={classes.mt2}>
             <Paper
-              variant="outlined"
+              variant='outlined'
               elevation={0}
-              className={classes.locationPaper}
-            >
-              <Grid container alignItems="center" justify="flex-start">
+              className={classes.locationPaper}>
+              <Grid container alignItems='center' justify='flex-start'>
                 <Grid item xs={1}>
                   <RoomOutlinedIcon
-                    className={classes.locationIcon}
-                  ></RoomOutlinedIcon>
+                    className={classes.locationIcon}></RoomOutlinedIcon>
                 </Grid>
                 <Grid item xs={3}>
                   <p className={classes.locationText}>Paris</p>
                 </Grid>
                 <Grid
                   container
-                  justify="flex-end"
+                  justify='flex-end'
                   item
                   xs={8}
-                  className={classes.pr1}
-                >
+                  className={classes.pr1}>
                   <CloseModal cb={null} modalContainer={false}></CloseModal>
                 </Grid>
               </Grid>
@@ -247,55 +242,50 @@ function SignUp(props) {
           </Grid>
           <Grid item xs={9}>
             <Paper
-              variant="outlined"
+              variant='outlined'
               elevation={0}
-              className={classes.locationPaper}
-            >
-              <Grid container alignItems="center" justify="flex-start">
+              className={classes.locationPaper}>
+              <Grid container alignItems='center' justify='flex-start'>
                 <Grid item xs={1}>
                   <RoomOutlinedIcon
-                    className={classes.locationIcon}
-                  ></RoomOutlinedIcon>
+                    className={classes.locationIcon}></RoomOutlinedIcon>
                 </Grid>
                 <Grid item xs={3}>
                   <p className={classes.locationText}>Bali</p>
                 </Grid>
                 <Grid
                   container
-                  justify="flex-end"
+                  justify='flex-end'
                   item
                   xs={8}
-                  className={classes.pr1}
-                >
+                  className={classes.pr1}>
                   <CloseModal
                     cb={handleExit}
-                    modalContainer={false}
-                  ></CloseModal>
+                    modalContainer={false}></CloseModal>
                 </Grid>
               </Grid>
             </Paper>
           </Grid>
-          <Grid container item xs={4} justify="center">
+          <Grid container item xs={4} justify='center'>
             <p className={classes.secondary}>Add More</p>
           </Grid>
         </Grid>
 
         {/* BUTTON */}
 
-        <Grid container justify="center" alignItems="center" item>
+        <Grid container justify='center' alignItems='center' item>
           <Grid item xs={5}>
             <Button
               color={"primary"}
-              variant="contained"
+              variant='contained'
               fullWidth={true}
-              size="large"
+              size='large'
               disableRipple={true}
               onClick={() => {
                 history.push("/");
                 props.exit();
               }}
-              className={classes.signUpButton}
-            >
+              className={classes.signUpButton}>
               Sign Up
             </Button>
           </Grid>
@@ -374,13 +364,12 @@ function SignUp(props) {
     <div className={classes.container}>
       <Paper elevation={3} className={classes.paper}>
         <CloseModal cb={props.exit} modalContainer={true}></CloseModal>
-        <Grid container direction="column" justify="center" alignItems="center">
+        <Grid container direction='column' justify='center' alignItems='center'>
           {/* TOP TEXT - HEADER */}
 
           <SignInModalHeader
-            title="Sign Up"
-            subTitle="Track Prices, organize travel plans and access member-only deals"
-          ></SignInModalHeader>
+            title='Sign Up'
+            subTitle='Track Prices, organize travel plans and access member-only deals'></SignInModalHeader>
 
           {/* FORM SECTION */}
 

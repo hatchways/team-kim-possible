@@ -4,15 +4,16 @@ import { MuiThemeProvider } from "@material-ui/core";
 import { theme } from "./themes/theme";
 import { makeStyles } from "@material-ui/core/styles";
 import Navbar from "./components/Navbar";
-import UserPage from "./components/Userpage";
+import UserPage from "./components/UserAccount/Userpage";
 import SearchPage from "./pages/SearchPage";
-import SignUp from "./components/SignUp";
-import SignIn from "./components/SignIn";
+import SignUp from "./components/UserAccount/SignUp";
+import SignIn from "./components/UserAccount/SignIn";
 import CarRental from "./pages/CarRentalPage";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Explore from "./components/Explore";
-import { ShoppingCartProvider } from "./components/ShoppingCartContext";
+import ProtectedRoute from "./utils/ProtectedRoute";
+import { ShoppingCartProvider } from "./components/ShoppingCart/ShoppingCartContext";
 import HotelsPage from "./pages/HotelsPage";
+import Stripe from "./components/Stripe";
+import CheckoutPage from "./pages/CheckoutPage";
 import ExplorePage from "./pages/ExplorePage";
 
 const appStyles = makeStyles((theme) => ({
@@ -28,6 +29,11 @@ const appStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+  },
+  navContainer: {
+    width: "100%",
+    height: "100%",
+    opacity: "50%",
   },
 }));
 
@@ -55,9 +61,15 @@ function App() {
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
         <ShoppingCartProvider>
-          <Navbar />
+          {loggedIn ? (
+            <Navbar />
+          ) : (
+            <div className={classes.navContainer}>
+              <Navbar />
+            </div>
+          )}
           <Switch>
-            <Route exact path="/">
+            <Route exact path='/'>
               <SearchPage />
               {loggedIn ? null : (
                 <div className={classes.container}>
@@ -65,9 +77,9 @@ function App() {
                 </div>
               )}
             </Route>
-            <Route exact path="/signup">
+            <Route exact path='/signup'>
               {loggedIn ? (
-                <Redirect to="/" />
+                <Redirect to='/' />
               ) : (
                 <>
                   <SearchPage />
@@ -77,9 +89,9 @@ function App() {
                 </>
               )}
             </Route>
-            <Route exact path="/signin">
+            <Route exact path='/signin'>
               {loggedIn ? (
-                <Redirect to="/" />
+                <Redirect to='/' />
               ) : (
                 <>
                   <SearchPage />
@@ -89,10 +101,12 @@ function App() {
                 </>
               )}
             </Route>
-            <ProtectedRoute exact path="/carrental" component={CarRental} />
-            <ProtectedRoute exact path="/userpage" component={UserPage} />
-            <ProtectedRoute exact path="/explore" component={ExplorePage} />
-            <ProtectedRoute exact path="/hotels" component={HotelsPage} />
+            <ProtectedRoute exact path='/carrental' component={CarRental} />
+            <ProtectedRoute exact path='/userpage' component={UserPage} />
+            <ProtectedRoute exact path='/explore' component={ExplorePage} />
+            <ProtectedRoute exact path='/hotels' component={HotelsPage} />
+            <ProtectedRoute exact path='/checkout' component={CheckoutPage} />
+            <ProtectedRoute exact path='/stripe' component={Stripe} />
           </Switch>
         </ShoppingCartProvider>
       </MuiThemeProvider>

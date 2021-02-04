@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Grid, Typography } from "@material-ui/core";
-import Search from "../components/Search";
-import SearchResults from "../components/search-results.component";
+import Search from "../components/Search/Search";
+import SearchResults from "../components/Search/search-results.component";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -82,10 +82,9 @@ const SearchPage = () => {
           xs={12}
           sm={5}
           spacing={2}
-          className={classes.item5}
-        >
+          className={classes.item5}>
           <Grid item xs={12}>
-            <Typography variant="h3" className={classes.header}>
+            <Typography variant='h3' className={classes.header}>
               Find the flight and start the holiday
             </Typography>
           </Grid>
