@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Button } from "@material-ui/core";
+import { Grid, Button, CircularProgress } from "@material-ui/core";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import ExploreCard from "./ExploreCard";
 import ShuffleIcon from "@material-ui/icons/Shuffle";
@@ -32,6 +32,13 @@ const exploreStyles = makeStyles((theme) => ({
     marginBottom: "2rem",
   },
   button: theme.buttonPrimary,
+  loading: {
+    display: "flex",
+    textAlign: "center",
+    alignItems: "center",
+    minHeight: "40rem",
+    [theme.breakpoints.down("sm")]: { minHeight: "23rem" },
+  },
 }));
 
 function Explore(props) {
@@ -60,9 +67,6 @@ function Explore(props) {
       8 - favoritesArray.length
     );
     favoritesArray.forEach((e) => (e.liked = true));
-    console.log(favoritesArray);
-    console.log(randomLocations);
-
     setState({
       locations: [...favoritesArray, ...randomLocations],
       favorites: favoritesArray,
@@ -76,58 +80,73 @@ function Explore(props) {
     <>
       <Grid
         container
-        justify='center'
-        alignItems='center'
-        direction='row'
-        className={classes.pageContainer}>
+        justify="center"
+        alignItems="center"
+        direction="row"
+        className={classes.pageContainer}
+      >
         <Grid
           container
           item
           xs={12}
-          justify='center'
-          alignItems='center'
-          className={classes.pt4}>
-          <Grid item xs={12} container justify='center' alignItems='center'>
-            <Typography variant='h2' className={classes.textAlign}>
+          justify="center"
+          alignItems="center"
+          className={classes.pt4}
+        >
+          <Grid item xs={12} container justify="center" alignItems="center">
+            <Typography variant="h2" className={classes.textAlign}>
               Explore Destinations
             </Typography>
           </Grid>
         </Grid>
         <Grid item>
-          <Typography variant='h5' className={classes.headerSpacing}>
+          <Typography variant="h5" className={classes.headerSpacing}>
             World's Top Destinations to Explore
           </Typography>
         </Grid>
         <Grid
           container
           item
-          justify='center'
-          alignItems='center'
+          justify="center"
+          alignItems="center"
           spacing={5}
-          className={classes.cardContainer}>
+          className={classes.cardContainer}
+        >
           <Grid
             container
-            alignItems='center'
-            justify='center'
-            className={classes.buttonContainer}>
+            alignItems="center"
+            justify="center"
+            className={classes.buttonContainer}
+          >
             <Button
-              variant='contained'
-              size='large'
+              variant="contained"
+              size="large"
               className={classes.button}
-              onClick={() => shuffleLocations()}>
+              onClick={() => shuffleLocations()}
+            >
               Shuffle <ShuffleIcon />
             </Button>
           </Grid>
-          {state.locations.map((loc) => {
-            return (
-              <Grid item xs={12} md={6} xl={3} key={loc.id}>
-                <ExploreCard
-                  location={loc}
-                  imgName={loc.imgName}
-                  alreadyLiked={loc.liked ? true : false}></ExploreCard>
-              </Grid>
-            );
-          })}
+          {state.locations.length > 0 ? (
+            state.locations.map((loc) => {
+              return (
+                <Grid item xs={12} md={6} xl={3} key={loc.id}>
+                  <ExploreCard
+                    location={loc}
+                    imgName={loc.imgName}
+                    alreadyLiked={loc.liked ? true : false}
+                  ></ExploreCard>
+                </Grid>
+              );
+            })
+          ) : (
+            <div className={classes.loading}>
+              <CircularProgress
+                className={classes.loadingCircle}
+                size="100px"
+              />
+            </div>
+          )}
         </Grid>
       </Grid>
     </>
