@@ -108,7 +108,7 @@ function SignUp(props) {
 
   const [page, setPage] = useState(true);
   const [locations, setLocations] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(["London", "Toronto"]);
 
   useEffect(() => {
     const getLocations = async () => {
