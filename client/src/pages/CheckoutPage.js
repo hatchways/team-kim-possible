@@ -6,10 +6,10 @@ import FlightTakeoffIcon from "@material-ui/icons/FlightTakeoff";
 import { loadStripe } from "@stripe/stripe-js";
 import FlightLandIcon from "@material-ui/icons/FlightLand";
 import ApartmentIcon from "@material-ui/icons/Apartment";
-import { ShoppingCartContext } from "../components/ShoppingCart/ShoppingCartContext";
+import { ShoppingCartContext } from "../components/ShoppingCartContext";
 import axios from "axios";
 import DirectionsCarIcon from "@material-ui/icons/DirectionsCar";
-import CheckoutForm from "../components/ShoppingCart/CheckoutForm";
+import CheckoutForm from "../components/CheckoutForm";
 
 const checkoutStyles = makeStyles((theme) => ({
   cartSummaryContainer: {

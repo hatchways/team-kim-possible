@@ -18,7 +18,7 @@ import {
 } from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { getCityId, getRouteData, getCityName } from "../../utils/skyscanner";
+import { getCityId, getRouteData, getCityName } from "../utils/skyscanner";
 
 const useStyles = makeStyles({
   root: {

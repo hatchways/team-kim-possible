@@ -4,7 +4,7 @@ import StarIcon from "@material-ui/icons/Star";
 import { makeStyles } from "@material-ui/core/styles";
 import Image from "material-ui-image";
 import { addToShoppingCart } from "../../utils/shoppingCart";
-import { ShoppingCartContext } from "../ShoppingCart/ShoppingCartContext";
+import { ShoppingCartContext } from "../ShoppingCartContext";
 
 const useStyles = makeStyles({
   wrapper: {
