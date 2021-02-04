@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import {
   Paper,
   TextField,
@@ -11,7 +11,7 @@ import {
   ListItemText,
   FormControl,
   Input,
-  ClickAwayListener,
+  InputLabel,
   List,
 } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
@@ -24,6 +24,7 @@ import axios from "axios";
 import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 import { useHistory } from "react-router-dom";
 import { getCityName } from "../utils/skyscanner";
+import { dataContext } from "../context";
 
 const signUpStyles = makeStyles((theme) => ({
   paper: {
@@ -65,6 +66,7 @@ const signUpStyles = makeStyles((theme) => ({
     borderRadius: "6px",
     marginTop: "2.5rem",
     padding: "0.5rem, 1rem, 0.5rem, 1rem",
+    width: "100%",
   },
   secondary: {
     color: `${theme.palette.secondary.main}`,
@@ -76,17 +78,20 @@ const signUpStyles = makeStyles((theme) => ({
   list: {
     width: "100%",
     overflow: "auto",
-    maxHeight: "200px",
+    height: "200px",
+    marginBottom: "20px",
   },
   select: {
-    marginTop: "20px",
+    color: `${theme.palette.secondary.main}`,
+  },
+  page2: {
+    width: "100%",
   },
 }));
 
 function SignUp(props) {
   const theme = useTheme();
   const classes = signUpStyles(theme);
-  const history = useHistory();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -97,46 +102,26 @@ function SignUp(props) {
   const [passwordLengthError, setPasswordLengthError] = useState(false);
   const [emailValidationError, setEmailValidationError] = useState(false);
   const [signUpErr, setSignUpErr] = useState(false);
-  const [page, setPage2] = useState(false);
+  const { dispatch } = useContext(dataContext);
   const [home, setHome] = useState("");
   const [options, setOptions] = useState([]);
   const timeoutRef = useRef();
 
+  const [page, setPage] = useState(true);
   const [locations, setLocations] = useState([]);
-  const [showSelect, setShowSelect] = useState(false);
   const [favorites, setFavorites] = useState([]);
-  const wrapperRef = useRef(null);
 
   useEffect(() => {
     const getLocations = async () => {
       const response = await axios.get("/locations");
       const locations = response.data.locations;
-      console.log(locations);
       setLocations(locations);
     };
     getLocations();
   }, []);
 
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside, true);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside, true);
-    };
-  }, []);
-  console.log(favorites);
-
-  const handleAddMore = () => {
-    setShowSelect(true);
-  };
   const handleChange = (e) => {
     setFavorites(e.target.value);
-  };
-
-  const handleClickOutside = (e) => {
-    // if (wrapperRef.current && !wrapperRef.current.contains(e.target))
-    //   console.log("test123");
-    // setShowSelect(false);
   };
 
   const page1 = () => {
@@ -301,6 +286,7 @@ function SignUp(props) {
               disableRipple={true}
               type="submit"
               className={classes.continueButton}
+              onClick={handleFormSubmit}
             >
               Continue
             </Button>
@@ -312,89 +298,84 @@ function SignUp(props) {
 
   const page2 = () => {
     return (
-      <div>
+      <div className={classes.page2}>
         <Grid container item xs={12} justify="center" alignItems="center">
-          <List className={classes.list}>
-            {favorites.map((i) => (
-              <Grid item xs={12}>
-                <Paper
-                  variant="outlined"
-                  elevation={0}
-                  className={classes.locationPaper}
-                >
-                  <Grid container alignItems="center" justify="flex-start">
-                    <Grid item xs={1}>
-                      <RoomOutlinedIcon
-                        className={classes.locationIcon}
-                      ></RoomOutlinedIcon>
+          <Grid item xs={6}>
+            <List className={classes.list}>
+              {favorites.map((i, index) => (
+                <Grid item xs={12} key={index}>
+                  <Paper
+                    variant="outlined"
+                    elevation={0}
+                    className={classes.locationPaper}
+                  >
+                    <Grid container alignItems="center" justify="flex-start">
+                      <Grid item xs={1}>
+                        <RoomOutlinedIcon
+                          className={classes.locationIcon}
+                        ></RoomOutlinedIcon>
+                      </Grid>
+                      <Grid item xs={8}>
+                        <p className={classes.locationText}>{i}</p>
+                      </Grid>
+                      <Grid
+                        container
+                        justify="flex-end"
+                        item
+                        xs={3}
+                        className={classes.pr1}
+                      >
+                        <Button onClick={handleDelete(i)}>
+                          <CloseModal
+                            cb={handleExit}
+                            modalContainer={false}
+                          ></CloseModal>
+                        </Button>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={8}>
-                      <p className={classes.locationText}>{i}</p>
-                    </Grid>
-                    <Grid
-                      container
-                      justify="flex-end"
-                      item
-                      xs={3}
-                      className={classes.pr1}
-                    >
-                      <CloseModal
-                        cb={handleExit}
-                        modalContainer={false}
-                      ></CloseModal>
-                    </Grid>
-                  </Grid>
-                </Paper>
-              </Grid>
-            ))}
-          </List>
-
-          <Grid
-            container
-            item
-            xs={4}
-            justify="center"
-            className={classes.select}
-          >
-            {showSelect ? (
-              <FormControl ref={wrapperRef}>
-                <Select
-                  multiple
-                  value={favorites}
-                  onChange={handleChange}
-                  input={<Input />}
-                  renderValue={(selected) => ""}
-                >
-                  {locations.map((i) => (
-                    <MenuItem key={i._id} value={i.location}>
-                      <Checkbox checked={favorites.indexOf(i.location) > -1} />
-                      <ListItemText primary={i.location} />
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            ) : (
-              <Button className={classes.secondary} onClick={handleAddMore}>
-                Add More
-              </Button>
-            )}
+                  </Paper>
+                </Grid>
+              ))}
+            </List>
+          </Grid>
+        </Grid>
+        <Grid container item xs={12} justify="center">
+          <Grid item xs={4}>
+            <FormControl fullWidth variant="filled">
+              <InputLabel className={classes.select}>ADD MORE</InputLabel>
+              <Select
+                multiple
+                value={favorites}
+                onChange={handleChange}
+                input={<Input />}
+                renderValue={(_) => ""}
+              >
+                {locations.map((i) => (
+                  <MenuItem
+                    key={i._id}
+                    value={i.location}
+                    disabled={isDisabled(i.location)}
+                  >
+                    <Checkbox checked={favorites.indexOf(i.location) > -1} />
+                    <ListItemText primary={i.location} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
         </Grid>
 
         {/* BUTTON */}
 
         <Grid container justify="center" alignItems="center" item>
-          <Grid item xs={8}>
+          <Grid item xs={4}>
             <Button
               color={"primary"}
               variant="contained"
               fullWidth={true}
               size="large"
               disableRipple={true}
-              onClick={() => {
-                history.push("/");
-                props.exit();
-              }}
+              onClick={handleAddFavorites}
               className={classes.signUpButton}
             >
               Sign Up
@@ -433,6 +414,20 @@ function SignUp(props) {
     setConfirmPassword(e.target.value);
   };
 
+  const handleDelete = (i) => () => {
+    console.log("test", i);
+    console.log(favorites.filter((el) => el !== i));
+    setFavorites((state) => state.filter((el) => el !== i));
+  };
+
+  const isDisabled = (x) => {
+    if (favorites.length >= 3 && !favorites.includes(x)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (name === "") {
@@ -464,13 +459,22 @@ function SignUp(props) {
         const resp = await axios.post("/signup", userData);
         localStorage.setItem("loggedIn", "true");
         localStorage.setItem("user", JSON.stringify(resp.data.user));
-        setPage2(true);
+        setPage(false);
       } catch (err) {
         setSignUpErr(true);
         return;
       }
     };
     sendSignUpRequest();
+  };
+
+  const handleAddFavorites = () => {
+    const sendFavorites = async () => {
+      const response = await axios.post("/favorites", { favorites });
+      dispatch({ type: "SET_USER", payload: response.user });
+      props.exit();
+    };
+    sendFavorites();
   };
 
   return (
@@ -487,7 +491,7 @@ function SignUp(props) {
 
           {/* FORM SECTION */}
 
-          <form onSubmit={handleFormSubmit}>{page ? page2() : page1()}</form>
+          {page ? page1() : page2()}
 
           {/* FOOTER */}
 

@@ -1,177 +1,153 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, Typography } from "@material-ui/core";
 import Avatar from "./BigAvatar";
 import ExploreCard from "./ExploreCard";
 import "fontsource-roboto";
+import { dataContext } from "../context";
+import axios from "axios";
 
-const useStyles = makeStyles((themes) => ({
-  root: {
-    maxWidth: "100%",
-    overflowX: "auto",
-  },
-  grid: {
-    width: "100%",
-    margin: "0px",
-    maxWidth: "100%",
-    overflowX: "hidden",
-  },
-  leftQuadrant: {
-    width: "30%",
-    margin: "0px",
-  },
-  rightQuadrant: {
-    width: "90%",
-    margin: "0px",
-    marginLeft: "30%",
-    backgroundImage:
-      "linear-gradient(to right, rgba(240,240,248,1), rgba(240,240,248,0));",
-    position: "absolute",
-    marginRight: "-30%",
-  },
-  paper: {
-    textAlign: "center",
-    backgroundColor: "transparent",
-  },
-  avatar: {
-    marginLeft: "41%",
-  },
-  container: {
-    display: "grid",
-    marginTop: "9%",
-  },
-  exploreContainer: {
-    marginLeft: "13%",
-    marginRight: "-13%",
-  },
-  invisible: {
-    marginLeft: "10%",
-    marginRight: "-10%",
-    opacity: "0",
-  },
-  alignment: {
-    alignContent: "center",
-    textAlign: "center",
-    margin: "auto",
-  },
-  logout: {
-    position: "absolute",
-    botton: "10px",
-    alignContent: "center",
-    textAlign: "center",
-    margin: "auto",
-  },
-  selected: {
-    textAlign: "center",
-    color: "#F09600",
-    marginLeft: "-38%",
-  },
-  misc: {
-    marginRight: "20px",
-    color: "#9A9DBA",
-    position: "fixed",
-    bottom: "10px",
-    left: "13%",
-  },
-  h3: {
-    marginLeft: "21%",
-    marginTop: "4%",
-  },
-  exploreButton: {
-    color: "black",
-    marginTop: "8%",
-  },
-  FavouriteSpace: {
-    marginTop: "10%",
-  },
-  buttongray: {
-    color: "#808080",
-  },
-  email: {
-    color: "#9EA1BC",
-  },
-}));
+const useStyles = makeStyles((themes) => {
+  return {
+    root: {
+      maxWidth: "100%",
+      overflowX: "auto",
+    },
+    grid: {
+      width: "100%",
+      margin: "0px",
+      maxWidth: "100%",
+      overflowX: "hidden",
+    },
+    leftQuadrant: {
+      width: "30%",
+      margin: "0px",
+    },
+    rightQuadrant: {
+      width: "90%",
+      margin: "0px",
+      marginLeft: "30%",
+      backgroundImage:
+        "linear-gradient(to right, rgba(240,240,248,1), rgba(240,240,248,0));",
+      position: "absolute",
+      marginRight: "-30%",
+    },
+    paper: {
+      textAlign: "center",
+      backgroundColor: "transparent",
+    },
+    avatar: {
+      marginLeft: "41%",
+    },
+    container: {
+      display: "grid",
+      marginTop: "9%",
+    },
+    exploreContainer: {
+      marginLeft: "13%",
+      marginRight: "-13%",
+    },
+    invisible: {
+      marginLeft: "10%",
+      marginRight: "-10%",
+      opacity: "0",
+    },
+    alignment: {
+      alignContent: "center",
+      textAlign: "center",
+      margin: "auto",
+    },
+    logout: {
+      position: "absolute",
+      botton: "10px",
+      alignContent: "center",
+      textAlign: "center",
+      margin: "auto",
+    },
+    selected: {
+      textAlign: "center",
+      color: "#F09600",
+      marginLeft: "-38%",
+    },
+    misc: {
+      marginRight: "20px",
+      color: "#9A9DBA",
+      position: "fixed",
+      bottom: "10px",
+      left: "13%",
+    },
+    h3: {
+      marginLeft: "21%",
+      marginTop: "4%",
+    },
+    exploreButton: {
+      color: "black",
+      marginTop: "8%",
+    },
+    FavouriteSpace: {
+      marginTop: "10%",
+    },
+    buttongray: {
+      color: "#808080",
+    },
+    email: {
+      color: "#9EA1BC",
+    },
+  };
+});
 
 export default function UserPage() {
   let invisibleCount = 0;
   const classes = useStyles();
-  const [exploreCards, setExploreCards] = React.useState([
-    {
-      location: "Oslo",
-      country: "Norway",
-      img: "oslo.png",
-      liked: true,
-    },
-    {
-      location: "New York",
-      country: "USA",
-      img: "newyork.png",
-      liked: true,
-    },
-    {
-      location: "Bali",
-      country: "Indonesia",
-      img: "bali.png",
-      liked: true,
-    },
-    {
-      location: "Vancouver",
-      country: "Canada",
-      img: "searchHero.jpg",
-      liked: true,
-    },
-    {
-      location: "Rome",
-      country: "Italy",
-      img: "rome.png",
-      liked: true,
-    },
-  ]);
+  const [exploreCards, setExploreCards] = useState([]);
 
-  const { name, email } = JSON.parse(localStorage.getItem("user"));
-
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await axios.get("/profile");
+      console.log(user.data.favorites);
+      setName(user.data.name);
+      setEmail(user.data.email);
+      setExploreCards(user.data.favorites);
+    };
+    getUser();
+  }, []);
   const listOfExploreCards = exploreCards.map((exploreCard) => {
-    if (exploreCard["liked"] === true) {
-      if (invisibleCount < 2) {
-        invisibleCount++;
-        return (
-          <Grid item xs={3} className={classes.exploreContainer}>
-            <ExploreCard
-              location={exploreCard.location}
-              country={exploreCard.country}
-              imgName={exploreCard.img}
-              onLike={() => {
-                exploreCard["liked"] = false;
-              }}
-            ></ExploreCard>
-          </Grid>
-        );
-      }
+    // if (exploreCard["liked"] === true) {
+    //   if (invisibleCount < 2) {
+    //     invisibleCount++;
+    //     return (
+    //       <Grid item xs={3} className={classes.exploreContainer}>
+    //         {/* <ExploreCard
+    //           location={exploreCard.location}
+    //           country={exploreCard.country}
+    //           // imgName={exploreCard.img}
+    //           onLike={() => {
+    //             exploreCard["liked"] = false;
+    //           }}
+    //         ></ExploreCard> */}
+    //       </Grid>
+    //     );
+    //   }
 
-      if (invisibleCount > 1) {
-        invisibleCount = 1;
-        return (
-          <React.Fragment>
-            <Grid item xs={3} className={classes.invisible}>
-              <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
-            </Grid>
-            <Grid item xs={3} className={classes.invisible}>
-              <ExploreCard location="Cancun" country="Mexico"></ExploreCard>
-            </Grid>
-            <Grid item xs={3} className={classes.exploreContainer}>
-              <ExploreCard
-                location={exploreCard.location}
-                country={exploreCard.country}
-                imgName={exploreCard.img}
-                onLike={() => {
-                  exploreCard["liked"] = false;
-                }}
-              ></ExploreCard>
-            </Grid>
-          </React.Fragment>
-        );
-      }
-    }
+    // if (invisibleCount > 1) {
+    //   invisibleCount = 1;
+    return (
+      <Grid container>
+        <Grid item xs={3}>
+          <ExploreCard
+            // country={exploreCard.country}
+            imgName={exploreCard.imgName}
+            // onLike={() => {
+            //   exploreCard["liked"] = false;
+            // }}
+            location={{ location: exploreCard.location }}
+            alreadyLiked={true}
+          ></ExploreCard>
+        </Grid>
+      </Grid>
+    );
   });
 
   return (
@@ -184,7 +160,7 @@ export default function UserPage() {
         </Grid>
         <Grid item xs={12} className={classes.alignment}>
           <Typography variant="h5" gutterBottom>
-            {name.toUpperCase()}
+            {name}
           </Typography>
           <Typography className={classes.email} gutterBottom>
             {email}

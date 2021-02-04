@@ -91,7 +91,7 @@ const Search = (props) => {
         departureCity: JSON.parse(localStorage.getItem("user")).home,
       }));
     }
-  }, [localStorage.getItem("user")]);
+  }, [setState]);
 
   return (
     <Grid item className={classes.root}>

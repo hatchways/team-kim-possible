@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { MuiThemeProvider } from "@material-ui/core";
 import { theme } from "./themes/theme";
@@ -14,6 +14,8 @@ import Explore from "./components/Explore";
 import { ShoppingCartProvider } from "./components/ShoppingCartContext";
 import HotelsPage from "./pages/HotelsPage";
 import ExplorePage from "./pages/ExplorePage";
+import { dataContext } from "./context";
+import axios from "axios";
 
 const appStyles = makeStyles((theme) => ({
   container: {
@@ -31,13 +33,39 @@ const appStyles = makeStyles((theme) => ({
   },
 }));
 
+const INIT_STATE = {
+  user: { name: "", email: "", home: "", favorites: [] },
+  flights: [],
+  hotels: [],
+  cars: [],
+  shoppingCart: [],
+};
+const reducer = (state, { type, payload }) => {
+  switch (type) {
+    case "SET_USER":
+      return { ...state, user: payload };
+    default:
+      return state;
+  }
+};
+
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const classes = appStyles(theme);
+  const [state, dispatch] = useReducer(reducer, INIT_STATE);
 
   useEffect(() => {
     checkLoggedIn();
   });
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await axios.get("/profile");
+      return user.data;
+    };
+    if (loggedIn) {
+      getUser();
+    }
+  }, [loggedIn]);
 
   const checkLoggedIn = () => {
     if (localStorage.loggedIn) {
@@ -52,51 +80,57 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <MuiThemeProvider theme={theme}>
-        <ShoppingCartProvider>
-          <Navbar />
-          <Switch>
-            <Route exact path="/">
-              <SearchPage />
-              {loggedIn ? null : (
-                <div className={classes.container}>
-                  <SignIn exit={handleModalExit} />
-                </div>
-              )}
-            </Route>
-            <Route exact path="/signup">
-              {loggedIn ? (
-                <Redirect to="/" />
-              ) : (
-                <>
-                  <SearchPage />
-                  <div className={classes.container}>
-                    <SignUp exit={handleModalExit} />
-                  </div>
-                </>
-              )}
-            </Route>
-            <Route exact path="/signin">
-              {loggedIn ? (
-                <Redirect to="/" />
-              ) : (
-                <>
-                  <SearchPage />
+    <dataContext.Provider value={{ state, dispatch }}>
+      <BrowserRouter>
+        <MuiThemeProvider theme={theme}>
+          <ShoppingCartProvider>
+            <Navbar />
+
+            <Switch>
+              <Route exact path="/">
+                <SearchPage />
+                {loggedIn ? null : (
                   <div className={classes.container}>
                     <SignIn exit={handleModalExit} />
                   </div>
-                </>
-              )}
-            </Route>
-            <ProtectedRoute exact path="/carrental" component={CarRental} />
-            <ProtectedRoute exact path="/userpage" component={UserPage} />
-            <ProtectedRoute exact path="/explore" component={ExplorePage} />
-            <ProtectedRoute exact path="/hotels" component={HotelsPage} />
-          </Switch>
-        </ShoppingCartProvider>
-      </MuiThemeProvider>
-    </BrowserRouter>
+                )}
+              </Route>
+
+              <Route exact path="/signup">
+                {loggedIn ? (
+                  <Redirect to="/explore" />
+                ) : (
+                  <>
+                    <SearchPage />
+                    <div className={classes.container}>
+                      <SignUp exit={handleModalExit} />
+                    </div>
+                  </>
+                )}
+              </Route>
+              <Route exact path="/signin">
+                {loggedIn ? (
+                  <Redirect to="/explore" />
+                ) : (
+                  <>
+                    <SearchPage />
+                    <div className={classes.container}>
+                      <SignIn exit={handleModalExit} />
+                    </div>
+                  </>
+                )}
+              </Route>
+              <ProtectedRoute exact path="/explore" component={ExplorePage} />
+              <ProtectedRoute exact path="/userpage" component={UserPage} />
+
+              <ProtectedRoute exact path="/carrental" component={CarRental} />
+
+              <ProtectedRoute exact path="/hotels" component={HotelsPage} />
+            </Switch>
+          </ShoppingCartProvider>
+        </MuiThemeProvider>
+      </BrowserRouter>
+    </dataContext.Provider>
   );
 }
 

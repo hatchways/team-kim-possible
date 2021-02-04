@@ -26,7 +26,7 @@ export default function ImageAvatars() {
     <div className={classes.root}>
       <Avatar
         alt="John  Sharp"
-        src="/static/images/avatar/1.jpg"
+        // src="/static/images/avatar/1.jpg"
         className={classes.large}
       />
     </div>
