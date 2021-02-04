@@ -60,6 +60,9 @@ function Explore(props) {
       8 - favoritesArray.length
     );
     favoritesArray.forEach((e) => (e.liked = true));
+    console.log(favoritesArray);
+    console.log(randomLocations);
+
     setState({
       locations: [...favoritesArray, ...randomLocations],
       favorites: favoritesArray,
@@ -68,6 +71,7 @@ function Explore(props) {
   useEffect(() => {
     shuffleLocations();
   }, [allLocations]);
+
   return (
     <>
       <Grid

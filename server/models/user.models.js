@@ -46,9 +46,12 @@ const userSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: Hotels,
     required: true,
-    favorites: {
-      type: [Object],
-    },
+  },
+  favorites: {
+    type: [Object],
+  },
+  shoppingCart: {
+    type: [Object],
   },
 });
 
