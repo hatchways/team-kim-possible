@@ -71,7 +71,7 @@ function ExploreCard(props) {
             {liked ? (
               <motion.div
                 intial={{ scale: 1 }}
-                animate={{ scale: [1, 1.1, 1.2, 0.9, 0.85, 0.9, 1.2] }}
+                animate={{ scale: [1, 1.1, 1.2, 0.9, 0.9, 1.2] }}
                 transition={{ duration: 0.35 }}>
                 <FavoriteIcon
                   className={classes.favoriteIconLiked}
