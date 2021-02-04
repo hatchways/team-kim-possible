@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { Flights } = require("./flights.models");
+const { Cars } = require("./cars.models");
+const { Hotels } = require("./hotels.models");
 
 const userSchema = mongoose.Schema({
   name: {
@@ -30,7 +33,25 @@ const userSchema = mongoose.Schema({
     type: String,
   },
   home: { type: String },
+  car: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Cars,
+    required: true,
+  },
+  flight: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Flights,
+    required: true,
+  },
+  hotel: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: Hotels,
+    required: true,
+  },
   favorites: {
+    type: [Object],
+  },
+  shoppingCart: {
     type: [Object],
   },
 });

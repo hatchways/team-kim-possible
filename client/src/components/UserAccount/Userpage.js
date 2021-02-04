@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Button, Typography } from "@material-ui/core";
-import Avatar from "./BigAvatar";
-import ExploreCard from "./ExploreCard";
-import { useHistory } from "react-router-dom";
+import Avatar from "../Avatars/BigAvatar";
+import ExploreCard from "../ExploreCard";
 import "fontsource-roboto";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((themes) => {
   return {

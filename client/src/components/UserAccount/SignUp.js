@@ -17,9 +17,9 @@ import {
 import { Autocomplete } from "@material-ui/lab";
 import Box from "@material-ui/core/Box";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
-import SignInModalFooter from "./MuiComponents/SignInModalFooter";
-import SignInModalHeader from "./MuiComponents/SignInModalHeader";
-import CloseModal from "./MuiComponents/CloseModal";
+import SignInModalFooter from "../MuiComponents/SignInModalFooter";
+import SignInModalHeader from "../MuiComponents/SignInModalHeader";
+import CloseModal from "../MuiComponents/CloseModal";
 import axios from "axios";
 import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 import { useHistory } from "react-router-dom";
@@ -367,7 +367,7 @@ function SignUp(props) {
         {/* BUTTON */}
 
         <Grid container justify="center" alignItems="center" item>
-          <Grid item xs={4}>
+          <Grid item xs={5}>
             <Button
               color={"primary"}
               variant="contained"

@@ -19,7 +19,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 
-import { getCityId, getRouteData, getCityName } from "../utils/skyscanner";
+import { getCityId, getRouteData, getCityName } from "../../utils/skyscanner";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -119,10 +119,10 @@ const Search = (props) => {
                   setOptionsDeparture(response);
                 }, 500);
               }}
-              renderInput={(params) => <TextField {...params} label="From" />}
+              renderInput={(params) => <TextField {...params} label='From' />}
             />
 
-            <Divider orientation="vertical" flexItem />
+            <Divider orientation='vertical' flexItem />
           </Grid>
 
           <Grid item xs={12} sm={2} className={classes.item}>
@@ -147,65 +147,63 @@ const Search = (props) => {
                 }, 500);
               }}
               renderInput={(params) => (
-                <TextField {...params} label="To" shrink />
+                <TextField {...params} label='To' shrink />
               )}
             />
-            <Divider orientation="vertical" flexItem />
+            <Divider orientation='vertical' flexItem />
           </Grid>
           <Grid item xs={12} sm={2} className={classes.item}>
             <KeyboardDatePicker
               disableToolbar
-              variant="inline"
-              format="MM/dd/yyyy"
-              margin="normal"
+              variant='inline'
+              format='MM/dd/yyyy'
+              margin='normal'
               className={classes.input}
-              label="Departure"
+              label='Departure'
               value={state.departureDate}
               minDate={new Date()}
               onChange={(e) => setState({ ...state, departureDate: e })}
             />
-            <Divider orientation="vertical" flexItem />
+            <Divider orientation='vertical' flexItem />
           </Grid>
           <Grid item xs={12} sm={2} className={classes.item}>
             <KeyboardDatePicker
               disableToolbar
-              variant="inline"
-              format="MM/dd/yyyy"
-              margin="normal"
+              variant='inline'
+              format='MM/dd/yyyy'
+              margin='normal'
               className={classes.input}
-              label="Arrival"
+              label='Return'
               value={state.arrivalDate}
               minDate={new Date()}
               onChange={(e) => setState({ ...state, arrivalDate: e })}
             />
-            <Divider orientation="vertical" flexItem />
+            <Divider orientation='vertical' flexItem />
           </Grid>
           <Grid item xs={12} sm={2} className={classes.item}>
             <FormControl className={classes.formControl}>
               <InputLabel shrink>Travellers</InputLabel>
               <Select
                 className={classes.input}
-                name="numOfTravellers"
+                name='numOfTravellers'
                 value={state.numOfTravellers}
                 onChange={(e) =>
                   setState({ ...state, numOfTravellers: e.target.value })
-                }
-              >
+                }>
                 <MenuItem value={1}>1</MenuItem>
                 <MenuItem value={2}>2</MenuItem>
                 <MenuItem value={3}>3</MenuItem>
               </Select>
             </FormControl>
-            <Divider orientation="vertical" flexItem />
+            <Divider orientation='vertical' flexItem />
           </Grid>
           <Grid item xs={12} sm={2} className={classes.item}>
             <FormControl className={classes.formControl}>
               <Button
                 class={classes.btn}
-                variant="contained"
-                type="submit"
-                onClick={handleSubmit}
-              >
+                variant='contained'
+                type='submit'
+                onClick={handleSubmit}>
                 {" "}
                 Search
               </Button>

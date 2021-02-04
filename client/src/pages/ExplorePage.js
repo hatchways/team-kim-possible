@@ -14,6 +14,7 @@ const ExplorePage = () => {
     };
     getFavorites();
   }, []);
+
   //Higher order component just so explore page loads all at once and not favorites first
   const HOC = Loading(Explore);
   return (
