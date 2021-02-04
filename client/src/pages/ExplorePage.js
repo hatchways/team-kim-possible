@@ -15,11 +15,9 @@ const ExplorePage = () => {
     getFavorites();
   }, []);
 
-  //Higher order component just so explore page loads all at once and not favorites first
+  //Higher order component just so explore page loads all at once and not favorites first(Reduce numb of Explore rerender by one)
   const HOC = Loading(Explore);
-  return (
-    <HOC allLocations={allLocations} isLoading={allLocations.length < 1} />
-  );
+  return <HOC allLocations={allLocations} />;
 };
 
 export default ExplorePage;

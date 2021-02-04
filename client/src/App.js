@@ -38,30 +38,18 @@ const appStyles = makeStyles((theme) => ({
 }));
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  //Update is literally only here to force a rerender of App when user signs up or signs in
+  const [update, setUpdate] = useState(false);
   const classes = appStyles(theme);
 
-  useEffect(() => {
-    checkLoggedIn();
-  });
-
-  const checkLoggedIn = () => {
-    if (localStorage.loggedIn) {
-      return setLoggedIn(true);
-    } else {
-      return setLoggedIn(false);
-    }
-  };
-
   const handleModalExit = () => {
-    setLoggedIn(true);
+    setUpdate(!update);
   };
-
   return (
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
         <ShoppingCartProvider>
-          {loggedIn ? (
+          {localStorage.loggedIn ? (
             <Navbar />
           ) : (
             <div className={classes.navContainer}>
@@ -69,17 +57,17 @@ function App() {
             </div>
           )}
           <Switch>
-            <Route exact path='/'>
+            <Route exact path="/">
               <SearchPage />
-              {loggedIn ? null : (
+              {localStorage.loggedIn ? null : (
                 <div className={classes.container}>
                   <SignIn exit={handleModalExit} />
                 </div>
               )}
             </Route>
-            <Route exact path='/signup'>
-              {loggedIn ? (
-                <Redirect to='/' />
+            <Route exact path="/signup">
+              {localStorage.loggedIn ? (
+                <Redirect to="/" />
               ) : (
                 <>
                   <SearchPage />
@@ -89,9 +77,9 @@ function App() {
                 </>
               )}
             </Route>
-            <Route exact path='/signin'>
-              {loggedIn ? (
-                <Redirect to='/' />
+            <Route exact path="/signin">
+              {localStorage.loggedIn ? (
+                <Redirect to="/" />
               ) : (
                 <>
                   <SearchPage />
@@ -101,12 +89,12 @@ function App() {
                 </>
               )}
             </Route>
-            <ProtectedRoute exact path='/carrental' component={CarRental} />
-            <ProtectedRoute exact path='/userpage' component={UserPage} />
-            <ProtectedRoute exact path='/explore' component={ExplorePage} />
-            <ProtectedRoute exact path='/hotels' component={HotelsPage} />
-            <ProtectedRoute exact path='/checkout' component={CheckoutPage} />
-            <ProtectedRoute exact path='/stripe' component={Stripe} />
+            <ProtectedRoute exact path="/carrental" component={CarRental} />
+            <ProtectedRoute exact path="/userpage" component={UserPage} />
+            <ProtectedRoute exact path="/explore" component={ExplorePage} />
+            <ProtectedRoute exact path="/hotels" component={HotelsPage} />
+            <ProtectedRoute exact path="/checkout" component={CheckoutPage} />
+            <ProtectedRoute exact path="/stripe" component={Stripe} />
           </Switch>
         </ShoppingCartProvider>
       </MuiThemeProvider>
