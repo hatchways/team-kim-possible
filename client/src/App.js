@@ -42,18 +42,6 @@ function App() {
   const [update, setUpdate] = useState(false);
   const classes = appStyles(theme);
 
-  // useEffect(() => {
-  //   checkLoggedIn();
-  // });
-
-  // const checkLoggedIn = () => {
-  //   if (localStorage.loggedIn) {
-  //     return setLoggedIn(true);
-  //   } else {
-  //     return setLoggedIn(false);
-  //   }
-  // };
-
   const handleModalExit = () => {
     setUpdate(!update);
   };
