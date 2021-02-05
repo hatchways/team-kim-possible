@@ -37,6 +37,7 @@ const exploreStyles = makeStyles((theme) => ({
 function Explore(props) {
   //To get image for exploreCard, make sure the image is saved in public with the name of the place. ex: "public/images/cancun.png"
   //THIS: props.location.toLowerCase() === saved image name
+
   const { allLocations } = props;
   const theme = useTheme();
   const classes = exploreStyles(theme);
@@ -70,6 +71,7 @@ function Explore(props) {
   };
   useEffect(() => {
     shuffleLocations();
+    console.log(state.locations);
   }, [allLocations]);
 
   return (

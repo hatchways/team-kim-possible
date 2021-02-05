@@ -20,5 +20,12 @@ router.post("/profile-picture", function (req, res, next) {
     });
   });
 });
-
+router.get("/", async function (req, res, next) {
+  try {
+    const user = await User.findById(req.user._id);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
 module.exports = router;

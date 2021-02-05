@@ -33,6 +33,8 @@ const carRentalRouter = require("./routes/car-rental");
 const hotelRouter = require("./routes/hotel");
 const flightRouter = require("./routes/flight");
 const stripeRouter = require("./routes/stripe");
+const locationsRouter = require("./routes/locations");
+
 const shoppingCartRouter = require("./routes/shopping-cart");
 const exploreRouter = require("./routes/explore");
 const auth = require("./middleware/auth");
@@ -60,6 +62,7 @@ app.use("/hotels", hotelRouter);
 app.use("/flights", flightRouter);
 app.use("/favorites", auth, favoritesRouter);
 app.use("/profile", auth, profileRouter);
+app.use("/locations", locationsRouter);
 app.use("/stripe", stripeRouter);
 app.use("/shopping-cart", auth, shoppingCartRouter);
 app.use("/explore", exploreRouter);

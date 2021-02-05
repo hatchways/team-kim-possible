@@ -41,7 +41,7 @@ function CloseModal(props) {
           </div>
         </Box>
       ) : (
-        <div className={classes.closeX1} onClick={() => props.exit()}>
+        <div className={classes.closeX1}>
           <div className={classes.closeX2}></div>
         </div>
       )}

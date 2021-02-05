@@ -1,7 +1,21 @@
-import React, { useState } from "react";
-import { Paper, TextField, Grid, FormHelperText } from "@material-ui/core";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  Paper,
+  TextField,
+  Grid,
+  FormHelperText,
+  Select,
+  Button,
+  MenuItem,
+  Checkbox,
+  ListItemText,
+  FormControl,
+  Input,
+  InputLabel,
+  List,
+} from "@material-ui/core";
+import { Autocomplete } from "@material-ui/lab";
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
 import { useTheme, makeStyles } from "@material-ui/core/styles";
 import SignInModalFooter from "../MuiComponents/SignInModalFooter";
 import SignInModalHeader from "../MuiComponents/SignInModalHeader";
@@ -9,6 +23,7 @@ import CloseModal from "../MuiComponents/CloseModal";
 import axios from "axios";
 import RoomOutlinedIcon from "@material-ui/icons/RoomOutlined";
 import { useHistory } from "react-router-dom";
+import { getCityName } from "../../utils/skyscanner";
 
 const signUpStyles = makeStyles((theme) => ({
   paper: {
@@ -50,6 +65,7 @@ const signUpStyles = makeStyles((theme) => ({
     borderRadius: "6px",
     marginTop: "2.5rem",
     padding: "0.5rem, 1rem, 0.5rem, 1rem",
+    width: "100%",
   },
   secondary: {
     color: `${theme.palette.secondary.main}`,
@@ -57,6 +73,18 @@ const signUpStyles = makeStyles((theme) => ({
   signUpErrText: {
     marginTop: "2rem",
     fontSize: "1rem",
+  },
+  list: {
+    width: "100%",
+    overflow: "auto",
+    height: "200px",
+    marginBottom: "20px",
+  },
+  select: {
+    color: `${theme.palette.secondary.main}`,
+  },
+  page2: {
+    width: "100%",
   },
 }));
 
@@ -74,31 +102,50 @@ function SignUp(props) {
   const [passwordLengthError, setPasswordLengthError] = useState(false);
   const [emailValidationError, setEmailValidationError] = useState(false);
   const [signUpErr, setSignUpErr] = useState(false);
-  const [page, setPage2] = useState(false);
+  const [home, setHome] = useState("");
+  const [options, setOptions] = useState([]);
+  const timeoutRef = useRef();
+
+  const [page, setPage] = useState(true);
+  const [locations, setLocations] = useState([]);
+  const [favorites, setFavorites] = useState(["London", "Toronto"]);
+
+  useEffect(() => {
+    const getLocations = async () => {
+      const response = await axios.get("/locations");
+      const locations = response.data.locations;
+      setLocations(locations);
+    };
+    getLocations();
+  }, []);
+
+  const handleChange = (e) => {
+    setFavorites(e.target.value);
+  };
 
   const page1 = () => {
     return (
       <div>
-        <Grid container item xs={12} justify='center' alignItems='center'>
+        <Grid container item xs={12} justify="center" alignItems="center">
           <Grid item xs={8}>
             <Box mt={4.5}>
               {nameError ? (
                 <TextField
                   error
-                  id='filled-error-helper-text'
-                  label='Name'
+                  id="filled-error-helper-text"
+                  label="Name"
                   fullWidth={true}
-                  helperText='Please put a name.'
-                  variant='outlined'
+                  helperText="Please put a name."
+                  variant="outlined"
                   onChange={(e) => handleNameChange(e)}
                 />
               ) : (
                 <TextField
-                  id='Name'
-                  label='Name'
-                  variant='outlined'
+                  id="Name"
+                  label="Name"
+                  variant="outlined"
                   fullWidth={true}
-                  color='secondary'
+                  color="secondary"
                   onChange={(e) => handleNameChange(e)}
                 />
               )}
@@ -110,20 +157,20 @@ function SignUp(props) {
               {emailValidationError ? (
                 <TextField
                   error
-                  id='filled-error-helper-text'
-                  label='Email Address'
+                  id="filled-error-helper-text"
+                  label="Email Address"
                   fullWidth={true}
-                  helperText='Must be a valid email.'
-                  variant='outlined'
+                  helperText="Must be a valid email."
+                  variant="outlined"
                   onChange={(e) => handleEmailChange(e)}
                 />
               ) : (
                 <TextField
-                  id='Email'
-                  label='Email Address'
-                  variant='outlined'
+                  id="Email"
+                  label="Email Address"
+                  variant="outlined"
                   fullWidth={true}
-                  color='secondary'
+                  color="secondary"
                   onChange={(e) => handleEmailChange(e)}
                 />
               )}
@@ -135,22 +182,22 @@ function SignUp(props) {
               {passwordLengthError ? (
                 <TextField
                   error
-                  id='filled-error-helper-text'
-                  label='Password'
+                  id="filled-error-helper-text"
+                  label="Password"
                   fullWidth={true}
-                  helperText='Passwords must be greater than 6 characters.'
-                  variant='outlined'
-                  type='password'
+                  helperText="Passwords must be greater than 6 characters."
+                  variant="outlined"
+                  type="password"
                   onChange={(e) => handlePasswordChange(e)}
                 />
               ) : (
                 <TextField
-                  id='pass	'
-                  label='Password'
-                  variant='outlined'
+                  id="pass	"
+                  label="Password"
+                  variant="outlined"
                   fullWidth={true}
-                  color='secondary'
-                  type='password'
+                  color="secondary"
+                  type="password"
                   onChange={(e) => handlePasswordChange(e)}
                 />
               )}
@@ -162,48 +209,84 @@ function SignUp(props) {
               {passwordMatchError ? (
                 <TextField
                   error
-                  id='filled-error-helper-text'
-                  label='Confirm Password'
+                  id="filled-error-helper-text"
+                  label="Confirm Password"
                   fullWidth={true}
-                  helperText='Passwords must match.'
-                  variant='outlined'
-                  type='password'
+                  helperText="Passwords must match."
+                  variant="outlined"
+                  type="password"
                   onChange={(e) => handleConfirmPasswordChange(e)}
                 />
               ) : (
                 <TextField
-                  id='Confirm-Password'
-                  label='Confirm Password'
-                  variant='outlined'
+                  id="Confirm-Password"
+                  label="Confirm Password"
+                  variant="outlined"
                   fullWidth={true}
-                  color='secondary'
-                  type='password'
+                  color="secondary"
+                  type="password"
                   onChange={(e) => handleConfirmPasswordChange(e)}
                 />
               )}
+            </Box>
+          </Grid>
+
+          <Grid item xs={8}>
+            <Box mt={2}>
+              <Autocomplete
+                options={options}
+                autoComplete
+                autoHighlight
+                groupLabel
+                value={home}
+                getOptionLabel={(option) => option}
+                onChange={(_, newValue) => {
+                  setHome(newValue);
+                }}
+                onInputChange={(_, newInputValue) => {
+                  if (timeoutRef.current) {
+                    clearTimeout(timeoutRef.current);
+                  }
+                  timeoutRef.current = setTimeout(async () => {
+                    const response = await getCityName(newInputValue);
+                    setOptions(response);
+                  }, 500);
+                }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Home Airport"
+                    variant="outlined"
+                    color="secondary"
+                  />
+                )}
+              />
             </Box>
           </Grid>
         </Grid>
 
         {/* BUTTON */}
         {signUpErr ? (
-          <Grid item container justify='center' alignItems='center'>
+          <Grid item container justify="center" alignItems="center">
             <FormHelperText
               error
-              children='Could not sign user up'
-              className={classes.signUpErrText}></FormHelperText>
+              children="Could not sign user up"
+              className={classes.signUpErrText}
+            ></FormHelperText>
           </Grid>
         ) : null}
-        <Grid container justify='center' alignItems='center' item>
+        <Grid container justify="center" alignItems="center" item>
           <Grid item xs={4}>
             <Button
               color={"primary"}
-              variant='contained'
+              variant="contained"
               fullWidth={true}
-              size='large'
+              size="large"
               disableRipple={true}
-              type='submit'
-              className={classes.continueButton}>
+              type="submit"
+              className={classes.continueButton}
+              onClick={handleFormSubmit}
+            >
               Continue
             </Button>
           </Grid>
@@ -214,78 +297,86 @@ function SignUp(props) {
 
   const page2 = () => {
     return (
-      <div>
-        <Grid container item xs={12} justify='center' alignItems='center'>
-          <Grid item xs={9} className={classes.mt2}>
-            <Paper
-              variant='outlined'
-              elevation={0}
-              className={classes.locationPaper}>
-              <Grid container alignItems='center' justify='flex-start'>
-                <Grid item xs={1}>
-                  <RoomOutlinedIcon
-                    className={classes.locationIcon}></RoomOutlinedIcon>
+      <div className={classes.page2}>
+        <Grid container item xs={12} justify="center" alignItems="center">
+          <Grid item xs={6}>
+            <List className={classes.list}>
+              {favorites.map((i, index) => (
+                <Grid item xs={12} key={index}>
+                  <Paper
+                    variant="outlined"
+                    elevation={0}
+                    className={classes.locationPaper}
+                  >
+                    <Grid container alignItems="center" justify="flex-start">
+                      <Grid item xs={1}>
+                        <RoomOutlinedIcon
+                          className={classes.locationIcon}
+                        ></RoomOutlinedIcon>
+                      </Grid>
+                      <Grid item xs={8}>
+                        <p className={classes.locationText}>{i}</p>
+                      </Grid>
+                      <Grid
+                        container
+                        justify="flex-end"
+                        item
+                        xs={3}
+                        className={classes.pr1}
+                      >
+                        <Button onClick={handleDelete(i)}>
+                          <CloseModal
+                            cb={handleExit}
+                            modalContainer={false}
+                          ></CloseModal>
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </Paper>
                 </Grid>
-                <Grid item xs={3}>
-                  <p className={classes.locationText}>Paris</p>
-                </Grid>
-                <Grid
-                  container
-                  justify='flex-end'
-                  item
-                  xs={8}
-                  className={classes.pr1}>
-                  <CloseModal cb={null} modalContainer={false}></CloseModal>
-                </Grid>
-              </Grid>
-            </Paper>
+              ))}
+            </List>
           </Grid>
-          <Grid item xs={9}>
-            <Paper
-              variant='outlined'
-              elevation={0}
-              className={classes.locationPaper}>
-              <Grid container alignItems='center' justify='flex-start'>
-                <Grid item xs={1}>
-                  <RoomOutlinedIcon
-                    className={classes.locationIcon}></RoomOutlinedIcon>
-                </Grid>
-                <Grid item xs={3}>
-                  <p className={classes.locationText}>Bali</p>
-                </Grid>
-                <Grid
-                  container
-                  justify='flex-end'
-                  item
-                  xs={8}
-                  className={classes.pr1}>
-                  <CloseModal
-                    cb={handleExit}
-                    modalContainer={false}></CloseModal>
-                </Grid>
-              </Grid>
-            </Paper>
-          </Grid>
-          <Grid container item xs={4} justify='center'>
-            <p className={classes.secondary}>Add More</p>
+        </Grid>
+        <Grid container item xs={12} justify="center">
+          <Grid item xs={4}>
+            <FormControl fullWidth variant="filled">
+              <InputLabel className={classes.select}>ADD MORE</InputLabel>
+              <Select
+                multiple
+                value={favorites}
+                onChange={handleChange}
+                input={<Input />}
+                renderValue={(_) => ""}
+              >
+                {locations.map((i) => (
+                  <MenuItem
+                    key={i._id}
+                    value={i.location}
+                    disabled={isDisabled(i.location)}
+                  >
+                    <Checkbox checked={favorites.indexOf(i.location) > -1} />
+                    <ListItemText primary={i.location} />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
         </Grid>
 
         {/* BUTTON */}
 
-        <Grid container justify='center' alignItems='center' item>
+        <Grid container justify="center" alignItems="center" item>
           <Grid item xs={5}>
             <Button
               color={"primary"}
-              variant='contained'
+              variant="contained"
               fullWidth={true}
-              size='large'
+              size="large"
               disableRipple={true}
-              onClick={() => {
-                history.push("/");
-                props.exit();
-              }}
-              className={classes.signUpButton}>
+              onClick={handleAddFavorites}
+              className={classes.signUpButton}
+            >
               Sign Up
             </Button>
           </Grid>
@@ -322,6 +413,20 @@ function SignUp(props) {
     setConfirmPassword(e.target.value);
   };
 
+  const handleDelete = (i) => () => {
+    console.log("test", i);
+    console.log(favorites.filter((el) => el !== i));
+    setFavorites((state) => state.filter((el) => el !== i));
+  };
+
+  const isDisabled = (x) => {
+    if (favorites.length >= 3 && !favorites.includes(x)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (name === "") {
@@ -342,16 +447,17 @@ function SignUp(props) {
       return;
     }
     const userData = {
-      name: name,
-      email: email,
-      password: password,
+      name,
+      email,
+      password,
+      home,
     };
 
     const sendSignUpRequest = async () => {
       try {
         const resp = await axios.post("/signup", userData);
         localStorage.setItem("loggedIn", "true");
-        setPage2(true);
+        setPage(false);
       } catch (err) {
         setSignUpErr(true);
         return;
@@ -360,20 +466,30 @@ function SignUp(props) {
     sendSignUpRequest();
   };
 
+  const handleAddFavorites = () => {
+    const sendFavorites = async () => {
+      const response = await axios.post("/favorites", { favorites });
+      history.push("/explore");
+      props.exit();
+    };
+    sendFavorites();
+  };
+
   return (
     <div className={classes.container}>
       <Paper elevation={3} className={classes.paper}>
         <CloseModal cb={props.exit} modalContainer={true}></CloseModal>
-        <Grid container direction='column' justify='center' alignItems='center'>
+        <Grid container direction="column" justify="center" alignItems="center">
           {/* TOP TEXT - HEADER */}
 
           <SignInModalHeader
-            title='Sign Up'
-            subTitle='Track Prices, organize travel plans and access member-only deals'></SignInModalHeader>
+            title="Sign Up"
+            subTitle="Please select your favourite travel destinations"
+          ></SignInModalHeader>
 
           {/* FORM SECTION */}
 
-          <form onSubmit={handleFormSubmit}>{page ? page2() : page1()}</form>
+          {page ? page1() : page2()}
 
           {/* FOOTER */}
 

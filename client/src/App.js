@@ -42,16 +42,15 @@ function App() {
   const classes = appStyles(theme);
 
   useEffect(() => {
+    const checkLoggedIn = () => {
+      if (localStorage.loggedIn) {
+        setLoggedIn(true);
+      } else {
+        setLoggedIn(false);
+      }
+    };
     checkLoggedIn();
-  });
-
-  const checkLoggedIn = () => {
-    if (localStorage.loggedIn) {
-      return setLoggedIn(true);
-    } else {
-      return setLoggedIn(false);
-    }
-  };
+  }, [loggedIn]);
 
   const handleModalExit = () => {
     setLoggedIn(true);
@@ -69,7 +68,7 @@ function App() {
             </div>
           )}
           <Switch>
-            <Route exact path='/'>
+            <Route exact path="/">
               <SearchPage />
               {loggedIn ? null : (
                 <div className={classes.container}>
@@ -77,9 +76,10 @@ function App() {
                 </div>
               )}
             </Route>
-            <Route exact path='/signup'>
+
+            <Route exact path="/signup">
               {loggedIn ? (
-                <Redirect to='/' />
+                <Redirect to="/explore" />
               ) : (
                 <>
                   <SearchPage />
@@ -89,9 +89,9 @@ function App() {
                 </>
               )}
             </Route>
-            <Route exact path='/signin'>
+            <Route exact path="/signin">
               {loggedIn ? (
-                <Redirect to='/' />
+                <Redirect to="/explore" />
               ) : (
                 <>
                   <SearchPage />
@@ -101,12 +101,12 @@ function App() {
                 </>
               )}
             </Route>
-            <ProtectedRoute exact path='/carrental' component={CarRental} />
-            <ProtectedRoute exact path='/userpage' component={UserPage} />
-            <ProtectedRoute exact path='/explore' component={ExplorePage} />
-            <ProtectedRoute exact path='/hotels' component={HotelsPage} />
-            <ProtectedRoute exact path='/checkout' component={CheckoutPage} />
-            <ProtectedRoute exact path='/stripe' component={Stripe} />
+            <ProtectedRoute exact path="/carrental" component={CarRental} />
+            <ProtectedRoute exact path="/userpage" component={UserPage} />
+            <ProtectedRoute exact path="/explore" component={ExplorePage} />
+            <ProtectedRoute exact path="/hotels" component={HotelsPage} />
+            <ProtectedRoute exact path="/checkout" component={CheckoutPage} />
+            <ProtectedRoute exact path="/stripe" component={Stripe} />
           </Switch>
         </ShoppingCartProvider>
       </MuiThemeProvider>

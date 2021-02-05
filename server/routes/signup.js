@@ -10,6 +10,7 @@ router.post("/", async function (req, res, next) {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
+      home: req.body.home,
       car: objectId(nullId),
       flight: objectId(nullId),
       hotel: objectId(nullId),
