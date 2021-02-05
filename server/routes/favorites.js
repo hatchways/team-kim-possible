@@ -6,14 +6,24 @@ const { Location } = require("../models/location.models");
 //PUT /favorites
 router.put("/", async function (req, res, next) {
   const { location, add } = req.body;
-  const user = await User.findById(req.user._id);
   if (add) {
-    user.favorites = [...user.favorites, location];
+    const user = await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { $push: { favorites: location } }
+    );
   } else {
-    user.favorites = user.favorites.filter((fav) => fav.id !== location.id);
+    //Following is just temporary fix for a bug for the sake of the demo
+    const user = await User.findById(req.user._id);
+    const updatedFavorites = user.favorites.filter(
+      (fav) => fav.location !== location.location
+    );
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { favorites: updatedFavorites }
+    );
   }
-  const updatedUser = await user.save();
-  res.status(200).send(updatedUser);
+
+  res.status(200).send();
 });
 
 router.get("/getAllFavorites", async function (req, res, next) {
@@ -24,7 +34,6 @@ router.get("/getAllFavorites", async function (req, res, next) {
 router.post("/", async function (req, res, next) {
   const { favorites } = req.body;
   try {
-    const user = await User.findById(req.user._id);
     async function getFavorites(arr) {
       let promises = arr.map(async (i) => {
         return await Location.findOne({ location: i });
@@ -32,10 +41,11 @@ router.post("/", async function (req, res, next) {
       return await Promise.all(promises);
     }
     let result = await getFavorites(favorites);
+    const user = await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { favorites: result }
+    );
 
-    user.favorites = result;
-
-    await user.save();
     res.status(200).json({
       user: {
         name: user.name,
