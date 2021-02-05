@@ -53,7 +53,9 @@ function Explore(props) {
     if (favoritesArray.length > 0) {
       filteredLocations = allLocations.filter(
         (location) =>
-          favoritesArray.findIndex((fav) => fav.id === location.id) < 0
+          favoritesArray.findIndex(
+            (fav) => fav.location === location.location
+          ) < 0
       );
     }
     const randomLocations = returnArrayRandom(
@@ -61,8 +63,6 @@ function Explore(props) {
       8 - favoritesArray.length
     );
     favoritesArray.forEach((e) => (e.liked = true));
-    console.log(favoritesArray);
-    console.log(randomLocations);
 
     setState({
       locations: [...favoritesArray, ...randomLocations],
@@ -71,52 +71,56 @@ function Explore(props) {
   };
   useEffect(() => {
     shuffleLocations();
-    console.log(state.locations);
   }, [allLocations]);
 
   return (
     <>
       <Grid
         container
-        justify='center'
-        alignItems='center'
-        direction='row'
-        className={classes.pageContainer}>
+        justify="center"
+        alignItems="center"
+        direction="row"
+        className={classes.pageContainer}
+      >
         <Grid
           container
           item
           xs={12}
-          justify='center'
-          alignItems='center'
-          className={classes.pt4}>
-          <Grid item xs={12} container justify='center' alignItems='center'>
-            <Typography variant='h2' className={classes.textAlign}>
+          justify="center"
+          alignItems="center"
+          className={classes.pt4}
+        >
+          <Grid item xs={12} container justify="center" alignItems="center">
+            <Typography variant="h2" className={classes.textAlign}>
               Explore Destinations
             </Typography>
           </Grid>
         </Grid>
         <Grid item>
-          <Typography variant='h5' className={classes.headerSpacing}>
+          <Typography variant="h5" className={classes.headerSpacing}>
             World's Top Destinations to Explore
           </Typography>
         </Grid>
         <Grid
           container
           item
-          justify='center'
-          alignItems='center'
+          justify="center"
+          alignItems="center"
           spacing={5}
-          className={classes.cardContainer}>
+          className={classes.cardContainer}
+        >
           <Grid
             container
-            alignItems='center'
-            justify='center'
-            className={classes.buttonContainer}>
+            alignItems="center"
+            justify="center"
+            className={classes.buttonContainer}
+          >
             <Button
-              variant='contained'
-              size='large'
+              variant="contained"
+              size="large"
               className={classes.button}
-              onClick={() => shuffleLocations()}>
+              onClick={() => shuffleLocations()}
+            >
               Shuffle <ShuffleIcon />
             </Button>
           </Grid>
@@ -126,7 +130,8 @@ function Explore(props) {
                 <ExploreCard
                   location={loc}
                   imgName={loc.imgName}
-                  alreadyLiked={loc.liked ? true : false}></ExploreCard>
+                  alreadyLiked={loc.liked ? true : false}
+                ></ExploreCard>
               </Grid>
             );
           })}
