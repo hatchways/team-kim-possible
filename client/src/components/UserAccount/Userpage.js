@@ -109,7 +109,6 @@ export default function UserPage() {
         <ExploreCard
           imgName={exploreCard.imgName}
           location={exploreCard}
-          s
           alreadyLiked={true}
         ></ExploreCard>
       </Grid>
